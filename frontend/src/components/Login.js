@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Axios from 'axios';
 function Login() {
-    const [usernameReg, setUsernameReg] = useState('')
-    const [passwordReg, setPasswordReg] = useState('')
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [usernameReg, setUsernameReg] = useState('');
+    const [passwordReg, setPasswordReg] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [loginStatus,setLoginStatus] = useState('');
     const Register = () => {
         Axios.post('http://localhost:3000/register', {
             username: usernameReg, password: passwordReg,
@@ -18,7 +19,16 @@ function Login() {
         Axios.post('http://localhost:3000/login', {
             username: username, password: password,
         }).then((response) =>{
-            console.log(response);
+            if(response.data.message)
+            {
+                setLoginStatus(response.data.message)
+                console.log(response);
+            } else
+            {
+                setLoginStatus(response.data[0].mobile)
+                console.log(response);
+
+            }
         });
     }
     return (
@@ -53,6 +63,7 @@ function Login() {
                     </div>
                     <button class="btn btn-lg btn-primary btn-block" onClick={Login}>Login</button>
                     <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+                    <h1>{loginStatus}</h1>
                 </div>
             </div>
         </div>
