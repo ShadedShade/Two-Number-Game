@@ -11,7 +11,6 @@ function Tweet() {
     const fetchItems = async () => {
         const data = await fetch('/tweets');
         const items = await data.json();
-        console.log("What is problem?"+items);
         setItems(items);
     };
 
@@ -23,9 +22,9 @@ function Tweet() {
                     <div class="card-deck">
                         <div class="card">
                             <div class="card-body p-1">
-                                <h6 class="card-title">{item.name}</h6>
-                                <p class="card-text">{item.msg}</p>
-                                <p class="card-text"><i>by {item.username}</i></p>
+                                <h6 class="card-title" key={items}> {item.name}</h6>
+                                <p class="card-text"  key={items}>{item.msg}</p>
+                                <p class="card-text"  key={items}><i>by {item.username}</i></p>
                             </div>
                         </div>
                     </div>
