@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import Login from '../components/Login';
 // import {Link} from 'react-router-dom';
 // Note that the use Effect is commonly used, which is used to fetchItems from the backend
 function Tweet() {
@@ -30,7 +31,9 @@ function Tweet() {
                     </div>
                 </div>
             ))
-            }
+            }<Login/>
+            <Login/>
+            <Login/>
         </section>
     );
 }
