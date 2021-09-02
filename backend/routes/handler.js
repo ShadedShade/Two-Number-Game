@@ -77,6 +77,10 @@ router.post('/login', (req, res) => {
 
 })
 
+
+// GAME SELECTION
+// UI no.4 
+// BUTTON WILL POST GAMEID
 router.get('/gameselect',(req,res)=>
 {
     db.query("Select  gametype.gamename,gametype.gamename, draw.DrawDate From numbers.gametype inner JOIN numbers.draw on draw.gameid = gametype.gameid group by draw.gameid",(err,result) =>
@@ -98,6 +102,45 @@ router.get('/gameselect',(req,res)=>
     })
 
 })
+
+// select Game ID 
+// UI no. 4
+router.post('/selected',(req,res)=>
+{
+    const gameid = req.body.gameid;
+
+    db.query("SELECT draw.gameid, Draw.DrawDate, Draw.ShiftTime From numbers.draw WHERE gameid = ? order by draw.DrawDate"),[gameid],(err,result)=>
+    {
+        console.log(result);
+        if(err)
+        {
+            res.send({err:err});
+        }
+        if(result.length >0)
+        {
+            var data =JSON.stringify(result);
+            res.send(data);
+        }
+        else
+        {
+            res.send(err);
+        }
+    }
+})
+
+
+
+router.post('/userBets',(req,res)=>
+{
+    const userid = req.body.userid;
+   // db.query("SELECT ")
+}
+)
+
+// now we go to Betting, INSERT GAMEID DATE TIME, COMBINATION AND BET
+
+
+// 
 
 // get all current draws
 // insert new draws
@@ -121,7 +164,28 @@ router.get('/draws',(req,res)=>
 
 
 
+
+
+
+
+
+
+
+
+
+
 // insert a draw ("Server ONLY")
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -140,6 +204,7 @@ router.get('/tweets', (req, res) => {
 router.post('/addTweet', (req, res) => {
     res.end('NA');
 });
+
 
 
 

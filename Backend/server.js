@@ -33,7 +33,7 @@ function CreateTicketControl(date,time,user)
 
 function TestQuery()
 {
-    db.query("Select  gametype.gamename,gametype.gameid, draw.DrawDate From numbers.gametype inner JOIN numbers.draw on draw.gameid = gametype.gameid group by draw.gameid",(err,result) =>
+    db.query("SELECT draw.gameid, Draw.DrawDate, Draw.ShiftTime From numbers.draw WHERE gameid = 'Ez2ltt' order by draw.DrawDate",(err,result) =>
     {
         if(err)
         {
@@ -58,7 +58,7 @@ app.listen(PORT, () => {
     var y = x.split(',').map(Number);
 console.log(x + " "+ typeof(x));
 console.log(y[0] +y[1] + " "+ typeof(y[0]));
-CreateTicketControl('2021-08;26','10:00:00','3922331144');
+CreateTicketControl('2021-09;02','10:00:00','3922331144');
 
 
 TestQuery();

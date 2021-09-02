@@ -62,6 +62,6 @@ function MatchEZTwoResult( result,userBet)
             if(userBet[i] == res[j])
             return 10;
      }
-
-
 }
+
+module.exports = {CreateTicketControl,MatchEZTwoResult,InsertDraw}
