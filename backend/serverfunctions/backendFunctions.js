@@ -6,9 +6,10 @@ const mysql = require('mysql2');
 
 var db = mysql.createConnection(
     {
-        host: 'localhost',    // Please change 
-        user: 'root',         // if you will test Database connection
-        password: 'Ron192000' // according to your Mysql settings/ configurations
+        host: 'localhost',
+        user: 'toor',
+        password: 'Ron192000',
+        port: 3307 // according to your Mysql settings/ configurations
     }
 );
 
@@ -28,11 +29,30 @@ function InsertDraw(date,time,combo,gameID){
     })
 }
 
-function CreateTicketControl(date,time,user)
+
+// Insert Bets
+// Inert Tickets
+// Insert Receipt
+function InsertBets(bets)
+{ // this will be a json from the client I supposed
+
+
+}
+
+
+
+
+
+
+
+
+function CreateTicketControl(user)
 {
-    let control = date+time+user;
+    let timestamp = + new Date;
+    let control = timestamp+user;
     let hash = Buffer.from(control).toString('base64');
     console.log(hash + " " + hash.length);
+    return hash;
 }
 
 // make a function that will multiply the bet to the result score
@@ -62,6 +82,17 @@ function MatchEZTwoResult( result,userBet)
             if(userBet[i] == res[j])
             return 10;
      }
+}
+
+function Match4DigitGame(result,userBet)
+{
+    for(let i =0; i< result.length;i++)
+    {
+        if(result[i]!=userBet[i])
+        return 0;
+    }
+    return 500;
+
 }
 
 module.exports = {CreateTicketControl,MatchEZTwoResult,InsertDraw}

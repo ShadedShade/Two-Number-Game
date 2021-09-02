@@ -4,6 +4,7 @@ const connection = require('../configs/database.js');
 var mysql = require('mysql2');
 const { json } = require('body-parser');
 const helper = require('../helpers/helper');
+const backendFunctions = require('../serverfunctions/backendFunctions');
 
 var db = mysql.createConnection(
     {
@@ -137,6 +138,24 @@ router.post('/userBets',(req,res)=>
 }
 )
 
+
+// now in theory this should work
+// we create bets, 
+// router.post('placeBets',(req,res)=>
+// {
+//     const bets = req.body.bets; // this will be a list of bets
+//     const userid = req.body.userid;
+//     const drawid = req.body.drawid; // if one draw date and time
+//     let betsDetails = [{"DrawID":"drawid","Combo":"combo","BetAmount":"betamount"}];  //<----  From Input
+
+//     let betsObject = JSON.parse(bets);
+    
+//     let control = backendFunctions.CreateTicketControl(userid)
+//     // Create a For Loop?
+//     db.query("CALL `numbers`.`InsertBets`(<{IN drawid int}>, <{IN combo varchar(25)}>, <{IN bettor varchar(25)}>, <{IN amount float}>, <{IN ticketControl varchar(45)}>);")
+
+// })
+
 // now we go to Betting, INSERT GAMEID DATE TIME, COMBINATION AND BET
 
 
@@ -161,12 +180,22 @@ router.get('/draws',(req,res)=>
     })
 })
 
+// Insertation then Update Profile of User
 
 
 
 
 
 
+// to test tommorow
+// CALL numbers.CreateBaseReceipt(<{IN receiptID varchar(45)}>, <{IN userid varchar(13)}>, <{IN lineseq varchar(45)}>, <{IN agent varchar(45)}>, <{IN outlet varchar(45)}>, <{IN gameid varchar(25)}>);
+// CALL numbers.InsertBets(5, '25-04', '+639922113388', 50,'MjAyMS0wOTswMjEwOjAwOjAwMzkyMjMzMTE0NA==');
+// UPDATE numbers.receipt
+// SETtotal amount = (SELECT SUM(receiptdetails.betamount) FROM numbers.receiptdetails WHERE receiptdetails.receiptid = receipt.receiptid) WHERE receipt.receiptid = ?;
+// UPDATE numbers.profile
+// SET
+// money = numbers.money - (SELECT receipt.totalamount From numbers.receipt WHERE receipt.receiptid = ?) 
+// WHERE mobile =?;
 
 
 

@@ -4,11 +4,14 @@ const draw = require('./Draw');
 const helper = require('./helpers/helper');
 const cors = require('cors');
 const app = express();
+const backendFunctions = require('./serverfunctions/backendFunctions');
+
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors());
 
 var mysql = require('mysql2');
+const { json } = require('body-parser');
 var db = mysql.createConnection(
     {
         host: 'localhost',    // Please change 
@@ -47,7 +50,40 @@ function TestQuery()
     })
 }
 
+function TestJsonStringify()
+{
+    let stringDate = "12-20-01";
+    let stringTime = "12:10:02";
+    let stringData =[{message:"Hello",something:"hi"},{message:"Hello",something:"hi"}];
+    let testJson = JSON.stringify({"Date":stringDate,"Time":stringTime,"Data":stringData});         // <- Create something like this in the client side
+    console.log(testJson);
+    let jsonObject = JSON.parse(testJson);
+    console.log(jsonObject)
+}
 
+function TestProcCall()
+{
+    // const bets = req.body.bets; // this will be a list of bets
+    // const userid = req.body.userid;
+    // const drawid = req.body.drawid; // if one draw date and time
+    // let betsDetails = [{"DrawID":"drawid","Combo":"combo","BetAmount":"betamount"}];  //<----  From Input
+
+    // let betsObject = JSON.parse(bets);
+    
+    let control = backendFunctions.CreateTicketControl('+639922113388') // NOTE HERE THAT TIME AND DATE IS IN A TIMESTAMP MEANING THAT THIS NEEDS TO BE CALLED ONCE SO EACH BET IS WITH THE SAME CONTROL
+    // Create a For Loop?
+    db.query("CALL `numbers`.`InsertBets`(?, ?, ?, ?, ?)",[5,"14-23","+639922113388",100,'MjAyMS0wOTswMjEwOjAwOjAwMzkyMjMzMTE0NA=='],(err,result)=>
+    {
+        if(err)
+        {
+            console.log(err)
+        }
+        if(result)
+        {
+            console.log(result)
+        }
+    })
+}
 
 
 
@@ -62,6 +98,8 @@ CreateTicketControl('2021-09;02','10:00:00','3922331144');
 
 
 TestQuery();
+TestJsonStringify();
+TestProcCall();
     console.log('Server started at http://localhost:' + PORT);
 
 });
