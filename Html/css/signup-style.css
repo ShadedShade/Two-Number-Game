@@ -9,7 +9,7 @@ body{
 }
 
 .bg-row{
-    height: 98vh;
+    height: 90vh;
 }
 
 h3{
@@ -130,4 +130,10 @@ span{
 
 .signup{
     font-size: smaller;
+}
+
+.back{
+    color: #db4a39;
+    padding-top: 30px;
+    padding-left: 40px;
 }
