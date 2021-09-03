@@ -43,9 +43,48 @@ body{
     
 }
 
+.btn.seemore{
+    padding: 8px 25px;
+    border-width: 2px;
+    border-radius: 50px;
+    border: 0px;
+    background-color: #FD0000;
+    font-size: smaller;
+    font-weight: 600;
+    
+}
+
+.btn.readmore{
+    background-color: black;
+    padding: 8px 15px;
+    border-width: 2px;
+    border-radius: 50px;
+    border: 0px;
+    color: white;
+    font-size:x-small;
+    font-weight: 600;
+}
+
+.btn.contactbtn{
+    padding: 8px 25px;
+    border-width: 2px;
+    border-radius: 50px;
+    border: 0px;
+    background-color: #FD0000;
+    font-size: smaller;
+    font-weight: 600;
+}
+
 .btn:hover{
     background-color: white;
     color: #FD0000;
+    font-weight: 900;
+}
+
+.btn.readmore:hover{
+    background-color: #FD0000;
+    color: white;
+    font-weight: 900;
 }
 
 img {
@@ -53,13 +92,23 @@ img {
 }
 
 .hero {
-    height: 88.5vh!important;
+    height: 100vh!important;
     background-image: url(../img/homebg.jpg);
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
     position: relative;
     z-index: 2;
+}
+
+.hero::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
 section {
@@ -83,4 +132,85 @@ h1.s{
 
 p{
     font-size: larger;
+}
+
+section#aboutus{
+    height: 100vh!important;
+    padding-top: 190px;
+}
+
+h5{
+    font-weight: 900;
+}
+
+#blog{
+    background-image: url(../img/blog.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 100vh!important
+}
+
+.blogtitle h2{
+    font-weight: 900;
+    color: #FD0000;
+    margin-top: -10px;
+}
+
+.card-effect {
+    box-shadow: 6px 0px 50px -7px black;
+    height: 275px;
+    background-color: white;
+    padding: 25px;
+    transition: all 0.35s ease;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+.card-effect:hover {
+    box-shadow: none;
+    transform: translateY(5px);
+}
+
+.card-effect h4{
+    font-weight: 900;
+}
+
+.card-effect p{
+    font-size: medium;
+}
+
+section#contact{
+    height: 100vh!important;
+    padding-bottom: 0px;
+}
+
+.contactus h6{
+    font-weight: 900;
+    font-size: medium;
+}
+
+.contactus p{
+    font-size: smaller;
+}
+
+.footer-top {
+    background-color: black;
+}
+
+.footer-top a, li {
+    color: white;
+}
+
+.footer-top a:hover {
+    color: red;
+}
+
+.footer-bottom {
+    background-color: #FD0000;
+    height: 26px;
+}
+
+.footer-bottom p{
+    font-size: smaller;
+    color: white;
 }
