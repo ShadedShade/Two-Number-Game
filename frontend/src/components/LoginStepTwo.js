@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
+import PinInput from "react-pin-input";
+
 import Axios from 'axios';
+import '../styles/login-step2-style.css'
+
+
+sessionStorage.setItem("mpins", "");
 function LoginStepTwo() {
+    const username = sessionStorage.getItem("Userid");
     const [password, setPassword] = useState('');
     const history = useHistory();
+
+
+
     const handleBackClick = () => {
         history.push('/');
     }
@@ -13,16 +23,38 @@ function LoginStepTwo() {
     const handleLoginStepTwoClick = () => {
         history.push('/logintwo'); // go to step 2
     }
+    function clickEvent(first, last) {
+        if (first.value.length) {
+            document.getElementById(last).focus();
+        }
+    }
+    let addPin = (val) => {
+        let currPin = sessionStorage.getItem("mpins");
+        currPin.concat(val);
+        sessionStorage.setItem("mpins", currPin);
+
+        console.log(currPin);
+        currPin.concat(val);
+        setPassword(currPin);
+        console.log("Pin: " + val);
+    }
+
+    const handleFocus = (e) => {
+        setPassword(e.target.value);
+        console.log(e.target.value);
+        if (e.target.nextSibling)
+            e.target.nextSibling.focus();
+    }
 
     const Login = () => {
         Axios.post('http://localhost:3000/login', {
-            username: username,
+            username: username, password: password
         }).then((response) => {
             if (response.data.message) {               //  When Invalid
-                setLoginStatus(response.data.message) /// set this to local storage, btw THIS IS ONLY TEMPORARY HAHAHAHHA, password should be hashed tho
+                // setLoginStatus(response.data.message) /// set this to local storage, btw THIS IS ONLY TEMPORARY HAHAHAHHA, password should be hashed tho
                 console.log(response.data.message);
             } else {                        // When True
-                setLoginStatus(response.data[0])
+                // setLoginStatus(response.data[0])
                 console.log(response);
                 console.log(response.data[0].mobile);
                 sessionStorage.setItem("Userid", response.data[0].mobile);
@@ -33,50 +65,81 @@ function LoginStepTwo() {
     }
     return (
 
-        <section>
-
-            <section class="container">
-                    <div class="row d-flex justify-content-center align-items-center bg-row">
-                        <div class="col-md-5 bg-box p-5">
-                            <a href="login.html">
-                                <span><i class="fas fa-arrow-left"></i></span>
+        <section class="container-fluid">
+            <div class="row d-flex justify-content-center align-items-center bg-row vh-100 w3-animate-right">
+                <div class="col-md-5 bg-box">
+                    {/* <!-- TITLE AND BACKBTN SECTION--> */}
+                    <div>
+                        <a >
+                            <span><i class="fas fa-arrow-left back"></i></span>
                         </a>
-                        <h3 class="text-center">Login</h3>
-                        <div class="mb-0 mt-5">
-                            <label for="userid">Enter your 6-digit MPIN</label>
-                        </div>
-                        <div class="mb-1 mpin">
-                            <input type="text" id='ist' maxlength="1" onkeyup="clickEvent(this, 'sec')"/>
-                                <input type="text" id="sec" maxlength="1" onkeyup="clickEvent(this, 'third')"/>
-                                    <input type="text" id="third" maxlength="1" onkeyup="clickEvent(this, 'fourth')"/>
-                                        <input type="text" id="fourth" maxlength="1" onkeyup="clickEvent(this, 'fifth')"/>
-                                            <input type="text" id="fifth" maxlength="1" onkeyup="clickEvent(this, 'sixth')"/>
-                                                <input type="text" id="sixth" maxlength="1"/>
-                                                </div>
-                                                <div class="text-center forgot">
-                                                    <p class="">Forgot MPIN? Call our <a class="CCC" href="">Customer Contact Center</a></p>
-                                                </div>
-                                                <div class="mt-5 pt-4 d-grid gap-2">
-                                                    <button class="btn">Login</button>
-                                                </div>
-                                                <div class="text-center mt-3 signup">
-                                                    <p class="mb-0">Don't have an account yet? <a class="CCC" href="signup.html">Sign Up</a></p>
-                                                </div>
+                        <h2 class="text-center">Login</h2>
+                    </div>
+                    {/* <!-- =========================== -->
+                <!-- === FORM SECTION ===== --> */}
+                    <form action="">
+                        <div class="col-md-12 bg-box width-100">
+                            <div class="mb-0 mt-5 mb-3">
+                                <label for="userid">Enter your 6-digit MPIN</label>
+                            </div>
+                            <div class="row mb-3 gap-2 mpin">
+                                <form>
+                                    <div className="row mb-3">
+
+                                    <PinInput PinInput 
+                                        length={6} 
+                                        initialValue=""
+                                        secret
+                                        onChange={(value, index) => { }}
+                                        type="numeric"
+                                        inputMode="number"
+                                        style={{ padding: '10px' }}
+                                        inputStyle={{ borderColor: 'red' }}
+                                        inputFocusStyle={{ borderColor: 'blue' }}
+                                        onComplete={(value, index) => { }}
+                                        autoSelect={true}
+                                        regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/} />
                                         </div>
-                                    </div>
-                            </section>
-                        </section>
+                                </form>
+                            </div>
+                            <div class="text-center forgot">
+                                <p class="">Forgot MPIN? Contact our <a class="CCC" href="">Customer Center</a></p>
+                            </div>
+                            <div class="mt-5 pt-4 d-grid gap-2">
+                                <button class="btn" onClick={Login}>Login</button>
+                            </div>
+                            <div class="text-center mt-3 signup">
+                                <p class="mb-0">Don't have an account yet? <a class="CCC" type="button" onClick={handleGoToSignUpClick}>Sign Up</a></p>
+                            </div>
+                        </div>
+                    </form>
+                    {/* <!-- ====================== --> */}
+                </div>
 
-);
+            </div>
 
-// //        {/* <!-- MPIN --> */}
-//   //      {/* <script type="text/javascript">
-//             function clickEvent(first, last){
-//                 if(first.value.length){
-//                     document.getElementById(last).focus();
-//                 }
-//             }
-//         </script> */}
+
+            {/* <!-- MPIN -->
+        <script type="text/javascript">
+            function clickEvent(first, last){
+                if(first.value.length){
+                    document.getElementById(last).focus();
+                }
+            }
+        </script>
+        <!-- == --> */}
+        </section>
+
+    );
+
+    // //        {/* <!-- MPIN --> */}
+    //   //      {/* <script type="text/javascript">
+    //             function clickEvent(first, last){
+    //                 if(first.value.length){
+    //                     document.getElementById(last).focus();
+    //                 }
+    //             }
+    //         </script> */}
 
 }
-export default Login
+export default LoginStepTwo

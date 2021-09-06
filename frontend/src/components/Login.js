@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Axios from 'axios';
+import '../styles/login-style.css'
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -13,7 +14,7 @@ function Login() {
         history.push('/SignUp');
     }
     const handleLoginStepTwoClick = () => {
-        history.push('/logintwo'); // go to step 2
+        history.push('/LoginStepTwo'); // go to step 2
     }
 
     const Login = () => {
@@ -52,7 +53,7 @@ function Login() {
                             <input type="text" name="userid" class="form-control" id="userid" onChange={(e) => { setUsername(e.target.value) }}/>
                         </div>
                         <div class="mt-4 mb-3 d-grid gap-2">
-                            <a class="btn" onClick={Login}>NEXT</a>
+                            <a class="btn" onClick={handleLoginStepTwoClick}>NEXT</a>
                         </div>
                         <div class="text-center forgot">
                             <p class="mb-0">Forgot UserID / Mobile Number? Contact our <br/></p>

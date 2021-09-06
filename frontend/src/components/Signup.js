@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Axios from 'axios';
+import '../styles/signup-style.css'
+
 /// TODO: Styles
 function Signup() {
 
@@ -8,6 +10,7 @@ function Signup() {
     const [emailReg, setEmailReg] = useState('');
     const [nameReg, setNameReg] = useState('');
     const [passwordReg, setPasswordReg] = useState('');
+    const [authCode, setAuthCode] = useState('');
     const history = useHistory();
     const handleBackClick = () => {
         history.push('/tweets');
@@ -21,9 +24,9 @@ function Signup() {
 
     const Register = () => {
         Axios.post('http://localhost:3000/register', {
-            username: usernameReg, password: passwordReg,
+            username: usernameReg, password: passwordReg,email:emailReg,name:nameReg
         }).then(function (response) {
-            console.log(response); // Should Redirect to the login or Pop a Alert box
+            console.log(response); // Should Redirect to the login or Pop a Alert box, or Alert that alerts IIIIIIIFFFFFFF user already exist
         }).catch(function (error) {
             console.log(error);
         });
@@ -43,18 +46,31 @@ function Signup() {
                     </div>
                     {/* <!-- =============================== -->
                     <!-- FORM SECTION --> */}
-                    <form class="w3-animate-opacity " style={{opacity: "1.5s"}}>
+                    <form class="w3-animate-opacity " style={{ opacity: "1.5s" }}>
                         <div class="form-content">
                             <div class="row pb-4">
                                 <div class="col-md-6">
                                     <div class="form-group pb-4">
                                         <label for="email">Email Address (Optional)</label>
-                                        <input type="email" id="email" class="form-control" value="" />
+                                        <input type="email" id="email" class="form-control" />
                                     </div>
                                     <div class="form-group pb-4">
-                                        <label for="mobilenum">Mobile Number <span style={{color: "#FD0000"}}>*</span></label>
+                                        <label for="mobilenum">Mobile Number <span style={{ color: "#FD0000" }}>*</span></label>
                                         <div class="input-group mb-0">
-                                            <input type="tel" id="mobilenum" class="form-control" aria-describedby="basic-addon2" minlength="11" maxlength="11" placeholder="09XXXXXXXXX" pattern="[0-9]{2}[0-9]{9}" required />
+                                            <input type="tel" id="mobilenum" class="form-control" aria-describedby="basic-addon2" minlength="11" maxlength="11" placeholder="09XXXXXXXXX" pattern="[0-9]{2}[0-9]{9}" value={usernameReg}
+                                                onChange={(e) => {
+                                                    const re = /^[0-9\b]+$/;
+                                                    //  console.log(e.target.value);
+                                                    if (re.test(e.target.value) || e.target.value === '') {
+                                                        setUsernameReg(e.target.value)
+                                                        console.log(e.target.value)
+                                                    }
+                                                    else {
+
+                                                    }
+                                                }}
+
+                                                required />
                                             <div class="input-group-append">
                                                 <button class="btn1 btn-outline-secondary" type="button">SEND CODE</button>
                                             </div>
@@ -62,11 +78,16 @@ function Signup() {
                                         <small id="mobsmalllabel" class="form-text text-muted">Your mobile number will be your <b>UserID</b>.</small>
                                     </div>
                                     <div class="form-group pb-4">
-                                        <label for="mpin">6-Digit MPIN <span style={{color: "#FD0000;"}}>*</span></label>
-                                        <input type="password" pattern="[0-9]{6}" id="mpin" class="form-control" maxlength="6" minlength="6" value="" onChange={(e) => {
+                                        <label for="mpin">6-Digit MPIN <span style={{ color: "#FD0000;" }}>*</span></label>
+                                        <input type="password" pattern="[0-9]{6}" id="mpin" class="form-control" maxlength="6" minlength="6" value={passwordReg} onChange={(e) => {
                                             const re = /^[0-9\b]+$/;
-                                            if (e.target.value === '' || re.test(e.target.value)) {
+                                            //  console.log(e.target.value);
+                                            if (re.test(e.target.value) || e.target.value === '') {
                                                 setPasswordReg(e.target.value)
+                                                console.log(e.target.value)
+                                            }
+                                            else {
+
                                             }
 
                                         }}
@@ -76,17 +97,21 @@ function Signup() {
                                 <div class="col-md-6">
                                     <div class="form-group pb-4">
                                         <label for="name">Full Name (Optional)</label>
-                                        <input type="text" id="name" class="form-control" value="" />
+                                        <input type="text" id="name" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <label for="auth">Authentication Code <span style={{color: "#FD0000;"}}>*</span></label>
-                                        <input type="text" id="auth" class="form-control" onChange={(e) => {}} onkeypress={(e) =>
-                                        {
-                                            var ASCIICode = (e.which) ? e.which : e.keyCode
-                                            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
-                                                return false;
-                                            return true;
-                                        }} maxlength="6" minlength="6" value="" required />
+                                        <label for="auth">Authentication Code <span style={{ color: "#FD0000;" }}>*</span></label>
+                                        <input type="text" id="auth" class="form-control" onChange={(e) => {
+                                            const re = /^[0-9\b]+$/;
+                                            //  console.log(e.target.value);
+                                            if (re.test(e.target.value) || e.target.value === '') {
+                                                setAuthCode(e.target.value)
+                                                console.log(e.target.value)
+                                            }
+                                            else {
+
+                                            }
+                                        }} maxlength="6" minlength="6" value={authCode} required />
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +122,7 @@ function Signup() {
                                 <button class="btnggle google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google</span> </button>
                             </div>
                             <div class="mt-5 login">
-                                <p class="mb-0">Already Registered? <a class="CCC" href="login.html">Login</a></p>
+                                <p class="mb-0">Already Registered? <a class="CCC" type="button" onClick={handleGoToLogInClick}>Login</a></p>
                             </div>
                         </div>
                     </form>
