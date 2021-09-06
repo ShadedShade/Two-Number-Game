@@ -8,6 +8,13 @@ import Login from './Login.js';
 
 
 function Home() {
+    const [items, setNames] = useState([]);
+    const fetchHomeStuff = async () => {
+        const data = await fetch('/home');
+        const items = await data.json();
+        console.log(items);
+        setNames(items);
+    };
     return (
         <div>
         </div>
