@@ -17,7 +17,7 @@ function Home() {
         setNames(items);
     };
     return <section>
-            <Header/>
+            {/* <Header/>
         <div>
         {items.map(item => (
             <div className="container-fluid text-center bg-light features-icons ">
@@ -26,7 +26,7 @@ function Home() {
             </div>
         )) 
     }
-        </div>
+        </div> */}
         <Signup/>
 
     </section>
