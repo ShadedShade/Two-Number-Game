@@ -15,7 +15,12 @@ function Home() {
         console.log(items);
         setNames(items);
     };
+    return <section>
+        {<Sidebar />}
+        {
 
+        }
+        <Login/>
 
     </section>);
 }
