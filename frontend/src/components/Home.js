@@ -9,6 +9,7 @@ import Sidebar from './Sidebar.js';
 
 
 function Home() {
+<<<<<<< HEAD
     const [items, setNames] = useState([]);
     const fetchHomeStuff = async () => {
         const data = await fetch('/home');
@@ -31,5 +32,10 @@ function Home() {
     );
 >>>>>>> fb4aca906a9cd7a0fdf4a846e9c40d6f37b580e9
 
+=======
+    return (<div>
+        <Login />
+            </div>);
+>>>>>>> 4654fdc9b6c2541309ff310985ba12de3c567f57
 }
 export default Home;
