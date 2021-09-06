@@ -5,13 +5,11 @@ import Test from './TestButton.js'
 import Signup from './Signup'
 import Login from './Login.js';
 import Nav from './Nav';
-import Landing from './Landing'
 
 
 function Home() {
     return (
         <div>
-            <Landing />            
         </div>
 
     );
