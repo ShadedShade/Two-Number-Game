@@ -36,7 +36,7 @@ function Signup() {
                 <div class="col-12 bg-box">
                     {/* <!-- TITLE AND BACKBTN SECTION--> */}
                     <div>
-                        <a href="landingpage.html">
+                        <a href="" onClick={handleBackClick}>
                             <span><i class="fas fa-arrow-left back pb-3"></i></span>
                         </a>
                         <h2 class="pb-4">Sign Up</h2>
@@ -80,7 +80,13 @@ function Signup() {
                                     </div>
                                     <div class="form-group">
                                         <label for="auth">Authentication Code <span style={{color: "#FD0000;"}}>*</span></label>
-                                        <input type="text" id="auth" class="form-control" onkeypress="return onlyNumberKey(event)" maxlength="6" minlength="6" value="" required />
+                                        <input type="text" id="auth" class="form-control" onChange={(e) => {}} onkeypress={(e) =>
+                                        {
+                                            var ASCIICode = (e.which) ? e.which : e.keyCode
+                                            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+                                                return false;
+                                            return true;
+                                        }} maxlength="6" minlength="6" value="" required />
                                     </div>
                                 </div>
                             </div>
