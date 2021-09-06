@@ -4,6 +4,7 @@ import LoginTest from './LoginTest.js'
 import Test from './TestButton.js'
 import Signup from './Signup'
 import Login from './Login.js';
+import Sidebar from './Sidebar.js';
 
 function Home() {
     useEffect(() => {
@@ -18,16 +19,10 @@ function Home() {
         setNames(items);
     };
     return <section>
-            {/* <Header/>
-        <div>
-        {items.map(item => (
-            <div className="container-fluid text-center bg-light features-icons ">
-                <h1 class="mt-5"  key={item}>Welcome {item.name}</h1>
-                <p  key={item}>This is a {item.stuff}  was created using Node JS and React.</p>
-            </div>
-        )) 
-    }
-        </div> */}
+        {<Sidebar />}
+        {
+
+        }
         <Login/>
 
     </section>
