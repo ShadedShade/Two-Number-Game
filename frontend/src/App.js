@@ -38,7 +38,7 @@ function App() {
   return (
     <Router>
       <div>
-          {<Sidebar />}
+          <Sidebar />
           <Switch>
             {/* This switch is Below  the Navigation bar meaning that if you changed routes, it will render under routes so what we need to do is to create a page that HAS THIS NAV and A SEPARATE SWITCH THAT SHOWS THE LOGIN AND LANDING PAGE MEAING ROUTE TO SIGN UP LOGIN AND LANDING PAGE AND HOME PAGE */}
             <Route path="/" exact component={Home} /> 

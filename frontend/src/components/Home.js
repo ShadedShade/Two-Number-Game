@@ -10,7 +10,7 @@ import Sidebar from './Sidebar.js';
 
 function Home() {
     return (<div>
-        <Sidebar />
+        <Login />
             </div>);
 }
 export default Home;
