@@ -6,11 +6,9 @@ import Signup from './Signup'
 import Login from './Login.js';
 import Sidebar from './Sidebar.js';
 
-function Home() {
-    useEffect(() => {
-        fetchHomeStuff(); // function name
-    }, []);
 
+
+function Home() {
     const [items, setNames] = useState([]);
     const fetchHomeStuff = async () => {
         const data = await fetch('/home');
@@ -18,13 +16,20 @@ function Home() {
         console.log(items);
         setNames(items);
     };
+<<<<<<< HEAD
     return <section>
         {<Sidebar />}
         {
 
         }
         <Login/>
+=======
+    return (
+        <div>
+        </div>
 
-    </section>
+    );
+>>>>>>> fb4aca906a9cd7a0fdf4a846e9c40d6f37b580e9
+
 }
 export default Home;
