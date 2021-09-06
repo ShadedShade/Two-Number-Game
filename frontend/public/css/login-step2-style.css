@@ -1,57 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;900&display=swap');
+@import url("palette.css");
 
 *{
     font-family: 'Poppins', sans-serif;
 }
 
 body{
-    background-color: white;
+    background-color: #f0f3f4;
+    color: #262626;
 }
 
-.bg-row{
-    height: 86vh;
+/* Back Button */
+.back{
+    color: #f36e23;
+    transition: 0.5s;
 }
-
-.fa-arrow-left{
-    color: black;
+.back:hover{
+    transform: translateX(-10px);
+    transition: 0.5s;
 }
+/* =========== */
 
-h3{
-    font-weight: 610;
+h2{
+    font-weight: 900;
     letter-spacing: 1px;
+    color: #f36e23;
 }
 
+/* Forgot MPIN */
 .forgot{
     font-size: smaller;
 }
+/* ============ */
 
+/* ====== DHAAY? Sign Up ====== */
 .CCC{
-    color: #FD0000;
+    color: #f7931e;
     font-weight: 600;
 }
-
-.btn{
-    color: white;
-    background-color: #FD0000;
-    letter-spacing: 1px;
+.CCC:hover{
+    color: #f36e23;
+    font-weight: 600;
 }
+.signup{
+    font-size: smaller;
+}
+/* ============================= */
 
+/* MPIN */
 .mpin{
-    display: flex;
-    justify-content: center;
+    display: block;
 }
 input{
-    margin: 10px;
     height: 35px;
-    width: 47px;
+    width: 65px;
     border: none;
     border-radius: 5px;
     text-align: center;
     font-size: 1rem;
-    background: rgb(224, 218, 218);
+    background: #9ba0a67a;
 
 }
+/* ======================= */
 
-.signup{
-    font-size: smaller;
+/* ===== Buttons ===== */
+.btn{
+    color: #ffffff; 
+    background-color: #f36e23;
+    letter-spacing: 2px;
+    font-weight: 600;
 }
+.btn:hover{
+    background-color: #f7931e;
+    color: #262626;
+}
+/* ========================================== */
+

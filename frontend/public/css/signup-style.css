@@ -5,120 +5,88 @@
 }
 
 body{
-    background-color: white;
+    background-color: #f0f3f4;
+    color: #262626;
 }
 
-.bg-row{
-    height: 90vh;
+/* Back Button */
+.back{
+    color: #262626;
+    transition: 0.5s;
 }
+.back:hover{
+    transform: translateX(-10px);
+    transition: 0.5s;
+}
+/* =========== */
 
-h3{
-    font-weight: 610;
+h2{
+    font-weight: 900;
     letter-spacing: 1px;
-    line-height: 100px;
+    color: #f36e23;
 }
-
-.forgot{
-    font-size: smaller;
-}
-
-.CCC{
-    color: #FD0000;
-    font-weight: 600;
-}
-
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
-}
-
-/*============= Or Sign in With ==============*/
-.login-or {
-    position: relative;
-    color: #aaa;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.span-or {
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 3px;
-    margin-left: -40px;
-    background-color: #fff;
-    width: 90px;
-    text-align: center;
-    font-size: 11px;
-}
-.hr-or {
-    height: 1px;
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
-}
-/* ========================================= */
-
-.btn{
-    color: white;
-    background-color: #FD0000;
-    letter-spacing: 2px;
-}
-
-.btn1{
-    color: white;
-    background-color: #FD0000;
-    border: 0px;
-    height: 40px;
-    border-radius: 0 5px 5px 0;
-}
-
-.vertical {
-    border-left: 2px solid #bebebe;
-    height: 40px;
-    position:absolute;
-    left: 10%;
-    top: -3%; 
-}
-
-.fa-facebook-f{
-    color: #3C589C;
-    padding-right: 7px;
-    padding-left: 5px;
-}
-
-.fa-google-plus-g{
-    color: #DF4B3B;
-    padding-right: 7px;
-    padding-left: 5px;
-}
-
-.social-btn{
-    position: relative;
-    left: 20px;
-}
-
-
-.btnfb, .btnggle{
-    background-color:white;
-    border: 2px solid rgb(184, 183, 183);
-    border-radius: 5px;
-    line-height: 31px;
-    font-size: 13px;
-}
-
-
 span{
     color: black;
     padding-right: 8px;
 }
 
-.grp-btn{
-    position: relative;
+/* ====== AR? Login ====== */
+.CCC{
+    color: #f7931e;
+    font-weight: 600;
 }
+.CCC:hover{
+    color: #f36e23;
+    font-weight: 600;
+}
+.login{
+    font-size: smaller;
+}
+/* ============================= */
 
+/* input type number arrow default removal */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+/* ====================================== */
 
+/* BUTTONS */
+.btn{
+    color: #ffffff; 
+    background-color: #f36e23;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+.btn1{
+    color: #ffffff; 
+    background-color: #f36e23;
+    border: 0px;
+    height: 40px;
+    border-radius: 0 5px 5px 0;
+    font-weight: 600;
+}
+.btn:hover, .btn1:hover{
+    background-color: #f7931e;
+    color: #262626;
+}
+/* ============================== */
+
+/* OR SIGN UP WITH */
+.grp-btn{
+    display: flex;
+}
+.vertical {
+    border-left: 2px solid #bebebe;
+    height: 40px;
+}
+.fa-facebook-f{
+    color: #3C589C;
+}
+.fa-google-plus-g{
+    color: #DF4B3B;
+}
 .fa-facebook-square{
     font-size: 2.5rem;
     color: #4267B2;
@@ -127,13 +95,15 @@ span{
     font-size: 2.5rem;
     color: #db4a39;
 }
-
-.signup{
-    font-size: smaller;
+.btnfb, .btnggle{
+    background-color:#ffffff;
+    border: 2px solid #9ba0a6;
+    border-radius: 5px;
+    line-height: 31px;
+    font-size: 13px;
 }
-
-.back{
-    color: #db4a39;
-    padding-top: 30px;
-    padding-left: 40px;
+.btnfb:hover, .btnggle:hover{
+    background-color: #f7931e;
+    color: #262626;
+    border: none;
 }
