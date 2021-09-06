@@ -12,27 +12,33 @@
         <title>Step 2</title>
     </head>
     <body>
-        <section class="container">
-            <form action="">
-                <div class="row d-flex justify-content-center align-items-center bg-row w3-animate-right">
-                    <div class="col-md-5 bg-box p-5">
-                            <a href="login.html">
-                                <span><i class="fas fa-arrow-left"></i></i></span>
-                            </a>
-                            <h3 class="text-center">Login</h3>
-                            <div class="mb-0 mt-5">
+        <section class="container-fluid">
+            <div class="row d-flex justify-content-center align-items-center bg-row vh-100 w3-animate-right">
+                <div class="col-md-5 bg-box">
+                    <!-- TITLE AND BACKBTN SECTION-->
+                    <div>
+                        <a href="login.html">
+                            <span><i class="fas fa-arrow-left back"></i></span>
+                        </a>
+                        <h2 class="text-center">Login</h2>
+                    </div>
+                    <!-- =========================== -->
+                    <!-- === FORM SECTION ===== -->
+                    <form action="">
+                        <div class="col-md-12 bg-box width-100">
+                            <div class="mb-0 mt-5 mb-3">
                                 <label for="userid">Enter your 6-digit MPIN</label>
                             </div> 
-                            <div class="mb-1 mpin">
-                                <input type="text" id='ist' maxlength="1" onkeyup="clickEvent(this, 'sec')">
-                                <input type="text" id="sec" maxlength="1" onkeyup="clickEvent(this, 'third')">
-                                <input type="text" id="third" maxlength="1" onkeyup="clickEvent(this, 'fourth')">
-                                <input type="text" id="fourth" maxlength="1" onkeyup="clickEvent(this, 'fifth')">
-                                <input type="text" id="fifth" maxlength="1" onkeyup="clickEvent(this, 'sixth')">
-                                <input type="text" id="sixth" maxlength="1">
+                            <div class="row mb-3 gap-2 mpin">
+                                <div class="col"><input type="text" id='ist' maxlength="1" onkeyup="clickEvent(this, 'sec')"></div>
+                                <div class="col"><input type="text" id="sec" maxlength="1" onkeyup="clickEvent(this, 'third')"></div>
+                                <div class="col"><input type="text" id="third" maxlength="1" onkeyup="clickEvent(this, 'fourth')"></div>
+                                <div class="col"><input type="text" id="fourth" maxlength="1" onkeyup="clickEvent(this, 'fifth')"></div>
+                                <div class="col"><input type="text" id="fifth" maxlength="1" onkeyup="clickEvent(this, 'sixth')"></div>
+                                <div class="col"><input type="text" id="sixth" maxlength="1"></div>
                             </div>
                             <div class="text-center forgot">
-                                <p class="">Forgot MPIN? Call our <a class="CCC" href="">Customer Contact Center</a></p>
+                                <p class="">Forgot MPIN? Contact our <a class="CCC" href="">Customer Center</a></p>
                             </div>
                             <div class="mt-5 pt-4 d-grid gap-2">
                                 <button class="btn">Login</button>
@@ -40,10 +46,13 @@
                             <div class="text-center mt-3 signup">
                                 <p class="mb-0">Don't have an account yet? <a class="CCC" href="signup.html">Sign Up</a></p>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
+                    <!-- ====================== -->
                 </div>
-            </form>
+                
+            </div>
+            
 
             <!-- MPIN -->
             <script type="text/javascript">
