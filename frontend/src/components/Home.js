@@ -15,11 +15,6 @@ function Home() {
         console.log(items);
         setNames(items);
     };
-    return (
-        <div>
-        </div>
-
-    );
 
 }
 export default Home;
