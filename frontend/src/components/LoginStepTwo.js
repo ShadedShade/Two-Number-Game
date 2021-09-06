@@ -70,7 +70,7 @@ function LoginStepTwo() {
                 <div class="col-md-5 bg-box">
                     {/* <!-- TITLE AND BACKBTN SECTION--> */}
                     <div>
-                        <a >
+                        <a type="button" onClick={handleBackClick}>
                             <span><i class="fas fa-arrow-left back"></i></span>
                         </a>
                         <h2 class="text-center">Login</h2>
@@ -82,26 +82,22 @@ function LoginStepTwo() {
                             <div class="mb-0 mt-5 mb-3">
                                 <label for="userid">Enter your 6-digit MPIN</label>
                             </div>
-                            <div class="row mb-3 gap-2 mpin">
-                                <form>
-                                    <div className="row mb-3">
 
-                                    <PinInput PinInput 
-                                        length={6} 
-                                        initialValue=""
-                                        secret
-                                        onChange={(value, index) => { }}
-                                        type="numeric"
-                                        inputMode="number"
-                                        style={{ padding: '10px' }}
-                                        inputStyle={{ borderColor: 'red' }}
-                                        inputFocusStyle={{ borderColor: 'blue' }}
-                                        onComplete={(value, index) => { }}
-                                        autoSelect={true}
-                                        regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/} />
-                                        </div>
-                                </form>
+                            <div class="col-md-12 mb-3 gap-1 mpin">
+                                <PinInput length={6}
+                                    initialValue=""
+                                    secret
+                                    onChange={(value, index) => {console.log(value) }}
+                                    type="numeric"
+                                    inputMode="number"
+                                    style={{ padding: '5px' }}
+                                    inputStyle={{ borderColor: "#f36e23" }}
+                                    inputFocusStyle={{ borderColor: '#f7931e' }}
+                                    onComplete={(value, index) => { }}
+                                    autoSelect={true}
+                                    regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/} />
                             </div>
+
                             <div class="text-center forgot">
                                 <p class="">Forgot MPIN? Contact our <a class="CCC" href="">Customer Center</a></p>
                             </div>
