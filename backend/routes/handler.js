@@ -39,10 +39,9 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
     const username = req.body.username;
-    const password = req.body.password;
 
-    db.query("SELECT * FROM `numbers`.`profile` WHERE mobile = ? AND mpin = ?", 
-    [username, password],
+    db.query("SELECT profile.mobile FROM `numbers`.`profile` WHERE mobile = ? ", 
+    [username],
         (err, result) => {
             if (err) { 
                 res.send({ err: err });
