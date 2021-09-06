@@ -61,28 +61,40 @@ function TestJsonStringify()
     console.log(jsonObject)
 }
 
+// Turn this into a AWAIT FUNCTION?
 function TestProcCall()
 {
-    // const bets = req.body.bets; // this will be a list of bets
-    // const userid = req.body.userid;
-    // const drawid = req.body.drawid; // if one draw date and time
-    // let betsDetails = [{"DrawID":"drawid","Combo":"combo","BetAmount":"betamount"}];  //<----  From Input
-
-    // let betsObject = JSON.parse(bets);
+    //  const bets = req.body.bets; // this will be a list of bets
+    //  const userid = req.body.userid;
+    //  const drawid = req.body.drawid; // if one draw date and time
+    //  let betsDetails = [{"DrawID":"drawid","Combo":"combo","Bettor":"bettor","BetAmount":"betamount"}];  //<----  From Input this should be the contents from the Front
+    //  const gameid =req.body.gameid;
+    //  let betsObject = JSON.parse(bets);
     
-    let control = backendFunctions.CreateTicketControl('+639922113388') // NOTE HERE THAT TIME AND DATE IS IN A TIMESTAMP MEANING THAT THIS NEEDS TO BE CALLED ONCE SO EACH BET IS WITH THE SAME CONTROL
-    // Create a For Loop?
-    db.query("CALL `numbers`.`InsertBets`(?, ?, ?, ?, ?)",[5,"14-23","+639922113388",100,'MjAyMS0wOTswMjEwOjAwOjAwMzkyMjMzMTE0NA=='],(err,result)=>
-    {
-        if(err)
-        {
-            console.log(err)
-        }
-        if(result)
-        {
-            console.log(result)
-        }
-    })
+    // let control = backendFunctions.CreateTicketControl('+639922113388') // NOTE HERE THAT TIME AND DATE IS IN A TIMESTAMP MEANING THAT THIS NEEDS TO BE CALLED ONCE SO EACH BET IS WITH THE SAME CONTROL
+    // // Create a For Loop?
+    // // Create a Receipt first
+    // // then create bets THEN Tickets
+    //                                             // Receipt                      // User                     // randomSeq                //localhost             //localhost                 // gameid
+    // db.query("CALL `numbers`.`CreateBaseReceipt`(?, ?, ?, ?, ?,?)",
+    // [control,userid,+new Date,"localhost","localhost",gameid])
+    // // For Loop // BETS DETAILS                             // DrawID, Combo,Bettor(by default User), control
+    // db.query("CALL `numbers`.`InsertBets`(?, ?, ?, ?, ?)",[5,"15-13",userid,100,control],(err,result)=>
+    // {
+    //     if(err)
+    //     {
+    //         console.log(err)
+    //     }
+    //     if(result)
+    //     {
+    //         console.log(result)
+    //     }
+    // })
+    // // UPDATE TOTAL AMOUNT ON RECEIPT
+    // db.query("UPDATE `numbers`.`receipt` SET`totalamount` = (SELECT SUM(receiptdetails.betamount) FROM numbers.receiptdetails WHERE receiptdetails.receiptid = receipt.receiptid) WHERE receipt.receiptid = ?",[control])
+    // // UPDATE PLAYER'S Money
+    // db.query("UPDATE `numbers`.`profile` SET `money` = profile.money - (SELECT receipt.totalamount From numbers.receipt WHERE receipt.receiptid = ?) WHERE `mobile` =?",[control,user])
+
 }
 
 

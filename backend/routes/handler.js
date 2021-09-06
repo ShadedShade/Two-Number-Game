@@ -130,31 +130,69 @@ router.post('/selected',(req,res)=>
 })
 
 
-
+// Select userBet History
 router.post('/userBets',(req,res)=>
 {
     const userid = req.body.userid;
-   // db.query("SELECT ")
+   db.query("Select receipt.receiptid, receiptdetails.ticketid,bets.combo, bets.BetAmount, draw.DrawDate, draw.ShiftTime from numbers.receipt inner join numbers.receiptdetails on receipt.receiptid = receiptdetails.receiptid inner join numbers.bets on receiptdetails.ticketid = bets.BetID inner join numbers.draw on draw.DrawID = bets.drawid Where UserID = '?';",[userid],
+   (err,result)=>
+   {
+    console.log(result);
+    if(err)
+    {
+        res.send({err:err});
+    }
+    if(result.length >0)
+    {
+        var data =JSON.stringify(result);
+        res.send(data);
+    }
+    else
+    {
+        res.send(err);
+    }
+   }
+   )
 }
 )
 
 
 // now in theory this should work
 // we create bets, 
-// router.post('placeBets',(req,res)=>
-// {
-//     const bets = req.body.bets; // this will be a list of bets
-//     const userid = req.body.userid;
-//     const drawid = req.body.drawid; // if one draw date and time
-//     let betsDetails = [{"DrawID":"drawid","Combo":"combo","BetAmount":"betamount"}];  //<----  From Input
+router.post('/placeBets',(req,res)=>
+{
+    const bets = req.body.bets; // this will be a list of bets
+    const userid = req.body.userid;
+    const drawid = req.body.drawid; // if one draw date and time
+    let betsDetails = [{"DrawID":"drawid","Combo":"combo","Bettor":"bettor","BetAmount":"betamount"}];  //<----  From Input this should be the contents from the Front
+    const gameid =req.body.gameid;
+    let betsObject = JSON.parse(bets);
+   
+   let control = backendFunctions.CreateTicketControl('+639922113388') // NOTE HERE THAT TIME AND DATE IS IN A TIMESTAMP MEANING THAT THIS NEEDS TO BE CALLED ONCE SO EACH BET IS WITH THE SAME CONTROL
+   // Create a For Loop?
+   // Create a Receipt first
+   // then create bets THEN Tickets
+                                               // Receipt                      // User                     // randomSeq                //localhost             //localhost                 // gameid
+   db.query("CALL `numbers`.`CreateBaseReceipt`(?, ?, ?, ?, ?,?)",
+   [control,userid,+new Date,"localhost","localhost",gameid])
+   // For Loop // BETS DETAILS                             // DrawID, Combo,Bettor(by default User), control
+   db.query("CALL `numbers`.`InsertBets`(?, ?, ?, ?, ?)",[betsObject[0].DrawID,betsObject[0].Combo,betsObject[0].Bettor,betsObject[0].BetAmount,control],(err,result)=>
+   {
+       if(err)
+       {
+           console.log(err)
+       }
+       if(result)
+       {
+           console.log(result)
+       }
+   })
+   // UPDATE TOTAL AMOUNT ON RECEIPT
+   db.query("UPDATE `numbers`.`receipt` SET`totalamount` = (SELECT SUM(receiptdetails.betamount) FROM numbers.receiptdetails WHERE receiptdetails.receiptid = receipt.receiptid) WHERE receipt.receiptid = ?",[control])
+   // UPDATE PLAYER'S Money
+   db.query("UPDATE `numbers`.`profile` SET `money` = profile.money - (SELECT receipt.totalamount From numbers.receipt WHERE receipt.receiptid = ?) WHERE `mobile` =?",[control,userid])
 
-//     let betsObject = JSON.parse(bets);
-    
-//     let control = backendFunctions.CreateTicketControl(userid)
-//     // Create a For Loop?
-//     db.query("CALL `numbers`.`InsertBets`(<{IN drawid int}>, <{IN combo varchar(25)}>, <{IN bettor varchar(25)}>, <{IN amount float}>, <{IN ticketControl varchar(45)}>);")
-
-// })
+})
 
 // now we go to Betting, INSERT GAMEID DATE TIME, COMBINATION AND BET
 
@@ -182,7 +220,30 @@ router.get('/draws',(req,res)=>
 
 // Insertation then Update Profile of User
 
+router.post('/transaction',(req,res)=>
+{
 
+    console.log("request accepted");
+    const username = req.body.username;
+    const type = req.body.type;
+    const method= req.body.method;
+    const details = req.body.details; // might be server
+    const amount = req.body.amount;
+   db.query("INSERT INTO ledger_table (user_id, trantype, method, details, amount) VALUES ('?','?','?','?','?')", [username, type,method,details,amount],
+        (err, result) => {
+            console.log(err);
+        });
+//     Ledger Table 
+//     : INSERT INTO ledger_table (user_id, trantype, method, details, amount) VALUES ('?','?','?','?','?');
+
+// Profile Table
+//     : UPDATE profile_table
+//                   SET Money =  (CASE WHEN (SELECT Trantype FROM ledger_table WHERE Transaction_ID = 'x') = 'x' THEN (Money + 'x')
+//                                      WHEN (SELECT Trantype FROM ledger_table WHERE Transaction_ID = 'x') = 'x' THEN (Money - 'x')
+//                                     WHEN (SELECT Trantype FROM ledger_table WHERE Transaction_ID = 'x') = 'x' THEN (Money - 'x')
+//                                       END)
+//                   WHERE Mobile_no = 'x';
+})
 
 
 

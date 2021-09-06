@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header.js'
 import Login from './Login.js'
+import Test from './TestButton.js'
+import Signup from './Signup'
+
 function Home() {
     useEffect(() => {
         fetchHomeStuff(); // function name
@@ -24,7 +27,7 @@ function Home() {
         )) 
     }
         </div>
-        <Login/>
+        <Signup/>
 
     </section>
 }
