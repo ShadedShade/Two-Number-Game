@@ -7,26 +7,18 @@ import Login from './Login.js'
 import Sidebar from './Sidebar.js'
 import Navbar from './Navbar.js'
 import HomeNav from './HomeNav.js'
-import Login from './Login';
-import Sidebar from './Sidebar.js';
 
 
 
 function Home() {
-
     return (
-        <div>
+    <div>
             <div>
-                <HomeNav />
+        <HomeNav />
             </div>
             <div>
-                <Sidebar />
+        <Sidebar />
             </div>
-        </div>);
-
-    return (<div>
-        <Login />
     </div>);
-
 }
 export default Home;
