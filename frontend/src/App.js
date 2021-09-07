@@ -1,13 +1,14 @@
 //import logo from './logo.svg';
 import './App.css';
-import Nav from './components/Nav';
+import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Tweet from './components/Tweet';
 import LoginTest from './components/LoginTest';
 import Login from './components/Login';
 import LoginStepTwo from './components/LoginStepTwo';
 import Signup from './components/Signup';
-import Sidebar from './components/Sidebar'
+import Sidebar from './components/Sidebar';
+import HomeNav from './components/HomeNav';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 //setter
@@ -38,6 +39,7 @@ function App() {
   return (
     <Router>
       <div>
+          <HomeNav />
           <Sidebar />
           <Switch>
             {/* This switch is Below  the Navigation bar meaning that if you changed routes, it will render under routes so what we need to do is to create a page that HAS THIS NAV and A SEPARATE SWITCH THAT SHOWS THE LOGIN AND LANDING PAGE MEAING ROUTE TO SIGN UP LOGIN AND LANDING PAGE AND HOME PAGE */}
