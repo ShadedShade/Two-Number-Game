@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;900&display=swap');
+
+nav .navbar{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+a{
+  color: #262626;
+  text-decoration: none;
+}
+
+nav {
+  background: white;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.logo{
+  flex: 70%;
+  padding-left: 20px;
+}
+
+.logo a:hover{
+  color: #262626;
+  text-decoration: none;
+}
+
+
+.nv .links li{
+  list-style: none;
+  line-height: 70px;
+}
+
+nav ul li #profile{
+  flex: 30%;
+  display: grid;
+  place-items: center;
+}
+
+nav ul {
+  background: #f7931e;;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+nav li {
+  color: #fff;
+  background: #f7931e;;
+  display: block;
+  float: left;
+  padding: 1rem;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.5s;
+}
+  
+nav li a {
+  color: #fff;
+}
+
+li:hover,
+li:focus-within {
+  background: #74d4af;
+  text-decoration: none;
+  color: #262626;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+li:focus-within a {
+  outline: none;
+  text-decoration: none;
+}
+
+ul li ul {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 1rem;
+  left: 0;
+  display: none;
+  text-align: right;
+}
+
+ul li:hover > ul,
+ul li:focus-within > ul,
+ul li ul:hover,
+ul li ul:focus {
+   visibility: visible;
+   opacity: 1;
+   display: block;
+   position: absolute;
+}
+
+ul li ul li {
+  clear: both;
+  width: 100%;
+}
+
+nav ul li .dropdown{
+  width: 150px;
+  font-weight: 500;
+}
+
+nav ul li .dropdown li a:hover{
+  text-decoration: none;
+  color: #262626;
+  font-weight: 500;
+}
