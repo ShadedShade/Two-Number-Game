@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
+import { useHistory } from "react-router-dom";
 
 
 function Navbar() {
+    const history = useHistory();
+    const handleGoToLoginClick = () => {
+        history.push('/Login');
+    }
     return (
         <nav className="navbar navbar-expand-lg py-3 sticky-top navbar-light bg-white">
             <div className="container">
@@ -28,7 +32,7 @@ function Navbar() {
                             <a className="nav-link" href="#contact">Contact</a>
                         </li>
                     </ul>
-                    <a href="login.html" className="shadow btn btn-primary ms-lg-3 login">LOGIN</a>
+                    <a type="button" onClick={handleGoToLoginClick} className="shadow btn btn-primary ms-lg-3 login">LOGIN</a>
                     {/* <!-- <button className="shadow btn btn-primary ms-lg-3 login">LOGIN</button> --> */}
                 </div>
             </div>

@@ -2,6 +2,7 @@
 import './App.css';
 import Nav from './components/Nav';
 import Home from './components/Home';
+import Landing from './components/Landing';
 import Tweet from './components/Tweet';
 import LoginTest from './components/LoginTest';
 import Login from './components/Login';
@@ -38,13 +39,14 @@ function App() {
   return (
     <Router>
       <div>
-          <Sidebar />
+          {/* <Login /> */}
           <Switch>
             {/* This switch is Below  the Navigation bar meaning that if you changed routes, it will render under routes so what we need to do is to create a page that HAS THIS NAV and A SEPARATE SWITCH THAT SHOWS THE LOGIN AND LANDING PAGE MEAING ROUTE TO SIGN UP LOGIN AND LANDING PAGE AND HOME PAGE */}
-            <Route path="/" exact component={Home} /> 
-            <Route path="/Login" exact component={Login} /> 
-            <Route path="/LoginStepTwo" exact component={LoginStepTwo} /> 
+            <Route path="/" exact component={Landing} /> 
+            <Route path="/Home" exact component={Home} /> 
             <Route path="/Signup" exact component={Signup} /> 
+            <Route path="/LoginStepTwo" exact component={LoginStepTwo} /> 
+            <Route path="/Login" exact component={Login} /> 
             <Route path="/tweets" exact component={Tweet} />
          </Switch>
      </div>

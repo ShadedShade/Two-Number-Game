@@ -84,6 +84,35 @@ function MatchEZTwoResult( result,userBet)
      }
 }
 
+function Match3DigitGame(result,userBet)
+{   // this can be optimized, made this with half functioning brain
+    let i1 = false;
+    let i2 = false;
+    let i3 = false;
+
+
+    for (let i =0; i<result.length;i++)
+    {
+        if(userBet[0] == result[i])
+        {
+            i1 = true;
+        }
+        if(userBet[1] == result[i])
+        {
+            i2 = true;
+        }
+        if(userBet[2] == result[i])
+        {
+            i3 = true;
+        }
+    }
+    if(i1 && i2 && i3)
+    {
+        return 500;
+    }
+    return 0;
+}
+
 function Match4DigitGame(result,userBet)
 {
     for(let i =0; i< result.length;i++)

@@ -27,16 +27,30 @@ router.get('/home', (req, res) => {
 
 });
 
+// just throwing the error back to the front is enough
 router.post('/register', (req, res) => {
     console.log("request accepted");
     const username = req.body.username;
     const password = req.body.password;
-   db.query("INSERT INTO `numbers`.`profile` (mobile,mpin) VALUES (?,?)", [username, password],
+    const email = req.body.email;
+    const name = req.body.name;
+   db.query("INSERT INTO `numbers`.`profile` (mobile,email,mpin,name) VALUES (?,?,?,?)", [username,email, password,name],
         (err, result) => {
-            console.log(err);
+            if(err)
+            {
+                console.log(err); // Go send an error message, alert in the front
+                res.send({ message: "User Already exists" });
+
+            }
+            if(result)
+            {
+                res.send({response:"User Created"});
+                console.log(result);
+            }
         });
 });
 
+// Send Username 
 router.post('/login', (req, res) => {
     const username = req.body.username;
 
@@ -51,7 +65,28 @@ router.post('/login', (req, res) => {
                 res.send(result);
             }
             else {
-                res.send({ message: "Invalid mobile no. / password" });
+                res.send({ message: " User does not exist" });
+            }
+
+        });
+})
+
+router.post('/loginMpin', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    db.query("SELECT profile.mobile,profile.mpin FROM `numbers`.`profile` WHERE mobile = ? AND mpin = ? ", 
+    [username,password],
+        (err, result) => {
+            if (err) { 
+                res.send({ err: err });
+             }
+
+            if (result.length > 0) {
+                res.send(result);
+            }
+            else {
+                res.send({ message: " User does not exist" });
             }
 
         });
@@ -167,7 +202,7 @@ router.post('/placeBets',(req,res)=>
     const gameid =req.body.gameid;
     let betsObject = JSON.parse(bets);
    
-   let control = backendFunctions.CreateTicketControl('+639922113388') // NOTE HERE THAT TIME AND DATE IS IN A TIMESTAMP MEANING THAT THIS NEEDS TO BE CALLED ONCE SO EACH BET IS WITH THE SAME CONTROL
+   let control = backendFunctions.CreateTicketControl(userid) // NOTE HERE THAT TIME AND DATE IS IN A TIMESTAMP MEANING THAT THIS NEEDS TO BE CALLED ONCE SO EACH BET IS WITH THE SAME CONTROL
    // Create a For Loop?
    // Create a Receipt first
    // then create bets THEN Tickets

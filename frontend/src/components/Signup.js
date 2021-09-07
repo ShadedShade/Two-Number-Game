@@ -13,7 +13,7 @@ function Signup() {
     const [authCode, setAuthCode] = useState('');
     const history = useHistory();
     const handleBackClick = () => {
-        history.push('/tweets');
+        history.push('/');
     }
     const handleRegisterClick = () => {
         history.push('/login');
@@ -26,6 +26,15 @@ function Signup() {
         Axios.post('http://localhost:3000/register', {
             username: usernameReg, password: passwordReg,email:emailReg,name:nameReg
         }).then(function (response) {
+            if(response.message)
+            {
+                console.log("Account already Exists")
+            }
+            if(response.result)
+            {
+                handleRegisterClick();
+            }
+
             console.log(response); // Should Redirect to the login or Pop a Alert box, or Alert that alerts IIIIIIIFFFFFFF user already exist
         }).catch(function (error) {
             console.log(error);
@@ -34,30 +43,30 @@ function Signup() {
 
 
     return (
-        <section class="container">
-            <div class="row d-flex justify-content-center align-items-center bg-row vh-100 w3-animate-top">
-                <div class="col-12 bg-box">
+        <div className="container">
+            <div className="row d-flex justify-content-center align-items-center bg-row vh-100 w3-animate-top">
+                <div className="col-12 bg-box">
                     {/* <!-- TITLE AND BACKBTN SECTION--> */}
                     <div>
                         <a href="" onClick={handleBackClick}>
-                            <span><i class="fas fa-arrow-left back pb-3"></i></span>
+                            <span><i className="fas fa-arrow-left back pb-3"></i></span>
                         </a>
-                        <h2 class="pb-4">Sign Up</h2>
+                        <h2 className="pb-4">Sign Up</h2>
                     </div>
                     {/* <!-- =============================== -->
                     <!-- FORM SECTION --> */}
-                    <form class="w3-animate-opacity " style={{ opacity: "1.5s" }}>
-                        <div class="form-content">
-                            <div class="row pb-4">
-                                <div class="col-md-6">
-                                    <div class="form-group pb-4">
+                    <form className="w3-animate-opacity " style={{ opacity: "1.5s" }}>
+                        <div className="form-content">
+                            <div className="row pb-4">
+                                <div className="col-md-6">
+                                    <div className="form-group pb-4">
                                         <label for="email">Email Address (Optional)</label>
-                                        <input type="email" id="email" class="form-control" />
+                                        <input type="email" id="email" className="form-control" />
                                     </div>
-                                    <div class="form-group pb-4">
+                                    <div className="form-group pb-4">
                                         <label for="mobilenum">Mobile Number <span style={{ color: "#FD0000" }}>*</span></label>
-                                        <div class="input-group mb-0">
-                                            <input type="tel" id="mobilenum" class="form-control" aria-describedby="basic-addon2" minlength="11" maxlength="11" placeholder="09XXXXXXXXX" pattern="[0-9]{2}[0-9]{9}" value={usernameReg}
+                                        <div className="input-group mb-0">
+                                            <input type="tel" id="mobilenum" className="form-control" aria-describedby="basic-addon2" minlength="11" maxlength="11" placeholder="09XXXXXXXXX" pattern="[0-9]{2}[0-9]{9}" value={usernameReg}
                                                 onChange={(e) => {
                                                     const re = /^[0-9\b]+$/;
                                                     //  console.log(e.target.value);
@@ -71,15 +80,15 @@ function Signup() {
                                                 }}
 
                                                 required />
-                                            <div class="input-group-append">
-                                                <button class="btn1 btn-outline-secondary" type="button">SEND CODE</button>
+                                            <div className="input-group-append">
+                                                <button className="btn1 btn-outline-secondary" type="button">SEND CODE</button>
                                             </div>
                                         </div>
-                                        <small id="mobsmalllabel" class="form-text text-muted">Your mobile number will be your <b>UserID</b>.</small>
+                                        <small id="mobsmalllabel" className="form-text text-muted">Your mobile number will be your <b>UserID</b>.</small>
                                     </div>
-                                    <div class="form-group pb-4">
+                                    <div className="form-group pb-4">
                                         <label for="mpin">6-Digit MPIN <span style={{ color: "#FD0000;" }}>*</span></label>
-                                        <input type="password" pattern="[0-9]{6}" id="mpin" class="form-control" maxlength="6" minlength="6" value={passwordReg} onChange={(e) => {
+                                        <input type="password" pattern="[0-9]{6}" id="mpin" className="form-control" maxlength="6" minlength="6" value={passwordReg} onChange={(e) => {
                                             const re = /^[0-9\b]+$/;
                                             //  console.log(e.target.value);
                                             if (re.test(e.target.value) || e.target.value === '') {
@@ -94,14 +103,14 @@ function Signup() {
                                             required />
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group pb-4">
+                                <div className="col-md-6">
+                                    <div className="form-group pb-4">
                                         <label for="name">Full Name (Optional)</label>
-                                        <input type="text" id="name" class="form-control" />
+                                        <input type="text" id="name" className="form-control" />
                                     </div>
-                                    <div class="form-group">
+                                    <div className="form-group">
                                         <label for="auth">Authentication Code <span style={{ color: "#FD0000;" }}>*</span></label>
-                                        <input type="text" id="auth" class="form-control" onChange={(e) => {
+                                        <input type="text" id="auth" className="form-control" onChange={(e) => {
                                             const re = /^[0-9\b]+$/;
                                             //  console.log(e.target.value);
                                             if (re.test(e.target.value) || e.target.value === '') {
@@ -115,21 +124,21 @@ function Signup() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 gap-2 grp-btn">
-                                <button type="submit" class="btn">SIGN UP</button>
-                                <div class="vertical"></div>
-                                <button class="btnfb facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
-                                <button class="btnggle google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google</span> </button>
+                            <div className="col-md-12 gap-2 grp-btn">
+                                <button type="button" onClick={Register} className="btn">SIGN UP</button>
+                                <div className="vertical"></div>
+                                <button className="btnfb facebook-btn social-btn" type="button"><span><i className="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
+                                <button className="btnggle google-btn social-btn" type="button"><span><i className="fab fa-google-plus-g"></i> Sign up with Google</span> </button>
                             </div>
-                            <div class="mt-5 login">
-                                <p class="mb-0">Already Registered? <a class="CCC" type="button" onClick={handleGoToLogInClick}>Login</a></p>
+                            <div className="mt-5 login">
+                                <p className="mb-0">Already Registered? <a className="CCC" type="button" onClick={handleGoToLogInClick}>Login</a></p>
                             </div>
                         </div>
                     </form>
                     {/* <!-- =============== --> */}
                 </div>
             </div>
-        </section>
+        </div>
     );
 }
 export default Signup;
