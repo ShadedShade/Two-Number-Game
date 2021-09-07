@@ -1,6 +1,6 @@
 //import logo from './logo.svg';
 import './App.css';
-import Nav from './components/Nav';
+import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Landing from './components/Landing';
 import Tweet from './components/Tweet';
@@ -8,7 +8,8 @@ import LoginTest from './components/LoginTest';
 import Login from './components/Login';
 import LoginStepTwo from './components/LoginStepTwo';
 import Signup from './components/Signup';
-import Sidebar from './components/Sidebar'
+import Sidebar from './components/Sidebar';
+import HomeNav from './components/HomeNav';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 //setter
