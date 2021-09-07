@@ -1,12 +1,32 @@
 import React, { useEffect, useState } from 'react';
+import Header from './Header.js'
+import LoginTest from './LoginTest.js'
+import Test from './TestButton.js'
+import Signup from './Signup'
+import Login from './Login.js'
+import Sidebar from './Sidebar.js'
+import Navbar from './Navbar.js'
+import HomeNav from './HomeNav.js'
 import Login from './Login';
 import Sidebar from './Sidebar.js';
 
 
 
 function Home() {
+
+    return (
+        <div>
+            <div>
+                <HomeNav />
+            </div>
+            <div>
+                <Sidebar />
+            </div>
+        </div>);
+
     return (<div>
-        <Login/>
-            </div>);
+        <Login />
+    </div>);
+
 }
 export default Home;
