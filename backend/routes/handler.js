@@ -275,7 +275,7 @@ router.post('/transaction',(req,res)=>
             if(result)
             {
                 console.log(result);
-                res.send({message:"unknown error occured"});
+                res.send({message:"unknown error occured"});    
 
             }
         });})
