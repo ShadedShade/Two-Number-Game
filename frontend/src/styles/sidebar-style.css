@@ -3,7 +3,8 @@
 .Sidebar{
     height: 610px;
     width: 250px;
-    background-color: #f7931e;
+    background-image: linear-gradient(#ffb055, #f76613);
+    overflow: hidden;
 }
 
 .SidebarList{

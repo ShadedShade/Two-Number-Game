@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;900&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+   
+}
+
+body{
+    background-color: #f0f3f4;
+    color: #262626;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hpc{
+    width: 100%;
+}
+
+div.div3{
+    width: 100%;
+    padding: 0;
+}
+
+h1{
+    padding: 0;
+    line-height: 150px;
+    width: 100%;
+    text-align: center;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #262626;
+}
+
+sup{
+    vertical-align: super;
+    font-size:large;
+    letter-spacing: 0px;
+    padding-right: 15px;
+    line-height: 100%;
+}
+
+.fa-plus-circle{
+    color: #f36e23;
+    padding-left: 10px;
+}
+
+.fa-plus-circle:hover{
+    color: #f7931e;
+}
+
+div .row .buttons div{
+    line-height: 150px;
+}
+
+.play, .mytix, .stats{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.description{
+    display: block;
+    padding-bottom: 20px;
+    line-height: 100%;
+    font-size: larger;
+    font-weight: 900;
+    padding-top: 15px;
+}
+
+.threeButton{
+    cursor: pointer;
+    height: 150px;
+    width: 100%;
+    border: none;
+    background: transparent;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+/* i.fas.fa-gamepad{
+    color: white;
+} */
+
+
+/* PLAY BUTTON */
+.buttonPlay{
+    background-image: linear-gradient(to right, #f36e23 , #f7931e);
+    color: white;
+    border-radius: 0.5rem;
+    border-bottom: 0.40em solid #bd6500;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    box-shadow: 0 2px 3px rgb(177, 177, 177);
+}
+.buttonPlay #icon1{
+    color: white;
+}
+.buttonPlay:hover, .buttonPlay:hover #icon1{
+    color: #f36e23;
+    background: white;
+    border-bottom-width: 0;
+    margin-top: 0.2em;
+}
+/* =========================== */
+
+/* MY TICKETS BUTTON */
+.buttontix{
+    background-image: linear-gradient(to right, #2f3136 , #54575f);
+    color: white;
+    border-radius: 0.5rem;
+    border-bottom: 0.40em solid #2f3136;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    box-shadow: 0 2px 3px rgb(177, 177, 177);
+}
+.buttontix #icon2{
+    color: white;
+}
+.buttontix:hover, .buttontix:hover #icon2{
+    color: #2f3136;
+    background: white;
+    border-bottom-width: 0;
+    margin-top: 0.2em;
+}
+/* =========================== */
+
+/* STATS BUTTON */
+.buttonstats{
+    background-image: linear-gradient(to right, #009885 , #74d4af);
+    color: white;
+    border-radius: 0.5rem;
+    border-bottom: 0.40em solid #009885;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    box-shadow: 0 2px 3px rgb(177, 177, 177);
+}
+.buttonstats #icon3{
+    color: white;
+}
+.buttonstats:hover, .buttonstats:hover #icon3{
+    color: #009885;
+    background: white;
+    border-bottom-width: 0;
+    margin-top: 0.2em;
+}
+/* =========================== */
+
+.bal{
+    border-radius: 15px;
+}
+
+.balance{
+    border-radius: 15px;
+    width: 100%;
+    background: white;
+    transition: 1s;
+    -webkit-transition: 1s;
+    border-bottom: 0.40em solid rgb(244, 113, 37);
+}

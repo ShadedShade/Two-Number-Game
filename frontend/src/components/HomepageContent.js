@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/hpcontent.css'
-/*
-    Add Credit: import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
-    Play: import SportsEsportsRoundedIcon from '@material-ui/icons/SportsEsportsRounded';
-    Tickets: import ConfirmationNumberRoundedIcon from '@material-ui/icons/ConfirmationNumberRounded';
-    Stats: import StarRoundedIcon from '@material-ui/icons/StarRounded';
-*/ 
 
 function HomepageContent() {
     return (
         <div>
-                <div class="row my-5"></div>
-                <div class="col-md-12 div3 px-5 py-4 ">
-                    <div class="p-3 bg-white shadow d-flex justify-content-around align-items-center rounded">
+                <div class="row my-4"></div>
+                <div class="col-md-12 div3 px-5 py-4 pt-5">
+                    <div class="shadow d-flex justify-content-around align-items-center  bal">
                         <div class="balance">
-                            <h1><sup>PTS</sup> 1,001,115.00</h1>
+                            <h1>
+                                <sup>PTS</sup> 
+                                1,001,115.00
+                                <a href="#"><span><i class="fas fa-plus-circle"></i></span></a>
+                            </h1>
                         </div>
                     </div>
                 </div>
                 <div class="row my-5">
                     <div class="col-md-12 px-2 d-flex justify-content-around align-items-center rounded buttons">
-                        <div class="col-md-3 bg-white shadow">1</div>
-                        <div class="col-md-3 bg-white shadow">2</div>
-                        <div class="col-md-3 bg-white shadow">3</div>
+                        <div class="col-md-3 buttonPlay">
+                            <div class="shadow play">
+                                <button class="btn-group threeButton" id="bplay"><i class="fas fa-gamepad" id="icon1" style={{fontSize:"145px"}}></i></button>                            
+                                <label class="description" id="play">Play</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 buttontix">
+                            <div class="shadow mytix">
+                                <button class="btn-group threeButton" id="btix"><i class="fas fa-ticket-alt" id="icon2" style={{fontSize:"140px"}}></i></button>
+                                <label class="description" id="tix">My Tickets</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 buttonstats">
+                            <div class="shadow stats">
+                                <button class="btn-group threeButton" id="bstat"><i class="fas fa-star" id="icon3" style={{fontSize:"125px"}}></i></button>
+                                <label class="description" id="stat">Stats</label>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
                 </div>
         </div>

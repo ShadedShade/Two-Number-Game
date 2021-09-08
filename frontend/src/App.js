@@ -48,34 +48,23 @@ function App() {
             
             <div className="container-fluid">
               <div className="row">
-                <div className="col-sm-3 p-0">
+                <div className="col-sm-2" style={{padding: "0px", paddingRight: "304px"}}>
                   <Sidebar />
                 </div>
                 <div className="col-sm-9">
                   <HomepageContent />
                 </div>
               </div>
-            </div>
-
-            {/* <div className="row ">
-            <Sidebar />
-              <div className="col-md-9">
-                <div className="col-md-12">
-                  <HomepageContent />
-                </div>
-              </div>
-              
-            </div> */}
-            
+            </div>            
             <div>
               <Switch>
                 {/* This switch is Below  the Navigation bar meaning that if you changed routes, it will render under routes so what we need to do is to create a page that HAS THIS NAV and A SEPARATE SWITCH THAT SHOWS THE LOGIN AND LANDING PAGE MEAING ROUTE TO SIGN UP LOGIN AND LANDING PAGE AND HOME PAGE */}
-                <Route path="/" exact component={Landing} />
+                {/* <Route path="/" exact component={Landing} />
                 <Route path="/Home" exact component={Home} />
                 <Route path="/Signup" exact component={Signup} />
                 <Route path="/LoginStepTwo" exact component={LoginStepTwo} />
                 <Route path="/Login" exact component={Login} />
-                <Route path="/tweets" exact component={Tweet} />
+                <Route path="/tweets" exact component={Tweet} /> */}
               </Switch>
             </div>
 

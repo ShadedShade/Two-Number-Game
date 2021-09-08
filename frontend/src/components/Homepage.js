@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar.js'
-import Navbar from './Navbar.js'
+import HomeNav from './HomeNav.js';
 import HomepageContent from '.HomepageContent.js';
 import '../styles/homepage.css'
 
@@ -8,11 +8,17 @@ import '../styles/homepage.css'
 function Homepage() {
     return (
         <div>
-            <Navbar />
-            
-            <Sidebar />
-            
-                        
+            <HomeNav />
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-sm-3 p-0">
+                  <Sidebar />
+                </div>
+                <div className="col-sm-9">
+                  <HomepageContent />
+                </div>
+              </div>
+            </div>     
         </div>
         
     );
