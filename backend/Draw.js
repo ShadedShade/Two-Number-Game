@@ -21,6 +21,20 @@ function GenerateRandomNumbers(count,minimum,maximum)
 }
 
 
+// Test function
+function ForceDraw()
+{
+    // Get draw ID, query it, query all bets on that draw ID, match it, query it on to the results
+
+}
+
+function Transact()
+{
+  // all inputs query it to this function
+  // then call the store proc
+}
+
+
 
 
 module.exports = {GenerateRandomNumbersBounded,GenerateRandomNumbers};

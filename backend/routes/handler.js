@@ -263,20 +263,26 @@ router.post('/transaction',(req,res)=>
     const method= req.body.method;
     const details = req.body.details; // might be server
     const amount = req.body.amount;
-   db.query("INSERT INTO ledger_table (user_id, trantype, method, details, amount) VALUES ('?','?','?','?','?')", [username, type,method,details,amount],
+   db.query("CALL `numbers`.`update_ledger_and_profile_table`(?, ?, ?,?, ?);", [username, type,method,details,amount],
         (err, result) => {
-            console.log(err);
-        });
-//     Ledger Table 
-//     : INSERT INTO ledger_table (user_id, trantype, method, details, amount) VALUES ('?','?','?','?','?');
+            if(err)
+            {
+                console.log(err);
+                res.send({message:"unknown error occured"});
 
-// Profile Table
-//     : UPDATE profile_table
-//                   SET Money =  (CASE WHEN (SELECT Trantype FROM ledger_table WHERE Transaction_ID = 'x') = 'x' THEN (Money + 'x')
-//                                      WHEN (SELECT Trantype FROM ledger_table WHERE Transaction_ID = 'x') = 'x' THEN (Money - 'x')
-//                                     WHEN (SELECT Trantype FROM ledger_table WHERE Transaction_ID = 'x') = 'x' THEN (Money - 'x')
-//                                       END)
-//                   WHERE Mobile_no = 'x';
+            }
+
+            if(result)
+            {
+                console.log(result);
+                res.send({message:"unknown error occured"});
+
+            }
+        });})
+
+router.post('results',(req,res)=>
+{
+
 })
 
 

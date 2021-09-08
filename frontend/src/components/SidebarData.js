@@ -11,7 +11,7 @@ export const SidebarData = [
     {
         title: "Homepage",
         icon: <HomeRoundedIcon />,
-        link: "/Homepage.js"
+        link: "/"
     },
     {
         title: "Mechanics",
