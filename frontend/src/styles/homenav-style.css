@@ -65,8 +65,6 @@ nav li a {
 li:hover,
 li:focus-within {
   background: #74d4af;
-  text-decoration: none;
-  color: #262626;
   cursor: pointer;
   font-weight: 500;
 }
