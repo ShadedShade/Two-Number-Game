@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import '../styles/hpcontent.css'
 
+
+//todo get all user profile here
 function HomepageContent() {
         const history = useHistory();
         const handlePlayClick = () => {

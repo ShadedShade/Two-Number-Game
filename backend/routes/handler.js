@@ -75,7 +75,7 @@ router.post('/loginMpin', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    db.query("SELECT profile.mobile,profile.mpin FROM `numbers`.`profile` WHERE mobile = ? AND mpin = ? ", 
+    db.query("SELECT * FROM `numbers`.`profile` WHERE mobile = ? AND mpin = ? ", 
     [username,password],
         (err, result) => {
             if (err) { 

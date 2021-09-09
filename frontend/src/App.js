@@ -42,9 +42,15 @@ function App() {
   return (
     <Router>
       <div>
-        <div>
-            <div><Homepage /></div>
-        </div>
+        <Switch>
+        <Route path="/" exact component={Landing} />
+        <Route path="/Home" exact component={Homepage} />
+        <Route path="/Signup" exact component={Signup} />
+        <Route path="/LoginStepTwo" exact component={LoginStepTwo} />
+        <Route path="/Login" exact component={Login} />
+        </Switch>
+            
+        
         {/* <Login /> */}
 
 

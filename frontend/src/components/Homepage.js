@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Sidebar from './Sidebar.js'
 import HomeNav from './HomeNav.js';
 import HomepageContent from './HomepageContent.js';
+
 import '../styles/homepage.css'
 
 
@@ -15,7 +17,12 @@ function Homepage() {
                   <Sidebar />
                 </div>
                 <div className="col-sm-9">
-                  <HomepageContent />
+                  <Switch>
+                    { // 
+                      <Route path="/Home" exact component={HomepageContent} />
+                    }
+                    </Switch>
+
                 </div>
               </div>
             </div>     
