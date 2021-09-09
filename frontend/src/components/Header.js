@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/landingpage-style.css';
+
 import { useHistory } from "react-router-dom";
 function Header() {
     const history = useHistory();

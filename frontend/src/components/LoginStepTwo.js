@@ -21,7 +21,7 @@ function LoginStepTwo() {
         history.push('/SignUp');
     }
     const handleLoginStepTwoClick = () => {
-        history.push('/logintwo'); // go to step 2
+        history.push('/Home'); // go to step 2
     }
 
 
@@ -44,8 +44,13 @@ function LoginStepTwo() {
                 console.log(response);
                 console.log(response.data[0].mobile);
                 sessionStorage.setItem("mPin", response.data[0].mpin);
+                sessionStorage.setItem("sessionMoney", response.data[0].money);
+                sessionStorage.setItem("sessionName", response.data[0].name);
                 console.log("session Storage Userid: " + sessionStorage.getItem("Userid"));
                 console.log("session Storage Mpin: " + sessionStorage.getItem("mPin"));
+                console.log("session Storage sessionMoney: " + sessionStorage.getItem("sessionMoney"));
+                console.log("session Storage sessionName: " + sessionStorage.getItem("sessionName"));
+                handleLoginStepTwoClick();
 
             }
         });
