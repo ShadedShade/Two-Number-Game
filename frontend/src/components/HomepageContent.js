@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
+
+import DateTimePicker from "react-datetime-picker";
+import { Modal,Button } from "react-bootstrap";
+
 import DateTimePicker from 'react-datetime-picker';
 import Axios from 'axios';
 
@@ -28,6 +32,17 @@ function HomepageContent() {
         const handleAddFundsClick = () => {
             history.push('/');
         }
+
+
+
+        /* Modal */
+        const values = [true, 'sm-down', 'md-down', 'lg-down', 'xl-down', 'xxl-down'];
+        const [fullscreen, setFullscreen] = useState(true);
+        const [show, setShow] = useState(false);
+        function handleShow(breakpoint) {
+            setFullscreen(breakpoint);
+            setShow(true);
+
         const generateReference = () =>
         {
             onReference(valueDate + " "+ gCashNumber + " " + reference + " " + senderName )
@@ -69,6 +84,7 @@ function HomepageContent() {
                     
                 }
             });
+
         }
     
     return (
@@ -90,7 +106,7 @@ function HomepageContent() {
                     <div class="col-md-12 px-2 d-flex justify-content-around align-items-center rounded buttons">
                         <div class="col-md-3 buttonPlay">
                             <div class="shadow play">
-                                <button class="btn-group threeButton" id="bplay"onClick={handlePlayClick}><i class="fas fa-gamepad" id="icon1" style={{fontSize:"145px"}}></i></button>                            
+                                <button class="btn-group threeButton" id="bplay" onClick={handleShow}><i class="fas fa-gamepad" id="icon1" style={{fontSize:"145px"}}></i></button>                            
                                 <label class="description" id="play">Play</label>
                             </div>
                         </div>
@@ -108,12 +124,12 @@ function HomepageContent() {
                         </div>
                     </div>
                 </div>
-                {/* <!-- Modal --> */}
+                {/* <!--Load Wallet Modal --> */}
                 <div class="modal fade" id="load" tabindex="-1" aria-labelledby="loadModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-fullscreen">
                     <div class="modal-content">
                     <div class="modal-header loadModalHeader">
-                        <h5 class="modal-title" id="loadModalLabel">Load <span style={{color: "#f36e23"}}>Wallet</span></h5>
+                        <h5 class="modal-title" id="loadModalLabel">LOAD <span style={{color: "#f36e23"}}>WALLET</span></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-5">
@@ -178,6 +194,58 @@ function HomepageContent() {
                     </div>
                 </div>
                 </div>
+                {/* ========================= */}
+
+                {/* Play Game Modal */}
+                <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>LIST OF <span style={{color: "#f36e23"}}>GAMES</span></Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="playModalBody p-5">
+                        {/* TABLE CODES HERE */}
+                        <table class="col-md-12 table table-bordered p-5">
+                            <thead>
+                            <tr>
+                                <th scope="col">Game Name</th>
+                                <th scope="col" style={{textAlign:"center"}}>Next Draw Date</th>
+                                <th scope="col" style={{textAlign:"center"}}>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>EZ2 Lotto</td>
+                                    <td style={{textAlign:"center"}}>DD-MM-YY</td>
+                                    <td>
+                                        <div style={{textAlign:"center"}}>
+                                            <button type="button" style={{marginRight: "2px"}}>MECHANICS</button>
+                                            <button type="button" style={{marginLeft: "2px"}}>BET NOW</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Suertres Lotto</td>
+                                    <td style={{textAlign:"center"}}>DD-MM-YY</td>
+                                    <td>
+                                        <div style={{textAlign:"center"}}>
+                                            <button type="button" style={{marginRight: "2px"}}>MECHANICS</button>
+                                            <button type="button" style={{marginLeft: "2px"}}>BET NOW</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4DG Lotto</td>
+                                    <td style={{textAlign:"center"}}>DD-MM-YY</td>
+                                    <td>
+                                        <div style={{textAlign:"center"}}>
+                                            <button type="button" style={{marginRight: "2px"}}>MECHANICS</button>
+                                            <button type="button" style={{marginLeft: "2px"}}>BET NOW</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </Modal.Body>
+                </Modal>
         </div>
     );
 }
