@@ -187,3 +187,34 @@ button.loadModalCloseBtn{
 button.loadWalletBtn{
     width: 30%;
 }
+
+th{
+    font-weight: 600;
+}
+
+tr td div button{
+    background: #f36e23;
+    color: white;
+    font-weight: normal;
+    border:none;
+}
+
+tr td div button:hover{
+    background: #74d4af;
+    color: white;
+    font-weight: normal;
+    border:none;
+}
+
+table{
+    background: white;
+    height: 300px;
+}
+
+.playModalBody{
+    background: #f0f3f4;
+}
+
+td{
+    vertical-align: middle;
+}

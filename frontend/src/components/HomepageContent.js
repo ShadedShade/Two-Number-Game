@@ -1,7 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
-import DateTimePicker from 'react-datetime-picker';
+import DateTimePicker from "react-datetime-picker";
+import { Modal } from "react-bootstrap";
+import { Button} from 'react-bootstrap';
 import '../styles/hpcontent.css'
+
+// For Table
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
 
 
 //todo get all user profile here
@@ -18,6 +31,16 @@ function HomepageContent() {
         }
         const handleAddFundsClick = () => {
             history.push('/');
+        }
+
+
+        /* Modal */
+        const values = [true, 'sm-down', 'md-down', 'lg-down', 'xl-down', 'xxl-down'];
+        const [fullscreen, setFullscreen] = useState(true);
+        const [show, setShow] = useState(false);
+        function handleShow(breakpoint) {
+            setFullscreen(breakpoint);
+            setShow(true);
         }
     
     return (
@@ -38,7 +61,7 @@ function HomepageContent() {
                     <div class="col-md-12 px-2 d-flex justify-content-around align-items-center rounded buttons">
                         <div class="col-md-3 buttonPlay">
                             <div class="shadow play">
-                                <button class="btn-group threeButton" id="bplay"onClick={handlePlayClick}><i class="fas fa-gamepad" id="icon1" style={{fontSize:"145px"}}></i></button>                            
+                                <button class="btn-group threeButton" id="bplay" onClick={handleShow}><i class="fas fa-gamepad" id="icon1" style={{fontSize:"145px"}}></i></button>                            
                                 <label class="description" id="play">Play</label>
                             </div>
                         </div>
@@ -56,12 +79,12 @@ function HomepageContent() {
                         </div>
                     </div>
                 </div>
-                {/* <!-- Modal --> */}
+                {/* <!--Load Wallet Modal --> */}
                 <div class="modal fade" id="load" tabindex="-1" aria-labelledby="loadModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-fullscreen">
                     <div class="modal-content">
                     <div class="modal-header loadModalHeader">
-                        <h5 class="modal-title" id="loadModalLabel">Load <span style={{color: "#f36e23"}}>Wallet</span></h5>
+                        <h5 class="modal-title" id="loadModalLabel">LOAD <span style={{color: "#f36e23"}}>WALLET</span></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-5">
@@ -126,6 +149,117 @@ function HomepageContent() {
                     </div>
                 </div>
                 </div>
+                {/* ========================= */}
+
+                {/* Play Game Modal */}
+                <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>LIST OF <span style={{color: "#f36e23"}}>GAMES</span></Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="playModalBody p-5">
+                        {/* TABLE CODES HERE */}
+                        <table class="col-md-12 table table-bordered p-5">
+                            <thead>
+                            <tr>
+                                <th scope="col">Game Name</th>
+                                <th scope="col" style={{textAlign:"center"}}>Next Draw Date</th>
+                                <th scope="col" style={{textAlign:"center"}}>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>EZ2 Lotto</td>
+                                    <td style={{textAlign:"center"}}>DD-MM-YY</td>
+                                    <td>
+                                        <div style={{textAlign:"center"}}>
+                                            <button type="button" style={{marginRight: "2px"}}>MECHANICS</button>
+                                            <button type="button" style={{marginLeft: "2px"}}>BET NOW</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Suertres Lotto</td>
+                                    <td style={{textAlign:"center"}}>DD-MM-YY</td>
+                                    <td>
+                                        <div style={{textAlign:"center"}}>
+                                            <button type="button" style={{marginRight: "2px"}}>MECHANICS</button>
+                                            <button type="button" style={{marginLeft: "2px"}}>BET NOW</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4DG Lotto</td>
+                                    <td style={{textAlign:"center"}}>DD-MM-YY</td>
+                                    <td>
+                                        <div style={{textAlign:"center"}}>
+                                            <button type="button" style={{marginRight: "2px"}}>MECHANICS</button>
+                                            <button type="button" style={{marginLeft: "2px"}}>BET NOW</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        {/* <div className="px-5">
+                            <TableContainer component={Paper}>
+                                <Table className="tbl">
+                                    <TableHead className="tblheadGame">
+                                        <TableRow>
+                                            <TableCell scope="col">GAME NAME</TableCell>
+                                            <TableCell scope="col" align="center">NEXT DRAW DATE</TableCell>
+                                            <TableCell colspan="2" align="center"></TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell>EZ2 Lotto</TableCell>
+                                            <TableCell align="center">DD-MM-YY</TableCell>
+                                            <TableCell align="center" colspan="2">
+                                            <button class="pull-left btn btn-primary btn-xs" ng-click="r.changeView('requests/edit/' + request.id)">
+                                                <i class="fa fa-pencil-square-o"></i>Button1
+                                            </button>
+                                            <button class="pull-right btn btn-primary btn-xs" ng-click="r.changeView('requests/edit/' + request.id)">
+                                                <i class="fa fa-step-backward"></i>
+                                                <i class="fa fa-step-forward"></i>Button2
+                                            </button>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </div> */}
+                        {/* ================ */}
+
+                    </Modal.Body>
+                </Modal>
         </div>
     );
 }
