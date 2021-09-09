@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Sidebar from './Sidebar.js'
 import HomeNav from './HomeNav.js';
 import HomepageContent from './HomepageContent.js';
-
 import '../styles/homepage.css'
 
 
