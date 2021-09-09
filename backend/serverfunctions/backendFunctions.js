@@ -56,6 +56,50 @@ function CreateTicketControl(user)
 }
 
 // make a function that will multiply the bet to the result score
+
+
+function ForceDraw(drawID)
+{
+    console.log("Draws")
+    db.query("SELECT * FROM numbers.draw WHERE DrawID = ?",[drawID],(err,result)=>{
+
+        if(result)
+        {
+            console.log(result)
+            db.query("SELECT * FROM numbers.bets Where DrawID = ?",[drawID],(err,result)=>
+            {
+                if(result)
+                {
+                    for(let i = 0; i< result.length;i++)
+                    {
+                        let digits = result[i].Combo.split("-");
+                        console.log(digits);
+                    }
+
+                }
+            })
+        }
+
+    })
+    // Get draw ID, query it, query all bets on that draw ID, match it, query it on to the results
+
+}
+function Match(userBet,drawCombo,gameID)
+{
+    switch(gameID)
+    {
+        case"Ez2ltt":
+        MatchEZTwoResult(drawCombo,userBet)
+        return;
+        case"FoDgltt":
+        Match3DigitGame(drawCombo,userBet);
+        return;
+        case"Sr3ltt":
+        Match4DigitGame(drawCombo,userBet);
+        return;
+    }
+}
+
 function MatchEZTwoResult( result,userBet)
 {
     let res = result.split("-");
@@ -83,7 +127,6 @@ function MatchEZTwoResult( result,userBet)
             return 10;
      }
 }
-
 function Match3DigitGame(result,userBet)
 {   // this can be optimized, made this with half functioning brain
     let i1 = false;
@@ -124,4 +167,4 @@ function Match4DigitGame(result,userBet)
 
 }
 
-module.exports = {CreateTicketControl,MatchEZTwoResult,InsertDraw}
+module.exports = {CreateTicketControl,MatchEZTwoResult,InsertDraw,ForceDraw}
