@@ -45,6 +45,26 @@ function HomepageContent() {
                 } else {                        // When True
                     // setLoginStatus(response.data[0])
                     console.log(response);
+                    Axios.post('http://localhost:3000/money',
+                    {
+                        username: sessionStorage.getItem("Userid"),password:sessionStorage.getItem("mPin")
+                    }).then((response)=>
+                    {
+                        if(response.data.message)
+                        {
+                            console.log(response.data.message);
+                        }
+                        else
+                        {
+                            console.log(response.data[0].money);
+
+                            sessionStorage.setItem("sessionMoney", response.data[0].money);
+                            money = sessionStorage.getItem("sessionMoney");
+                        }
+                    })
+
+
+
 
                     
                 }
