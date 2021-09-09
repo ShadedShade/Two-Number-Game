@@ -160,3 +160,30 @@ div .row .buttons div{
     -webkit-transition: 1s;
     border-bottom: 0.40em solid rgb(244, 113, 37);
 }
+
+button.loadwallet{
+    background: none;
+    border: none;
+}
+button.loadModalCloseBtn{
+    border:none;
+}
+.loadModalHeader{
+    border-bottom: 1px solid #f36e23;
+}
+.loadModalFooter{
+    border-top: 1px solid #f36e23;
+}
+
+.react-datetime-picker__wrapper{
+    border: none;
+    height: 21px;
+}
+
+.form-control{
+    text-align: left;
+}
+
+button.loadWalletBtn{
+    width: 30%;
+}
