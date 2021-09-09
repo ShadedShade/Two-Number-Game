@@ -5,17 +5,6 @@ import { Modal } from "react-bootstrap";
 import { Button} from 'react-bootstrap';
 import '../styles/hpcontent.css'
 
-// For Table
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-
 
 //todo get all user profile here
 function HomepageContent() {
@@ -202,65 +191,6 @@ function HomepageContent() {
                                 </tr>
                             </tbody>
                         </table>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        {/* <div className="px-5">
-                            <TableContainer component={Paper}>
-                                <Table className="tbl">
-                                    <TableHead className="tblheadGame">
-                                        <TableRow>
-                                            <TableCell scope="col">GAME NAME</TableCell>
-                                            <TableCell scope="col" align="center">NEXT DRAW DATE</TableCell>
-                                            <TableCell colspan="2" align="center"></TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell>EZ2 Lotto</TableCell>
-                                            <TableCell align="center">DD-MM-YY</TableCell>
-                                            <TableCell align="center" colspan="2">
-                                            <button class="pull-left btn btn-primary btn-xs" ng-click="r.changeView('requests/edit/' + request.id)">
-                                                <i class="fa fa-pencil-square-o"></i>Button1
-                                            </button>
-                                            <button class="pull-right btn btn-primary btn-xs" ng-click="r.changeView('requests/edit/' + request.id)">
-                                                <i class="fa fa-step-backward"></i>
-                                                <i class="fa fa-step-forward"></i>Button2
-                                            </button>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </div> */}
-                        {/* ================ */}
-
                     </Modal.Body>
                 </Modal>
         </div>
