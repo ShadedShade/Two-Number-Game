@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
+
 import DateTimePicker from "react-datetime-picker";
-import { Modal } from "react-bootstrap";
-import { Button} from 'react-bootstrap';
+import { Modal,Button } from "react-bootstrap";
+
+import DateTimePicker from 'react-datetime-picker';
+import Axios from 'axios';
+
 import '../styles/hpcontent.css'
 
 
 //todo get all user profile here
 function HomepageContent() {
     let money = sessionStorage.getItem("sessionMoney");
-                 
+    const [valueDate, onChangeDate] = useState(new Date());
+    const [gCashNumber, onGcashNumberChange] = useState("");
+    const [valueAmount, onAmountChange] = useState("");
+    const [agent, onAgentChange] = useState("");
+    const [senderName, onSenderChange] = useState("");
+    const [reference, onReference] = useState("");
         const history = useHistory();
         const handlePlayClick = () => {
             history.push('/');
@@ -25,6 +34,7 @@ function HomepageContent() {
         }
 
 
+
         /* Modal */
         const values = [true, 'sm-down', 'md-down', 'lg-down', 'xl-down', 'xxl-down'];
         const [fullscreen, setFullscreen] = useState(true);
@@ -32,6 +42,49 @@ function HomepageContent() {
         function handleShow(breakpoint) {
             setFullscreen(breakpoint);
             setShow(true);
+
+        const generateReference = () =>
+        {
+            onReference(valueDate + " "+ gCashNumber + " " + reference + " " + senderName )
+        }
+
+        const transact = () =>
+        {
+            generateReference();
+            Axios.post('http://localhost:3000/transaction', {
+                username: sessionStorage.getItem("Userid"), type: 1, method: "Gcash",details: "", amount:valueAmount
+            }).then((response) => {
+                if (response.data.message) {               //  When Invalid
+                    // setLoginStatus(response.data.message) /// set this to local storage, btw THIS IS ONLY TEMPORARY HAHAHAHHA, password should be hashed tho
+                    console.log(response.data.message);
+                } else {                        // When True
+                    // setLoginStatus(response.data[0])
+                    console.log(response);
+                    Axios.post('http://localhost:3000/money',
+                    {
+                        username: sessionStorage.getItem("Userid"),password:sessionStorage.getItem("mPin")
+                    }).then((response)=>
+                    {
+                        if(response.data.message)
+                        {
+                            console.log(response.data.message);
+                        }
+                        else
+                        {
+                            console.log(response.data[0].money);
+
+                            sessionStorage.setItem("sessionMoney", response.data[0].money);
+                            money = sessionStorage.getItem("sessionMoney");
+                        }
+                    })
+
+
+
+
+                    
+                }
+            });
+
         }
     
     return (
@@ -86,28 +139,28 @@ function HomepageContent() {
                                     <div className="col-md-6">
                                         <div className="form-group pb-4">
                                             <label for="senderName">Sender Name</label>
-                                            <input type="text" id="senderName" className="form-control" />
+                                            <input type="text" id="senderName" className="form-control" onChange={(e) => { onSenderChange(e.target.value) }} />
                                         </div>
                                         <div className="form-group pb-4">
                                             <label for="agentID">Select Agent ID</label>
                                             {/* SELECT MENU HERE */}
-                                            <select class="form-select" id="agentID" aria-label="select">
-                                                <option selected></option>
-                                                <option value="1">First</option>
-                                                <option value="2">Second</option>
-                                                <option value="3">Third</option>
+                                            <select class="form-select" id="agentID" aria-label="select" defaultValue={"Gcash"} onChange={(e) =>{onAgentChange(e.target.value); console.log(e.target.value)}}>
+                                                <option value = ""selected> Select Item</option>
+                                                <option value="Gcash">Gcash</option>
+                                                <option value="Paymaya">Paymaya</option>
+                                                <option value="Paypal">Paypal</option>
                                             </select>
                                             {/* ======================= */}
                                         </div>
                                         <div className="form-group pb-4">
                                             <label for="refnum">Reference Number</label>
-                                            <input type="text" id="refnum" className="form-control"/>
+                                            <input type="text" id="refnum" className="form-control" value={reference} />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group pb-4">
                                             <label for="gcashnum">Gcash Number</label>
-                                            <input type="tel" id="gcashnum" className="form-control" aria-describedby="basic-addon2" minlength="11" maxlength="11" placeholder="09XXXXXXXXX" pattern="[0-9]{2}[0-9]{9}"/>
+                                            <input type="tel" id="gcashnum" className="form-control" aria-describedby="basic-addon2" minlength="11" maxlength="11" placeholder="09XXXXXXXXX" pattern="[0-9]{2}[0-9]{9} "onChange={(e) => { onGcashNumberChange(e.target.value) }}/>
                                         </div>
                                         <div className="form-group pb-4">
                                             <label for="dtpicker">Select Deposit and Time</label>
@@ -116,8 +169,8 @@ function HomepageContent() {
                                                     <DateTimePicker 
                                                         className="form-control"
                                                         id="dtpicker"
-                                                        // onChange={onChange}
-                                                        // value={value}
+                                                         onChange={onChangeDate}
+                                                         value={valueDate}
                                                     />
                                                 </div>
                                                 
@@ -125,12 +178,12 @@ function HomepageContent() {
                                         </div>
                                         <div className="form-group pb-4">
                                             <label for="amount">Amount</label>
-                                            <input type="number" id="amount" className="form-control"/>
+                                            <input type="number" id="amount" className="form-control" onChange={(e) => { onAmountChange(e.target.value) }}/>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-md-12 text-center">
-                                    <button type="button" className="btn loadWalletBtn">LOAD WALLET</button>
+                                    <button type="button" className="btn loadWalletBtn" onClick={transact}>LOAD WALLET</button>
                                 </div>
                             </div>
                         </form>
