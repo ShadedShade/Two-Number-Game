@@ -102,17 +102,17 @@ function TestProcCall()
 
 const PORT = 4000; // backend routing port
 app.listen(PORT, () => {
-    var x = draw.GenerateRandomNumbers(3,1,40); // with this we can store it as a string in the database and we can parse it back to check combinations
-    var y = x.split(',').map(Number);
-console.log(x + " "+ typeof(x));
-console.log(y[0] +y[1] + " "+ typeof(y[0]));
-CreateTicketControl('2021-09;02','10:00:00','3922331144');
+//     var x = draw.GenerateRandomNumbers(3,1,40); // with this we can store it as a string in the database and we can parse it back to check combinations
+//     var y = x.split(',').map(Number);
+// console.log(x + " "+ typeof(x));
+// console.log(y[0] +y[1] + " "+ typeof(y[0]));
+// CreateTicketControl('2021-09;02','10:00:00','3922331144');
 
-
-TestQuery();
-TestJsonStringify();
-TestProcCall();
-    console.log('Server started at http://localhost:' + PORT);
+// TestQuery();
+// TestJsonStringify();
+// TestProcCall();
+console.log('Server started at http://localhost:' + PORT);
+backendFunctions.ForceDraw(5);
 
 });
 

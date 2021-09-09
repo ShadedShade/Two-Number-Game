@@ -6,6 +6,8 @@ import '../styles/hpcontent.css'
 
 //todo get all user profile here
 function HomepageContent() {
+    let money = sessionStorage.getItem("sessionMoney");
+                 
         const history = useHistory();
         const handlePlayClick = () => {
             history.push('/');
@@ -28,8 +30,9 @@ function HomepageContent() {
                         <div class="balance">
                             <h1>
                                 <sup>PTS</sup> 
-                                1,001,115.00
+                               {money}
                                 <button class="loadwallet" data-bs-toggle="modal" data-bs-target="#load"><span><i class="fas fa-plus-circle"></i></span></button>
+                            
                             </h1>
                         </div>
                     </div>
