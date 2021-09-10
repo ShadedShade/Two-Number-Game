@@ -4,9 +4,11 @@ import { useHistory } from "react-router-dom";
 import DateTimePicker from "react-datetime-picker";
 import { Modal, Button } from "react-bootstrap";
 
+
 import EZ2Mechanics from '../img/EZ2-Mechanics.png';
 import suertres from '../img/suertres.png';
 import fourdigit from '../img/fourdigit.png';
+
 
 
 import Axios from 'axios';
@@ -307,6 +309,7 @@ function HomepageContent() {
                         </tbody>
                     </table>
 
+
                     
                     {/* EZ2 Mechanics */}
                     <div class="modal fade" id="ez2m" tabindex="-1" aria-labelledby="" aria-hidden="true">
@@ -350,6 +353,7 @@ function HomepageContent() {
                             </div>
                         </div>
                     {/* ========================= */}
+
                 </Modal.Body>
             </Modal>
         </div>
