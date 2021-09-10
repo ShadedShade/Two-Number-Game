@@ -10,14 +10,10 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "react": "^17.0.2",
-<<<<<<< HEAD
-    "react-datetime-picker": "^3.4.0",
-=======
 
     "react-bootstrap": "^1.6.3",
     "react-datetime-picker": "^3.4.0",
 
->>>>>>> c3a46048d56241327ef3874bd6ec3b2f205c7303
     "react-dom": "^17.0.2",
     "react-pin-input": "^1.0.1",
     "react-pro-sidebar": "^0.6.0",
