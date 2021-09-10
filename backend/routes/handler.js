@@ -92,28 +92,6 @@ router.post('/loginMpin', (req, res) => {
         });
 })
 
-router.post('/money', (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-
-    db.query("SELECT money FROM `numbers`.`profile` WHERE mobile = ? AND mpin = ? ", 
-    [username,password],
-        (err, result) => {
-            if (err) { 
-                res.send({ message: " An Error Occured" });
-
-             }
-
-            if (result.length > 0) {
-                res.send(result);
-            }
-            else {
-                res.send({ message: " User does not exist" });
-            }
-
-        });
-})
-
 
  router.get('/games',(req,res)=>
 {
@@ -296,8 +274,8 @@ router.post('/transaction',(req,res)=>
 
             if(result)
             {
-                console.log(JSON.stringify(result));
-                res.send(result);    
+                console.log(result);
+                res.send({message:"unknown error occured"});    
 
             }
         });})
