@@ -45,7 +45,7 @@ function TestQuery()
         if(result.length >0)
         {
             let obj = helper.ParseToObject(result); // for testing only // use stringify to send to front
-            console.log(obj);  // access object key value pair
+         //   console.log(obj);  // access object key value pair
         }
     })
 }
@@ -108,11 +108,21 @@ app.listen(PORT, () => {
 // console.log(y[0] +y[1] + " "+ typeof(y[0]));
 // CreateTicketControl('2021-09;02','10:00:00','3922331144');
 
-// TestQuery();
+backendFunctions.ForceDraw(5);
+  let prelimDate = new Date();
+  console.log("init Date: "+ prelimDate);
+for(let i = 0; i<=100000;i++)
+{
+    TestQuery();
+    process.stdout.cursorTo(0);
+    process.stdout.write("Query no.: "+ i);
+
+}
+console.log();
+     console.log(prelimDate+" "+new Date());
 // TestJsonStringify();
 // TestProcCall();
 console.log('Server started at http://localhost:' + PORT);
-backendFunctions.ForceDraw(5);
 
 });
 
