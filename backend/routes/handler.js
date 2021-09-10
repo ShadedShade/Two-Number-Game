@@ -118,7 +118,7 @@ router.post('/loginMpin', (req, res) => {
 // BUTTON WILL POST GAMEID
 router.get('/gameselect',(req,res)=>
 {
-    db.query("Select  gametype.gamename,gametype.gamename, draw.DrawDate From numbers.gametype inner JOIN numbers.draw on draw.gameid = gametype.gameid group by draw.gameid",(err,result) =>
+    db.query("Select  draw.DrawDate, draw.gameid,draw.DrawID  From numbers.draw Where (date(now())<= draw.drawdate) group by draw.gameid order by draw.drawdate asc",(err,result) =>
     {
         console.log(result);
         if(err)
