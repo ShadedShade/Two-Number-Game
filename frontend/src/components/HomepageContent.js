@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import DateTimePicker from "react-datetime-picker";
 import { Modal } from "react-bootstrap";
-import { Button} from 'react-bootstrap';
+import EZ2Mechanics from '../img/EZ2-Mechanics.png';
+import suertres from '../img/suertres.png';
+import fourdigit from '../img/fourdigit.png';
 import '../styles/hpcontent.css'
 
 
@@ -164,7 +166,7 @@ function HomepageContent() {
                                     <td style={{textAlign:"center"}}>DD-MM-YY</td>
                                     <td>
                                         <div style={{textAlign:"center"}}>
-                                            <button type="button" style={{marginRight: "2px"}}>MECHANICS</button>
+                                            <button data-bs-toggle="modal" data-bs-target="#ez2m" type="button" style={{marginRight: "2px"}}>MECHANICS</button>
                                             <button type="button" style={{marginLeft: "2px"}}>BET NOW</button>
                                         </div>
                                     </td>
@@ -174,7 +176,7 @@ function HomepageContent() {
                                     <td style={{textAlign:"center"}}>DD-MM-YY</td>
                                     <td>
                                         <div style={{textAlign:"center"}}>
-                                            <button type="button" style={{marginRight: "2px"}}>MECHANICS</button>
+                                            <button data-bs-toggle="modal" data-bs-target="#s3m" type="button" style={{marginRight: "2px"}}>MECHANICS</button>
                                             <button type="button" style={{marginLeft: "2px"}}>BET NOW</button>
                                         </div>
                                     </td>
@@ -184,15 +186,59 @@ function HomepageContent() {
                                     <td style={{textAlign:"center"}}>DD-MM-YY</td>
                                     <td>
                                         <div style={{textAlign:"center"}}>
-                                            <button type="button" style={{marginRight: "2px"}}>MECHANICS</button>
+                                            <button data-bs-toggle="modal" data-bs-target="#fDm" type="button" style={{marginRight: "2px"}}>MECHANICS</button>
                                             <button type="button" style={{marginLeft: "2px"}}>BET NOW</button>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+
+                        {/* EZ2 Mechanics */}
+                        <div class="modal fade" id="ez2m" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                            <div class="modal-dialog modal-fullscreen">
+                                <div class="modal-content">
+                                    <div class="modal-header ez2modalheader">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body p-5">
+                                        <img src={EZ2Mechanics} alt=""/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* ========================= */}
+                        {/* Suertres Mechanics */}
+                        <div class="modal fade" id="s3m" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                            <div class="modal-dialog modal-fullscreen">
+                                <div class="modal-content">
+                                    <div class="modal-header ez2modalheader">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body p-5">
+                                        <img src={suertres} alt=""/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* ========================= */}
+                        {/* 4DG Mechanics */}
+                        <div class="modal fade" id="fDm" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                            <div class="modal-dialog modal-fullscreen">
+                                <div class="modal-content">
+                                    <div class="modal-header ez2modalheader">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body p-5">
+                                        <img src={fourdigit} alt=""/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* ========================= */}
                     </Modal.Body>
                 </Modal>
+                {/* ========================= */}
         </div>
     );
 }

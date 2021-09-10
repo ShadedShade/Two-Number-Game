@@ -218,3 +218,7 @@ table{
 td{
     vertical-align: middle;
 }
+
+.ez2modalheader{
+    border-bottom: none;
+}
