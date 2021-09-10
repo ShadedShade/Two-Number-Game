@@ -281,7 +281,7 @@ function HomepageContent() {
                                 <td style={{ textAlign: "center" }}>{ezTwo}</td>
                                 <td>
                                     <div style={{ textAlign: "center" }}>
-                                        <button type="button" style={{ marginRight: "2px" }}>MECHANICS</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#ez2m" style={{ marginRight: "2px" }}>MECHANICS</button>
                                         <button type="button" style={{ marginLeft: "2px" }} value="Ez2ltt" onClick={(e)=>{onPlayClick(e.target.value); console.log(e.target.value)}}>BET NOW</button>
                                     </div>
                                 </td>
@@ -291,7 +291,7 @@ function HomepageContent() {
                                 <td style={{ textAlign: "center" }}>{swerTres}</td>
                                 <td>
                                     <div style={{ textAlign: "center" }}>
-                                        <button type="button" style={{ marginRight: "2px" }}>MECHANICS</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#s3m" style={{ marginRight: "2px" }}>MECHANICS</button>
                                         <button type="button" style={{ marginLeft: "2px" }}value="Sr3ltt" onClick={(e)=>{onPlayClick(e.target.value); console.log(e.target.value)}}>BET NOW</button>
                                     </div>
                                 </td>
@@ -301,7 +301,7 @@ function HomepageContent() {
                                 <td style={{ textAlign: "center" }}>{forDgt}</td>
                                 <td>
                                     <div style={{ textAlign: "center" }}>
-                                        <button type="button" style={{ marginRight: "2px" }}>MECHANICS</button>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#fDm" style={{ marginRight: "2px" }}>MECHANICS</button>
                                         <button type="button" style={{ marginLeft: "2px" }}value="FoDgltt" onClick={(e)=>{onPlayClick(e.target.value); console.log(e.target.value)}}>BET NOW</button>
                                     </div>
                                 </td>
