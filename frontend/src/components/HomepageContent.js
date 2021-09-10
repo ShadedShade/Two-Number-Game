@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 import DateTimePicker from "react-datetime-picker";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+import {  Button } from "react-bootstrap";
 
 
 import EZ2Mechanics from '../img/EZ2-Mechanics.png';
