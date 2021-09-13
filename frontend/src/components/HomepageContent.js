@@ -558,13 +558,63 @@ function HomepageContent() {
                 {/* EZ2 BET MODAL */}
                 <div class="modal fade" id="ez2Bet" tabindex="-1" aria-labelledby="" aria-hidden="true">
                     <div class="modal-dialog modal-fullscreen">
-                        <div class="modal-content betmodalcontents">
+                        <div class="modal-content">
                             <div class="modal-header betmodalheader">
-                                <h5 class="modal-title" id="betModalLabel">Selected <span style={{ color: "#f36e23" }}>Combination</span></h5>
+                                <h5 class="modal-title" id="betModalLabel">Selected<span style={{ color: "#f36e23" }}> Combination</span></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body p-5">
-                                hehe
+                                <div className="row py-4 border-1 rectangle" style={{columnGap: "39px", justifyContent: "center"}}>
+                                    <div className="shadow border-1 col-md-5 pb-3 pt-2" style= {{border: "1px solid #262626", borderRadius: ".25rem"}}>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                                            <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
+                                                <span style={{ color: "#f36e23" }}>Draw</span>Date:
+                                                <br/>Combination:
+                                                <br/>Total:
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div className="shadow border-1 col-md-5 pb-3 pt-2" style= {{border: "1px solid #262626", borderRadius: ".25rem"}}>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                                            <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
+                                                <span style={{ color: "#f36e23" }}>Draw</span>Date:
+                                                <br/>Combination:
+                                                <br/>Total:
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row py-4 border-1 rectangle" style={{columnGap: "39px", justifyContent: "center"}}>
+                                    <div className="shadow border-1 col-md-5 pb-3 pt-2" style= {{border: "1px solid #262626", borderRadius: ".25rem"}}>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                                            <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
+                                                <span style={{ color: "#f36e23" }}>Draw</span>Date:
+                                                <br/>Combination:
+                                                <br/>Total:
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div className="shadow border-1 col-md-5 pb-3 pt-2" style= {{border: "1px solid #262626", borderRadius: ".25rem"}}>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                                            <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
+                                                <span style={{ color: "#f36e23" }}>Draw</span>Date:
+                                                <br/>Combination:
+                                                <br/>Total:
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-12 pt-5">
+                                    <div className="btn-toolbar amount">
+                                        <button type="button" class="btn mx-2 btnAddMore">ADD MORE</button>
+                                        <button type="button" class="btn mx-2 btnCheckout">CHECKOUT</button>
+                                        <button type="button" class="btn mx-2 btnRemove">REMOVE</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>                  
