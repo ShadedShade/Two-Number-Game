@@ -37,11 +37,14 @@
                                 <input type="text" id="fifth" maxlength="1" onkeyup="clickEvent(this, 'sixth')">
                                 <input type="text" id="sixth" maxlength="1">
                             </div>
+
+                            <div id="error_message" class="error_message"></div>
+
                             <div class="text-center forgot">
                                 <p class="">Forgot MPIN? Contact our <a class="CCC" href="">Customer Center</a></p>
                             </div>
                             <div class="mt-5 pt-4 d-grid gap-2">
-                                <button class="btn">Login</button>
+                                <a class="btn" id="btn">Login</a>
                             </div>
                             <div class="text-center mt-3 signup">
                                 <p class="mb-0">Don't have an account yet? <a class="CCC" href="signup.html">Sign Up</a></p>
@@ -66,4 +69,22 @@
         </section>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
+
+    <script>
+        document.getElementById("btn").addEventListener("click", function () {
+            var one = document.getElementById("ist").value;
+            var two = document.getElementById("sec").value;
+            var three = document.getElementById("third").value;
+            var four = document.getElementById("fourth").value;
+            var five = document.getElementById("fifth").value;
+            var six = document.getElementById("sixth").value;
+    
+            if (isNaN(one) || isNaN(two) || isNaN(three) || isNaN(four) || isNaN(five) || isNaN(six) || one === '' || two === '' || three === '' || four === '' || five === '' || six === '') {
+                document.getElementById("error_message").innerHTML = "Invalid 6-Digit MPin";
+            } else {
+                window.location.href = "homepage.html";
+            }
+        });
+    </script>
+
 </html>

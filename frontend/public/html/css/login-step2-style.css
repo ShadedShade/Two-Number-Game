@@ -76,7 +76,7 @@ input{
 }
 /* ========================================== */
 
-
-
-
-
+/* ===== Error_Message ===== */
+.error_message{
+    text-align: center;
+}

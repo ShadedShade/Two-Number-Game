@@ -93,3 +93,8 @@ h2{
     color: #262626;
 }
 /* ========================================== */
+
+/* ===== Error Message ===== */
+.error_message {
+    text-align: center;
+}
