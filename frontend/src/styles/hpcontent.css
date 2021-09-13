@@ -23,7 +23,7 @@ div.div3{
     padding: 0;
 }
 
-h1{
+.balance h1{
     padding: 0;
     line-height: 150px;
     width: 100%;
@@ -33,7 +33,7 @@ h1{
     color: #262626;
 }
 
-sup{
+.balance h1 sup{
     vertical-align: super;
     font-size:large;
     letter-spacing: 0px;
@@ -221,4 +221,55 @@ td{
 
 .mechanicsmodalheader{
     border-bottom: none;
+}
+
+.icon{
+    width: min-content;
+}
+h1.iconlabel{
+    line-height: 80px;
+    text-align: left;
+    margin-top: revert;
+}
+
+div#datetime{
+    height: 160px;
+    align-items: center;
+}
+.drawtime{
+    border: 1px solid #262626;
+}
+.drawdate input#date{
+    height: 21px;
+}
+.modal-content.ez2playgame.modal-content-scrollable{
+    overflow: scroll;
+}
+
+div#combination{
+    height: 100%;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+.btn-toolbar{
+    justify-content: center;
+}
+button.btn.mx-5.btnamount{
+    width: 100px;
 }
