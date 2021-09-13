@@ -54,6 +54,7 @@ function Login() {
                         <div className="mb-4 pb-2 mt-5">
                             <label for="userid">Enter User ID / Mobile Number</label>
                             <input type="text" name="userid" className="form-control" id="userid" onChange={(e) => { setUsername(e.target.value) }}/>
+                            <label >{loginStatus}</label>
                         </div>
                         <div className="mt-4 mb-3 d-grid gap-2">
                             <a className="btn" onClick={Login}>NEXT</a>

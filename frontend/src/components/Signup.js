@@ -11,6 +11,7 @@ function Signup() {
     const [nameReg, setNameReg] = useState('');
     const [passwordReg, setPasswordReg] = useState('');
     const [authCode, setAuthCode] = useState('');
+    const [status, setStatus] = useState('');
     const history = useHistory();
     const handleBackClick = () => {
         history.push('/');
@@ -26,10 +27,18 @@ function Signup() {
         Axios.post('http://localhost:3000/register', {
             username: usernameReg, password: passwordReg,email:emailReg,name:nameReg
         }).then(function (response) {
+            if(authCode == "")
+            {
+                
+                console.log("Invalid AuthCode");
+                setStatus("Invalid AuthCode");
+                return;
+            }
             if(response.message)
             {
                 console.log("Account already Exists")
             }
+
             if(response.result)
             {
                 handleRegisterClick();
@@ -89,6 +98,7 @@ function Signup() {
                                     <div className="form-group pb-4">
                                         <label for="mpin">6-Digit MPIN <span style={{ color: "#FD0000;" }}>*</span></label>
                                         <input type="password" pattern="[0-9]{6}" id="mpin" className="form-control" maxlength="6" minlength="6" value={passwordReg} onChange={(e) => {
+                                        
                                             const re = /^[0-9\b]+$/;
                                             //  console.log(e.target.value);
                                             if (re.test(e.target.value) || e.target.value === '') {
@@ -121,6 +131,7 @@ function Signup() {
 
                                             }
                                         }} maxlength="6" minlength="6" value={authCode} required />
+                                        <label >{status} </label>
                                     </div>
                                 </div>
                             </div>
