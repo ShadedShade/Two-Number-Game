@@ -273,3 +273,39 @@ div#combination{
 button.btn.mx-5.btnamount{
     width: 100px;
 }
+div#ez2Bet{
+    overflow: hidden;
+}
+
+.btnAddMore{
+    background: #f7931e;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+.btnCheckout{
+    background: white;
+    color: #009885;
+    border: 1px solid #009885;
+    border-radius: 10px;
+}
+.btnCheckout:hover{
+    transition: none;
+    cursor: pointer;
+    background: #009885;
+    color: white;
+    font-weight: normal;
+}
+.btnRemove{
+    background: #2f3136;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+.btnRemove:hover{
+    background: #2f31368c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: normal;
+}
