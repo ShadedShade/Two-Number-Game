@@ -383,21 +383,19 @@ function HomepageContent() {
                                         <label style = {{fontWeight: "600"}} for="datetime">Choose <span style={{color: "#f36e23"}}>Draw Date</span></label>
                                         <div className="row shadow py-4 border-1 rectangle" id="datetime" style= {{border: "1px solid #262626", borderRadius: ".25rem"}}>
                                             <div className="col-md-6">
-                                                <div className="form-group drawdate px-5">
-                                                    <TextField
-                                                        style = {{border: "1px solid #262626", borderRadius: ".25rem", height: "35px", background: "white"}}
-                                                        id="date"
-                                                        type="date"
-                                                        defaultValue="YYYY-MM-DD"
-                                                        fullWidth
-                                                    />
+                                                <div className="form-group px-5">
+                                                    {/* SELECT MENU HERE */}
+                                                    <select class="form-select drawdate" id="drawdate" aria-label="select" defaultValue="def">
+                                                        <option value="def" selected>Choose Date</option>
+                                                    </select>
+                                                    {/* ======================= */}
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group px-5">
                                                     {/* SELECT MENU HERE */}
                                                     <select class="form-select drawtime" id="drawtime" aria-label="select" defaultValue="def">
-                                                        <option value="def" selected>Choose time</option>
+                                                        <option value="def" selected>Choose Date</option>
                                                     </select>
                                                     {/* ======================= */}
                                                 </div>
