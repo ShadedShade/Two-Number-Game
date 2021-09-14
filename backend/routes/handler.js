@@ -140,7 +140,7 @@ router.post('/money', (req, res) => {
 // BUTTON WILL POST GAMEID
 router.get('/gameselect',(req,res)=>
 {
-    db.query("Select  draw.DrawDate, draw.gameid,draw.DrawID  From numbers.draw Where (date(now())<= draw.drawdate) group by draw.gameid order by draw.drawdate asc",(err,result) =>
+    db.query("Select  draw.DrawDate, draw.gameid,draw.DrawID  From numbers.draw Where (date(now())<= draw.drawdate)  order by draw.drawdate asc",(err,result) =>
     {
         console.log(result);
         if(err)
@@ -150,6 +150,7 @@ router.get('/gameselect',(req,res)=>
         if(result.length >0)
         {
             var data =JSON.stringify(result);
+            console.log(data);
             res.send(data);
         }
         else
@@ -166,7 +167,7 @@ router.post('/selected',(req,res)=>
 {
     const gameid = req.body.gameid;
 
-    db.query("SELECT draw.gameid, Draw.DrawDate, Draw.ShiftTime From numbers.draw WHERE gameid = ? order by draw.DrawDate"),[gameid],(err,result)=>
+    db.query("Select  draw.DrawDate,  draw.ShiftTime, draw.gameid,draw.DrawID,gametype.gamename,gametype.combination  From numbers.draw inner join numbers.gametype on draw.gameid = gametype.gameid  Where draw.gameid = ? AND (date(now())<= draw.drawdate)  order by draw.drawdate asc",[gameid],(err,result)=>
     {
         console.log(result);
         if(err)
@@ -176,13 +177,14 @@ router.post('/selected',(req,res)=>
         if(result.length >0)
         {
             var data =JSON.stringify(result);
+            console.log(data);
             res.send(data);
         }
         else
         {
             res.send(err);
         }
-    }
+    })
 })
 
 

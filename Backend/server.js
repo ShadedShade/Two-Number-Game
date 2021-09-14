@@ -61,41 +61,7 @@ function TestJsonStringify()
     console.log(jsonObject)
 }
 
-// Turn this into a AWAIT FUNCTION?
-function TestProcCall()
-{
-    //  const bets = req.body.bets; // this will be a list of bets
-    //  const userid = req.body.userid;
-    //  const drawid = req.body.drawid; // if one draw date and time
-    //  let betsDetails = [{"DrawID":"drawid","Combo":"combo","Bettor":"bettor","BetAmount":"betamount"}];  //<----  From Input this should be the contents from the Front
-    //  const gameid =req.body.gameid;
-    //  let betsObject = JSON.parse(bets);
-    
-    // let control = backendFunctions.CreateTicketControl('+639922113388') // NOTE HERE THAT TIME AND DATE IS IN A TIMESTAMP MEANING THAT THIS NEEDS TO BE CALLED ONCE SO EACH BET IS WITH THE SAME CONTROL
-    // // Create a For Loop?
-    // // Create a Receipt first
-    // // then create bets THEN Tickets
-    //                                             // Receipt                      // User                     // randomSeq                //localhost             //localhost                 // gameid
-    // db.query("CALL `numbers`.`CreateBaseReceipt`(?, ?, ?, ?, ?,?)",
-    // [control,userid,+new Date,"localhost","localhost",gameid])
-    // // For Loop // BETS DETAILS                             // DrawID, Combo,Bettor(by default User), control
-    // db.query("CALL `numbers`.`InsertBets`(?, ?, ?, ?, ?)",[5,"15-13",userid,100,control],(err,result)=>
-    // {
-    //     if(err)
-    //     {
-    //         console.log(err)
-    //     }
-    //     if(result)
-    //     {
-    //         console.log(result)
-    //     }
-    // })
-    // // UPDATE TOTAL AMOUNT ON RECEIPT
-    // db.query("UPDATE `numbers`.`receipt` SET`totalamount` = (SELECT SUM(receiptdetails.betamount) FROM numbers.receiptdetails WHERE receiptdetails.receiptid = receipt.receiptid) WHERE receipt.receiptid = ?",[control])
-    // // UPDATE PLAYER'S Money
-    // db.query("UPDATE `numbers`.`profile` SET `money` = profile.money - (SELECT receipt.totalamount From numbers.receipt WHERE receipt.receiptid = ?) WHERE `mobile` =?",[control,user])
 
-}
 
 
 
@@ -107,17 +73,19 @@ app.listen(PORT, () => {
 // console.log(x + " "+ typeof(x));
 // console.log(y[0] +y[1] + " "+ typeof(y[0]));
 // CreateTicketControl('2021-09;02','10:00:00','3922331144');
-
+// backendFunctions.InsertDraw("2021-09-016","10:00:00",draw.GenerateRandomNumbers(2,1,40),"Ez2ltt")
+// backendFunctions.InsertDraw("2021-09-016","14:00:00",draw.GenerateRandomNumbers(2,1,40),"Ez2ltt")
+// backendFunctions.InsertDraw("2021-09-016","18:00:00",draw.GenerateRandomNumbers(2,1,40),"Ez2ltt")
 backendFunctions.ForceDraw(5);
   let prelimDate = new Date();
   console.log("init Date: "+ prelimDate);
-for(let i = 0; i<=100000;i++)
-{
-    TestQuery();
-    process.stdout.cursorTo(0);
-    process.stdout.write("Query no.: "+ i);
+// for(let i = 0; i<=100000;i++)
+// {
+//     TestQuery();
+//     process.stdout.cursorTo(0);
+//     process.stdout.write("Query no.: "+ i);
 
-}
+// }
 console.log();
      console.log(prelimDate+" "+new Date());
 // TestJsonStringify();

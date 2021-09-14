@@ -27,9 +27,9 @@ function Login() {
                 setLoginStatus(response.data.message) /// set this to local storage, btw THIS IS ONLY TEMPORARY HAHAHAHHA, password should be hashed tho
                 console.log(response.data.message);
             } else {                        // When True
-                setLoginStatus(response.data[0])
-                console.log(response);
-                console.log(response.data[0].mobile);
+               // setLoginStatus(response.data[0])
+               // console.log(response);
+              //  console.log(response.data[0].mobile);
                 sessionStorage.setItem("Userid", response.data[0].mobile);
                 console.log("session Storage Userid: " + sessionStorage.getItem("Userid"));
                 handleLoginStepTwoClick();

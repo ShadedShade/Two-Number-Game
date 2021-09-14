@@ -17,7 +17,7 @@ function GenerateRandomNumbers(count,minimum,maximum)
     {
         console.log(values[index]);
     }
-    return values.toString();
+    return values.join('-');
 }
 
 
