@@ -236,7 +236,7 @@ div#datetime{
     height: 160px;
     align-items: center;
 }
-.drawtime{
+.drawtime, .drawdate{
     border: 1px solid #262626;
 }
 .drawdate input#date{
@@ -308,4 +308,16 @@ div#ez2Bet{
     border: none;
     border-radius: 10px;
     font-weight: normal;
+}
+
+button.btn.mx-3.btn-default.btn-circle.btn-xl.combibtn{
+    border-radius: 5px;
+    background-color: #9ba0a6;
+    color: #262626;
+}
+
+button.btn.mx-5.btn-default.btn-circle.btn-xl.betinputbtn{
+    border-radius: 5px;
+    background-color: #9ba0a6;
+    color: #262626;
 }

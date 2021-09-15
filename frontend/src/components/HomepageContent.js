@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import PinInput from "react-pin-input";
-import { PinCode } from "baseui/pin-code";
 
 import DateTimePicker from "react-datetime-picker";
 import { Modal } from "react-bootstrap";
@@ -18,6 +17,7 @@ import fdgIcon from '../img/fdgIcon.png';
 
 import TextField from '@material-ui/core/TextField';
 
+import BackspaceIcon from '@material-ui/icons/Backspace';
 
 
 import Axios from 'axios';
@@ -261,11 +261,11 @@ function HomepageContent() {
         let buttonValues = Array(maxPin).fill("");
         if (comboChanged) {
             buttonValues = combination;
-            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl" key={i}>{item}</button>);
+            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-3 btn-default btn-circle btn-xl combibtn" key={i}>{item}</button>);
 
         }
         else
-            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl" key={i}>0</button>);
+            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-3 btn-default btn-circle btn-xl combibtn" key={i}></button>);
 
     }
     const SetupBetInput = (num) => {
@@ -283,11 +283,11 @@ function HomepageContent() {
         let buttonValues = Array(1).fill("");
         if (betAmountChanged) {
             buttonValues = betAmount;
-            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl" key={i}>{item}</button>);
+            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl betinputbtn" key={i}>{item}</button>);
 
         }
         else
-            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl" key={i}>0</button>);
+            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl betinputbtn" key={i}>0</button>);
 
     }
 
@@ -637,23 +637,19 @@ function HomepageContent() {
                                                 <div className="col-md-12 pt-4">
                                                     {/* PIN LOCATION HERE */}
                                                     <div className="btn-toolbar numpad">
-                                                        {CombinationPin()}
+                                                        <div style={{display:"flex"}}>
+                                                            <div style={{width:"338px", display:"flex", flexDirection:"row-reverse"}}>
+                                                                {CombinationPin()}
+                                                            </div>
+                                                            <div style={{display:"flex", width:"134px", justifyContent:"center", alignContent:"center", flexWrap:"wrap"}}>
+                                                                <BackspaceIcon 
+                                                                    fontSize="large"
+                                                                    cursor="pointer"
+                                                                />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-
-                                                {/* <PinInput
-                                                    length={4}
-                                                    maxValue ={2}
-                                                    initialValue={combo}
-                                                    onChange={(value, index) => { }}
-                                                    type="text"
-                                                    inputMode="text"
-                                                    style={{ padding: '10px', textAlign: 'center' }}
-                                                    inputStyle={{ background: '#c6c7c9', border: 'none' }}
-                                                    inputFocusStyle={{ border: '1px solid #f36e23', background: 'white' }}
-                                                    onComplete={(value, index) => { }}
-                                                    autoSelect={true}
-                                                /> */}
                                             </div>
                                         </div>
                                         <div className="col-md-12 pt-4">
