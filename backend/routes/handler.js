@@ -219,11 +219,11 @@ router.post('/userBets',(req,res)=>
 // we create bets, 
 router.post('/placeBets',(req,res)=>
 {
-    const bets = req.body.bets; // this will be a list of bets
-    const userid = req.body.userid;
-    const drawid = req.body.drawid; // if one draw date and time
+    const bets = req.body.Wager; // this will be a list of bets
+    const userid = req.body.User;
+// if one draw date and time
+    const gameid =req.body.GameID;
     let betsDetails = [{"DrawID":"drawid","Combo":"combo","Bettor":"bettor","BetAmount":"betamount"}];  //<----  From Input this should be the contents from the Front
-    const gameid =req.body.gameid;
     let betsObject = JSON.parse(bets);
    
    let control = backendFunctions.CreateTicketControl(userid) // NOTE HERE THAT TIME AND DATE IS IN A TIMESTAMP MEANING THAT THIS NEEDS TO BE CALLED ONCE SO EACH BET IS WITH THE SAME CONTROL
@@ -234,22 +234,37 @@ router.post('/placeBets',(req,res)=>
    db.query("CALL `numbers`.`CreateBaseReceipt`(?, ?, ?, ?, ?,?)",
    [control,userid,+new Date,"localhost","localhost",gameid])
    // For Loop // BETS DETAILS                             // DrawID, Combo,Bettor(by default User), control
-   db.query("CALL `numbers`.`InsertBets`(?, ?, ?, ?, ?)",[betsObject[0].DrawID,betsObject[0].Combo,betsObject[0].Bettor,betsObject[0].BetAmount,control],(err,result)=>
-   {
-       if(err)
-       {
-           console.log(err)
-       }
-       if(result)
-       {
-           console.log(result)
-       }
-   })
+for(let i = 0; i < betsObject.length;i++)
+{
+    db.query("CALL `numbers`.`InsertBets`(?, ?, ?, ?, ?)",[betsObject[i].DrawID,betsObject[i].Combo,betsObject[i].Bettor,betsObject[i].BetAmount,control],(err,result)=>
+    {
+        if(err)
+        {
+            console.log(err)
+            res.send({err:"unknown error occured"});
+            return;
+        }
+        if(result)
+        {
+            console.log(result)
+            console.log("Draws Inserted")
+        }
+    })
+}
    // UPDATE TOTAL AMOUNT ON RECEIPT
    db.query("UPDATE `numbers`.`receipt` SET`totalamount` = (SELECT SUM(receiptdetails.betamount) FROM numbers.receiptdetails WHERE receiptdetails.receiptid = receipt.receiptid) WHERE receipt.receiptid = ?",[control])
    // UPDATE PLAYER'S Money
    db.query("UPDATE `numbers`.`profile` SET `money` = profile.money - (SELECT receipt.totalamount From numbers.receipt WHERE receipt.receiptid = ?) WHERE `mobile` =?",[control,userid])
-
+   db.query("SELECT money FROM `numbers`.`profile` WHERE mobile = ?",[userid],(err,result) =>
+   {
+    if(result)
+    {
+        console.log(result[0].money);
+        res.send({receipt:control,balance:result[0].money});
+    }
+   }) 
+   
+   
 })
 
 // now we go to Betting, INSERT GAMEID DATE TIME, COMBINATION AND BET
