@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import PinInput from "react-pin-input";
-import { PinCode } from "baseui/pin-code";
 
 import DateTimePicker from "react-datetime-picker";
 import { Modal } from "react-bootstrap";
@@ -26,6 +25,9 @@ import '../styles/hpcontent.css'
 
 let combo = [23, 2]
 let maxPin = 2;
+let gameDrawDate = "2021-09-21";
+let gameShift = "10:00:00";
+let user = sessionStorage.getItem("Userid");
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -50,13 +52,15 @@ function HomepageContent() {
     const [game, onPlayClick] = useState("");
     let [dateList, setDates] = useState([]);
     let [shiftList, setShifts] = useState([]);
+    let [gameDrawDate, setDrawDate] = useState("");
+    let [gameDrawShift, setShiftTime] = useState("");
     const [hasDates, checkDates] = useState(false);
     const [hasShift, checkShift] = useState(false);
     const [comboChanged, changedPinValue] = useState(false)
     let [combination, setCombination] = useState([]);
     const [betAmountChanged, changedbetAmount] = useState(false)
-    let [betAmount, setbetAmount] = useState([]);
-    const [bettor, onChangeBettor] = useState("");
+    let [betAmount, setbetAmount] = useState(0);
+    const [bettor, onChangeBettor] = useState(user);
     //dateList.push({date:""})
     console.log("^^")
     console.log(dateList);
@@ -204,6 +208,8 @@ function HomepageContent() {
         console.log('COMBO ' + combination.length);
         if (combination.length > 0)
             changedPinValue(true);
+            else
+            changedPinValue(false);
 
     }, [combination]);
     useEffect(() => {
@@ -219,12 +225,12 @@ function HomepageContent() {
             checkShift(true);
         }
     }, [shiftList]);
-    useEffect(() => {
-        console.log("EFFECT: " + shiftList + " " + shiftList.length);
-        if (shiftList.length > 0) {
-            checkShift(true);
-        }
-    }, [shiftList]);
+    // useEffect(() => {
+    //     console.log("EFFECT: " + shiftList + " " + shiftList.length);
+    //     if (shiftList.length > 0) {
+    //         checkShift(true);
+    //     }
+    // }, [shiftList]);
 
     const chooseDatesDropDown = () => {
         console.log("datelist length: " + dateList)
@@ -256,6 +262,11 @@ function HomepageContent() {
             console.log("full cap");
         }
     }
+    const removeCombo = () => {
+                combination.length = 0;       
+            setCombination([...combination]);
+
+    }
     let CombinationPin = () => {
         // e.g 2
         let buttonValues = Array(maxPin).fill("");
@@ -271,18 +282,18 @@ function HomepageContent() {
     const SetupBetInput = (num) => {
         console.log("why is this one?: " + num);
         if (betAmount.length < 1) {
-            betAmount.push(num.toString());            
+            betAmount.push(num.toString());
         }
         else {
-            betAmount[0] = num;
+            betAmount = num;
         }
-        setbetAmount([...betAmount]);
+        setbetAmount(betAmount);
     }
     let betInputPin = () => {
         // e.g 2
         let buttonValues = Array(1).fill("");
         if (betAmountChanged) {
-            buttonValues = betAmount;
+            buttonValues[0] = betAmount;
             return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl" key={i}>{item}</button>);
 
         }
@@ -330,9 +341,48 @@ function HomepageContent() {
         });
 
     }
+    const [bets, onShowBets] = useState([])
+    const [betChange, onChangeBets] = useState(false)
+    useEffect(() => {
+        console.log('bets ' + bets.length);
+        if (bets.length > 0)
+        onChangeBets(true);
+        else
+        onChangeBets(false);
 
-    const starGame = () => {
-        // query Game ID, return all game details, draw date and shift time
+    }, [bets]);
+    const generateTicket = () => {
+        let amount = betAmount;
+        let toBettor = bettor;
+        let drawDate = gameDrawDate;
+        let drawShift = gameDrawShift;
+        let numbCombo =  combination.join('-');
+        let ticket = { DrawDate: drawDate, DrawShift: drawShift, BetAmount: amount, Bettor: toBettor, Combination: numbCombo }
+        bets.push(ticket);
+        onShowBets([...bets])
+        console.log(bets);
+        console.log(bets[0].Bettor);
+    }
+    const generateTicketUI = () => {
+ 
+        if(betChange)
+        return (bets.map((item, i) =>
+            <div className="row py-4 border-1 rectangle" style={{ columnGap: "39px", justifyContent: "center" }}>
+                <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                        <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
+                            <span style={{ color: "#f36e23" }}>Draw</span>Date:
+                            <br />Combination: {item.Combination}
+                            <br />Total: {item.BetAmount}
+                        </h3>
+                    </div></div>
+            </div>));
+            else 
+            {
+                return<h1>Nothing to Display</h1>
+            }
+
     }
 
     /* Modal */
@@ -728,6 +778,11 @@ function HomepageContent() {
                                                 <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>40</button>
                                             </div>
                                         </div>
+                                        <div className="col-md-12 pt-4 pb-3">
+                                            <div className="btn-toolbar numpad">
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={removeCombo} >X</button>
+ </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="step3 mx-5 py-4">
@@ -764,13 +819,13 @@ function HomepageContent() {
                                         </div>
                                         <div className="col-md-12 pb-3 pt-5 px-5">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" id="floatingInput" placeholder="09XXXXXXXXX" onChange={(e)=>{onChangeBettor(e.target.value);console.log(bettor)}} />
+                                                <input type="text" class="form-control" id="floatingInput" placeholder="09XXXXXXXXX" value={user} onChange={(e) => { onChangeBettor(e.target.value); console.log(bettor) }} />
                                                 <label for="floatingInput">Enter Bettor's UserID / Mobile Number (Optional)</label>
                                             </div>
                                         </div>
                                         <div className="col-md-12 pt-4 px-5">
                                             <div class="d-grid gap-2 col-6 mx-auto">
-                                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#ez2Bet" >BET</button>
+                                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#ez2Bet" onClick={generateTicket} >BET</button>
                                             </div>
                                         </div>
                                     </div>
@@ -790,7 +845,7 @@ function HomepageContent() {
         {/* ========== */}
 
 
-{/* TODO: MAKE THIS A DYNAMIC COMPONENT */}
+        {/* TODO: MAKE THIS A DYNAMIC COMPONENT */}
         {/* ================== BET MODALS ============== */}
         {/* EZ2 BET MODAL */}
         <div class="modal fade" id="ez2Bet" tabindex="-1" aria-labelledby="" aria-hidden="true">
@@ -801,53 +856,10 @@ function HomepageContent() {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-5">
-                        <div className="row py-4 border-1 rectangle" style={{ columnGap: "39px", justifyContent: "center" }}>
-                            <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                    <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
-                                        <span style={{ color: "#f36e23" }}>Draw</span>Date:
-                                        <br />Combination:
-                                        <br />Total:
-                                    </h3>
-                                </div>
-                            </div>
-                            <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                    <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
-                                        <span style={{ color: "#f36e23" }}>Draw</span>Date:
-                                        <br />Combination:
-                                        <br />Total:
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row py-4 border-1 rectangle" style={{ columnGap: "39px", justifyContent: "center" }}>
-                            <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                    <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
-                                        <span style={{ color: "#f36e23" }}>Draw</span>Date:
-                                        <br />Combination:
-                                        <br />Total:
-                                    </h3>
-                                </div>
-                            </div>
-                            <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                    <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
-                                        <span style={{ color: "#f36e23" }}>Draw</span>Date:
-                                        <br />Combination:
-                                        <br />Total:
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
+                            {generateTicketUI()}
                         <div className="col-md-12 pt-5">
                             <div className="btn-toolbar amount">
-                                <button type="button" class="btn mx-2 btnAddMore">ADD MORE</button>
+                                <button type="button" data-bs-dismiss="modal" class="btn mx-2 btnAddMore">ADD MORE</button>
                                 <button type="button" class="btn mx-2 btnCheckout">CHECKOUT</button>
                                 <button type="button" class="btn mx-2 btnRemove">REMOVE</button>
                             </div>
@@ -866,3 +878,39 @@ function HomepageContent() {
 export default HomepageContent
 
 // 
+
+/**
+ *                             <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
+                                        <span style={{ color: "#f36e23" }}>Draw</span>Date:
+                                        <br />Combination:
+                                        <br />Total:
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row py-4 border-1 rectangle" style={{ columnGap: "39px", justifyContent: "center" }}>
+                            <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
+                                        <span style={{ color: "#f36e23" }}>Draw</span>Date:
+                                        <br />Combination:
+                                        <br />Total:
+                                    </h3>
+                                </div>
+                            </div>
+                            <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
+                                        <span style={{ color: "#f36e23" }}>Draw</span>Date:
+                                        <br />Combination:
+                                        <br />Total:
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+ */
