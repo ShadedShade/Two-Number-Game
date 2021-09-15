@@ -265,7 +265,7 @@ function HomepageContent() {
                 }
             }
         }
-        
+
     }
 
     useEffect(() => {
@@ -350,7 +350,7 @@ function HomepageContent() {
     const SetupBetInput = (num) => {
         console.log("why is this one?: " + num);
         if (betAmount.length < 1) {
-            betAmount.push(num.toString());
+            betAmount.push(num.toString());            
         }
         else {
             betAmount = num;
@@ -421,47 +421,47 @@ function HomepageContent() {
             onChangeBets(false);
 
     }, [listOfBets]);
-    const generateTicket = () => {
-        let amount = betAmount;
-        let toBettor = bettor ?? user;
-        console.log(gameDrawDate);
-        let drawDate = gameDrawDate;
-        let drawShift = gameDrawShift;
-        let drawID = gameDraw;
-        let numbCombo = combination.join('-');
-        //<----  From Input this should be the contents from the Front
+        const generateTicket = () => {
+            let amount = betAmount;
+            let toBettor = bettor;
+            console.log(gameDrawDate);
+            let drawDate = gameDrawDate;
+            let drawShift = gameDrawShift;
+            let drawID = gameDraw;
+            let numbCombo = combination.join('-');
+            //<----  From Input this should be the contents from the Front
+    
+            let ticket = { DrawID: drawID, DrawDate: drawDate, DrawShift: drawShift, BetAmount: amount, Bettor: toBettor, Combo: numbCombo }
+            console.log("TICKET:" + drawID + " "+ currentGame);
+           
+            listOfBets.push(ticket);
+            onShowBets([...listOfBets])
+            console.log(listOfBets);
+            console.log(listOfBets[0].Bettor);
+        }
+        const generateTicketUI = () => {
+    
+            if (betChange)
+                return (listOfBets.map((item, i) =>
+                    <div className="row py-4 border-1 rectangle" style={{ columnGap: "39px", justifyContent: "center" }}>
+                        <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
+                                    <span style={{ color: "#f36e23" }}>Draw</span>Date: {item.DrawDate}
+                                    <br />Shift Time: {item.DrawShift}
+                                    <br />Combination: {item.Combo}
+                                    <br />Total: {item.BetAmount}
+                                </h3>
+                            </div></div>
+                    </div>));
+            else {
+                return <h1>Nothing to Display</h1>
+            }
 
-        let ticket = { DrawID: drawID, DrawDate: drawDate, DrawShift: drawShift, BetAmount: amount, Bettor: toBettor, Combo: numbCombo }
-        console.log("TICKET:" + drawID + " "+ currentGame);
-       
-        listOfBets.push(ticket);
-        onShowBets([...listOfBets])
-        console.log(listOfBets);
-        console.log(listOfBets[0].Bettor);
-    }
-    const generateTicketUI = () => {
-
-        if (betChange)
-            return (listOfBets.map((item, i) =>
-                <div className="row py-4 border-1 rectangle" style={{ columnGap: "39px", justifyContent: "center" }}>
-                    <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                            <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
-                                <span style={{ color: "#f36e23" }}>Draw</span>Date: {item.DrawDate}
-                                <br />Shift Time: {item.DrawShift}
-                                <br />Combination: {item.Combo}
-                                <br />Total: {item.BetAmount}
-                            </h3>
-                        </div></div>
-                </div>));
-        else {
-            return <h1>Nothing to Display</h1>
         }
 
-    }
-
-    // GENERATE RECEIPT :D
+        // GENERATE RECEIPT :D
     const generateTicketReceipt = () => {
 
         // listOfBets array contains these
@@ -489,8 +489,8 @@ function HomepageContent() {
             if(response.data.err)
             {
                 console.log(response.data.err)
-            }
-            else 
+    }
+    else 
             {
                 console.log(response.data);
                 money = response.data.balance
@@ -783,7 +783,7 @@ function HomepageContent() {
                                                 {/* SELECT MENU HERE */}
 
                                                 <select class="form-select drawdate" id="drawdate" aria-label="select" defaultValue="def" onChange={(e) => { changeShiftAccordingtoDate(e.target.value) }}>
-                                                    <option value="def" selected>Choose Date</option>
+                                                <option value="def" selected>Choose Date</option>
                                                     {chooseDatesDropDown()}
                                                 </select>
                                                 {/* ======================= */}
@@ -810,10 +810,12 @@ function HomepageContent() {
                                                     {/* PIN LOCATION HERE */}
                                                     <div className="btn-toolbar numpad">
                                                         <div style={{display:"flex"}}>
-                                                            <div style={{width:"338px", display:"flex", flexDirection:"row-reverse"}}>
+                                                            <div style={{display:"flex", marginLeft:"59px"}}>
                                                                 {CombinationPin()}
                                                             </div>
-                                                            <div style={{display:"flex", width:"134px", justifyContent:"center", alignContent:"center", flexWrap:"wrap"}} onClick ={removeCombo}>
+
+                                                            <div style={{display:"flex", width:"70px", placeContent:"center", flexWrap:"wrap", marginLeft: "-13px"}}onClick ={removeCombo}>
+                                                           
                                                                 <BackspaceIcon 
                                                                     fontSize="large"
                                                                     cursor="pointer"
@@ -1005,13 +1007,14 @@ function HomepageContent() {
                                                     {/* PIN LOCATION HERE */}
                                                     <div className="btn-toolbar numpad">
                                                         <div style={{display:"flex"}}>
-                                                            <div style={{width:"338px", display:"flex", flexDirection:"row-reverse"}}>
+                                                            <div style={{width:"338px", display:"flex"}}>
                                                                 {CombinationPin()}
                                                             </div>
                                                             <div style={{display:"flex", width:"134px", justifyContent:"center", alignContent:"center", flexWrap:"wrap"}}>
                                                                 <BackspaceIcon 
                                                                     fontSize="large"
                                                                     cursor="pointer"
+                                                                    onClick={removeCombo}
                                                                 />
                                                             </div>
                                                         </div>
@@ -1091,11 +1094,6 @@ function HomepageContent() {
                                                 <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>40</button>
                                             </div>
                                         </div>
-                                        <div className="col-md-12 pt-4 pb-3">
-                                            <div className="btn-toolbar numpad">
-                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={removeCombo} >X</button>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div className="step3 mx-5 py-4">
@@ -1138,7 +1136,7 @@ function HomepageContent() {
                                         </div>
                                         <div className="col-md-12 pt-4 px-5">
                                             <div class="d-grid gap-2 col-6 mx-auto">
-
+                                                
                                                 <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#betModal" onClick={generateTicket}>BET</button>
 
                                             </div>
@@ -1156,14 +1154,8 @@ function HomepageContent() {
         {/* 4DG - GAME */}
         {/* ========== */}
 
-
-
-
-        {/* TODO: MAKE THIS A DYNAMIC COMPONENT */}
-        {/* ================== BET MODALS ============== */}
-        {/* EZ2 BET MODAL */}
-       <div class="modal fade" id="betModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-
+        {/* ================== BET MODAL ============== */}
+        <div class="modal fade" id="betModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header betmodalheader">
@@ -1178,7 +1170,7 @@ function HomepageContent() {
                                 <button type="button" class="btn mx-2 btnCheckout" data-bs-toggle="modal" data-bs-target="#receipt" onClick={generateTicketReceipt}>CHECKOUT</button>
                                 <button type="button" class="btn mx-2 btnRemove">REMOVE</button>
                             </div>
-                        </div>
+                        </div>    
                     </div>
                 </div>
             </div>
@@ -1186,6 +1178,7 @@ function HomepageContent() {
         {/* ============= */}
 
         {/* ============================================ */}
+
         <div class="modal fade" id="receipt" tabindex="-1" aria-labelledby="" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
@@ -1212,7 +1205,6 @@ function HomepageContent() {
 }
 
 
-        {/* RECEIPT MODAL HERE */}
 
 
 export default HomepageContent
