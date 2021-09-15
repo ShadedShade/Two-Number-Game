@@ -17,6 +17,7 @@ import fdgIcon from '../img/fdgIcon.png';
 
 import TextField from '@material-ui/core/TextField';
 
+import BackspaceIcon from '@material-ui/icons/Backspace';
 
 
 import Axios from 'axios';
@@ -331,11 +332,11 @@ function HomepageContent() {
         let buttonValues = Array(maxPin).fill("");
         if (comboChanged) {
             buttonValues = combination;
-            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl" key={i}>{item}</button>);
+            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-3 btn-default btn-circle btn-xl combibtn" key={i}>{item}</button>);
 
         }
         else
-            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl" key={i}>0</button>);
+            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-3 btn-default btn-circle btn-xl combibtn" key={i}></button>);
 
     }
     const SetupBetInput = (num) => {
@@ -352,12 +353,14 @@ function HomepageContent() {
         // e.g 2
         let buttonValues = Array(1).fill("");
         if (betAmountChanged) {
-            buttonValues[0] = betAmount;
-            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl" key={i}>{item}</button>);
+
+            buttonValues = betAmount;
+            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl betinputbtn" key={i}>{item}</button>);
+
 
         }
         else
-            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl" key={i}>0</button>);
+            return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl betinputbtn" key={i}>0</button>);
 
     }
 
@@ -677,7 +680,9 @@ function HomepageContent() {
                                     <td>
                                         <div style={{ textAlign: "center" }}>
                                             <button type="button" data-bs-toggle="modal" data-bs-target="#s3m" style={{ marginRight: "2px" }}>MECHANICS</button>
-                                            <button type="button" style={{ marginLeft: "2px" }} data-bs-toggle="modal" data-bs-target="#ez2game" value="Sr3ltt" onClick={(e) => { onPlayClick(e.target.value); console.log(e.target.value); playGame(e.target.value); }}>BET NOW</button>
+
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#s3game" style={{ marginLeft: "2px" }} value="Sr3ltt" onClick={(e) => { onPlayClick(e.target.value); console.log(e.target.value); playGame(e.target.value); }}>BET NOW</button>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -796,23 +801,213 @@ function HomepageContent() {
                                                 <div className="col-md-12 pt-4">
                                                     {/* PIN LOCATION HERE */}
                                                     <div className="btn-toolbar numpad">
-                                                        {CombinationPin()}
+                                                        <div style={{display:"flex"}}>
+                                                            <div style={{width:"338px", display:"flex", flexDirection:"row-reverse"}}>
+                                                                {CombinationPin()}
+                                                            </div>
+                                                            <div style={{display:"flex", width:"134px", justifyContent:"center", alignContent:"center", flexWrap:"wrap"}}>
+                                                                <BackspaceIcon 
+                                                                    fontSize="large"
+                                                                    cursor="pointer"
+                                                                />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 pt-4">
+                                            <div className="btn-toolbar numpad">
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>1</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>2</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>3</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>4</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>5</button>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 pt-4">
+                                            <div className="btn-toolbar numpad">
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>6</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>7</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>8</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>9</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>10</button>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 pt-4">
+                                            <div className="btn-toolbar numpad">
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>11</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>12</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>13</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>14</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>15</button>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 pt-4">
+                                            <div className="btn-toolbar numpad">
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>16</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>17</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>18</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>19</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>20</button>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 pt-4">
+                                            <div className="btn-toolbar numpad">
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>21</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>22</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>23</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>24</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>25</button>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 pt-4">
+                                            <div className="btn-toolbar numpad">
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>26</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>27</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>28</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>29</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>30</button>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 pt-4">
+                                            <div className="btn-toolbar numpad">
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>31</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>32</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>33</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>34</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>35</button>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 pt-4 pb-3">
+                                            <div className="btn-toolbar numpad">
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>36</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>37</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>38</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>39</button>
+                                                <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={(e) => { SetupComboPin(e.currentTarget.childNodes[0].textContent); }}>40</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="step3 mx-5 py-4">
+                                    <label style={{ fontWeight: "600" }} for="combination">Choose <span style={{ color: "#f36e23" }}>Amount</span></label>
+                                    <div className="row shadow py-4 border-1 rectangle" id="combination" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
+                                        <div className="col-md-12">
+                                            <div className="form-group px-5">
 
+                                                <div className="btn-toolbar numpad">
+                                                    {betInputPin()}
+                                                </div>
                                                 {/* <PinInput
-                                                    length={4}
-                                                    maxValue ={2}
-                                                    initialValue={combo}
+                                                    length={2}
+                                                    initialValue=""
                                                     onChange={(value, index) => { }}
-                                                    type="text"
-                                                    inputMode="text"
+                                                    type="numeric"
+                                                    inputMode="number"
                                                     style={{ padding: '10px', textAlign: 'center' }}
                                                     inputStyle={{ background: '#c6c7c9', border: 'none' }}
                                                     inputFocusStyle={{ border: '1px solid #f36e23', background: 'white' }}
                                                     onComplete={(value, index) => { }}
                                                     autoSelect={true}
                                                 /> */}
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 pt-4">
+                                            <div className="btn-toolbar amount">
+                                                <button type="button" class="btn mx-5 btnamount" onClick={(e) => { SetupBetInput(e.currentTarget.childNodes[0].textContent); }}>5</button>
+                                                <button type="button" class="btn mx-5 btnamount" onClick={(e) => { SetupBetInput(e.currentTarget.childNodes[0].textContent); }}>10</button>
+                                                <button type="button" class="btn mx-5 btnamount" onClick={(e) => { SetupBetInput(e.currentTarget.childNodes[0].textContent); }}>20</button>
+                                                <button type="button" class="btn mx-5 btnamount" onClick={(e) => { SetupBetInput(e.currentTarget.childNodes[0].textContent); }}>50</button>
+                                                <button type="button" class="btn mx-5 btnamount" onClick={(e) => { SetupBetInput(e.currentTarget.childNodes[0].textContent); }}>100</button>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 pb-3 pt-5 px-5">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="floatingInput" placeholder="09XXXXXXXXX" onChange={(e)=>{onChangeBettor(e.target.value);console.log(bettor)}} />
+                                                <label for="floatingInput">Enter Bettor's UserID / Mobile Number (Optional)</label>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 pt-4 px-5">
+                                            <div class="d-grid gap-2 col-6 mx-auto">
+                                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#betModal" >BET</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/* ========== */}
+
+        {/* S3 - GAME */}
+        <div class="modal fade" id="s3game" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content modal-content-scrollable ez2playgame" style={{ background: "#f0f3f4" }}>
+                    <div class="modal-header mechanicsmodalheader">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="col-md-12">
+                        <div className="px-3 d-flex justify-content-around align-items-center">
+                            <div className="col-md-6 d-flex px-5 justify-content-end" style={{marginRight: "-76px"}}>
+                                <img className="icon" src={s3Icon} alt="" />
+                            </div>
+                            <div className="col-md-6 px-2 d-flex m-0">
+                                <h1 className="iconlabel">Suertres <span style={{ color: "#f36e23" }}>Lotto</span></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <form>
+                            <div className="form-content px-5">
+                                <div className="step1 mx-5 py-4">
+                                    <label style={{ fontWeight: "600" }} for="datetime">Choose <span style={{ color: "#f36e23" }}>Draw Date</span></label>
+                                    <div className="row shadow py-4 border-1 rectangle" id="datetime" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
+                                        <div className="col-md-6">
+                                            <div className="form-group px-5">
+                                                {/* SELECT MENU HERE */}
+
+                                                <select class="form-select drawdate" id="drawdate" aria-label="select" defaultValue="def" onChange={(e) => { changeShiftAccordingtoDate(e.target.value) }}>
+                                                    {chooseDatesDropDown()}
+                                                </select>
+                                                {/* ======================= */}
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="form-group px-5">
+                                                {/* SELECT MENU HERE */}
+                                                <select class="form-select drawtime" id="drawtime" aria-label="select" defaultValue="def" onChange={(e) => { console.log(e.target.value) }}>
+                                                    {chooseShiftTimeDropDown()}
+                                                </select>
+                                                {/* ======================= */}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="step2 mx-5 py-4">
+                                    <label style={{ fontWeight: "600" }} for="combination">Choose <span style={{ color: "#f36e23" }}>Combination</span></label>
+                                    <div className="row shadow py-4 border-1 rectangle" id="combination" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
+                                        <div className="col-md-12">
+                                            <div className="form-group px-5">
+                                                <div className="col-md-12 pt-4">
+                                                    {/* PIN LOCATION HERE */}
+                                                    <div className="btn-toolbar numpad">
+                                                        <div style={{display:"flex"}}>
+                                                            <div style={{width:"338px", display:"flex", flexDirection:"row-reverse"}}>
+                                                                {CombinationPin()}
+                                                            </div>
+                                                            <div style={{display:"flex", width:"134px", justifyContent:"center", alignContent:"center", flexWrap:"wrap"}}>
+                                                                <BackspaceIcon 
+                                                                    fontSize="large"
+                                                                    cursor="pointer"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="col-md-12 pt-4">
@@ -934,7 +1129,9 @@ function HomepageContent() {
                                         </div>
                                         <div className="col-md-12 pt-4 px-5">
                                             <div class="d-grid gap-2 col-6 mx-auto">
-                                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#ez2Bet" onClick={generateTicket} >BET</button>
+
+                                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#betModal" onClick={generateTicket}>BET</button>
+
                                             </div>
                                         </div>
                                     </div>
@@ -947,17 +1144,17 @@ function HomepageContent() {
         </div>
         {/* ========== */}
 
-        {/* S3 - GAME */}
-        {/* ========== */}
-
         {/* 4DG - GAME */}
         {/* ========== */}
+
+
 
 
         {/* TODO: MAKE THIS A DYNAMIC COMPONENT */}
         {/* ================== BET MODALS ============== */}
         {/* EZ2 BET MODAL */}
-        <div class="modal fade" id="ez2Bet" tabindex="-1" aria-labelledby="" aria-hidden="true">
+       <div class="modal fade" id="betModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header betmodalheader">
@@ -1022,4 +1219,46 @@ export default HomepageContent
                                 </div>
                             </div>
                         </div>
- */
+
+                        <div className="col-md-12 pt-5">
+                            <div className="btn-toolbar amount">
+                                <button type="button" class="btn mx-2 btnAddMore">ADD MORE</button>
+                                <button type="button" class="btn mx-2 btnCheckout" data-bs-toggle="modal" data-bs-target="#receipt">CHECKOUT</button>
+                                <button type="button" class="btn mx-2 btnRemove">REMOVE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/* ============================================ */}
+
+        {/* RECEIPT MODAL HERE */}
+        <div class="modal fade" id="receipt" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header" style={{borderBottom:"0px"}}>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-5 col-md-12 d-flex">
+                        <div className="col-md-5">
+                            <h1>Your bet has<br></br>been <span style={{ color: "#f36e23" }}>submitted.</span></h1>
+                            <div className="btn-toolbar btnReceipts">
+                                <button type="button" class="px-3 py-1 btnDownload">DOWNLOAD TICKET</button>
+                                <button type="button" class="px-3 py-1 mx-2 btnHome">BACK TO HOME</button>      
+                            </div>
+                        </div>
+                        <div className="col-md-7 receiptcolumn">
+                            {/* RECEIPT GENERATION CODES HERE */}
+                        </div>
+                    </div>
+                </div>
+            </div>                                 
+        </div>
+    </div>
+    );
+}
+
+export default HomepageContent
+
+
