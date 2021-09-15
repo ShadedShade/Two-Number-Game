@@ -27,10 +27,12 @@ import '../styles/hpcontent.css'
 
 let combo = [23, 2]
 let maxPin = 2;
+let image = ez2Icon;
 let gameDrawDate = "2021-09-21";
 let gameShift = "10:00:00";
 let user = sessionStorage.getItem("Userid");
 let currentGame = "";
+let gameName = "EZ2 Lotto"
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -112,14 +114,20 @@ function HomepageContent() {
             case "Ez2ltt":
                 currentGame = "Ez2ltt";
                 maxPin = 2;
+                image = ez2Icon;
+                gameName ="EZ2"
                 break;
-            case "Sr3ltt":
-                currentGame = "sr3ltt";
-                maxPin = 3;
-                break;
-            case "FoDgltt":
-                currentGame = "FoDgltt";
-                maxPin = 4;
+                case "Sr3ltt":
+                    currentGame = "sr3ltt";
+                    maxPin = 3;
+                    image = s3Icon;
+                    gameName ="Suertres"
+                    break;
+                    case "FoDgltt":
+                        currentGame = "FoDgltt";
+                        maxPin = 4;
+                        image = fdgIcon;
+                        gameName ="4DG"
                 break;
         }
 
@@ -351,10 +359,10 @@ function HomepageContent() {
     }
     let betInputPin = () => {
         // e.g 2
-        let buttonValues = Array(1).fill("");
+        let buttonValues = Array(maxPin).fill("");
         if (betAmountChanged) {
 
-            buttonValues = betAmount;
+            buttonValues = combination;
             return buttonValues.map((item, i) => <button type="button" disabled={true} class="btn mx-5 btn-default btn-circle btn-xl betinputbtn" key={i}>{item}</button>);
 
 
@@ -412,7 +420,7 @@ function HomepageContent() {
         else
             onChangeBets(false);
 
-        }, [listOfBets]);
+    }, [listOfBets]);
         const generateTicket = () => {
             let amount = betAmount;
             let toBettor = bettor;
@@ -450,7 +458,7 @@ function HomepageContent() {
             else {
                 return <h1>Nothing to Display</h1>
             }
-    
+
         }
 
         // GENERATE RECEIPT :D
@@ -681,7 +689,7 @@ function HomepageContent() {
                                         <div style={{ textAlign: "center" }}>
                                             <button type="button" data-bs-toggle="modal" data-bs-target="#s3m" style={{ marginRight: "2px" }}>MECHANICS</button>
 
-                                            <button type="button" data-bs-toggle="modal" data-bs-target="#s3game" style={{ marginLeft: "2px" }} value="Sr3ltt" onClick={(e) => { onPlayClick(e.target.value); console.log(e.target.value); playGame(e.target.value); }}>BET NOW</button>
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#ez2game" style={{ marginLeft: "2px" }} value="Sr3ltt" onClick={(e) => { onPlayClick(e.target.value); console.log(e.target.value); playGame(e.target.value); }}>BET NOW</button>
 
                                         </div>
                                     </td>
@@ -757,10 +765,10 @@ function HomepageContent() {
                     <div className="col-md-12">
                         <div className="px-3 d-flex justify-content-around align-items-center">
                             <div className="col-md-6 d-flex px-2 justify-content-end">
-                                <img className="icon" src={ez2Icon} alt="" />
+                                <img className="icon" src={image} alt="" />
                             </div>
                             <div className="col-md-6 px-2 d-flex m-0">
-                                <h1 className="iconlabel">EZ2 <span style={{ color: "#f36e23" }}>Lotto</span></h1>
+                                <h1 className="iconlabel">{gameName} <span style={{ color: "#f36e23" }}>Lotto</span></h1>
                             </div>
                         </div>
                     </div>
@@ -805,10 +813,13 @@ function HomepageContent() {
                                                             <div style={{display:"flex", marginLeft:"59px"}}>
                                                                 {CombinationPin()}
                                                             </div>
-                                                            <div style={{display:"flex", width:"70px", placeContent:"center", flexWrap:"wrap", marginLeft: "-13px"}}>
+
+                                                            <div style={{display:"flex", width:"70px", placeContent:"center", flexWrap:"wrap", marginLeft: "-13px"}}onClick ={removeCombo}>
+                                                           
                                                                 <BackspaceIcon 
                                                                     fontSize="large"
                                                                     cursor="pointer"
+                                                                    
                                                                 />
                                                             </div>
                                                         </div>
@@ -924,13 +935,13 @@ function HomepageContent() {
                                         </div>
                                         <div className="col-md-12 pb-3 pt-5 px-5">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" id="floatingInput" placeholder="09XXXXXXXXX" onChange={(e)=>{onChangeBettor(e.target.value);console.log(bettor)}} />
+                                                <input type="text" class="form-control" id="floatingInput" placeholder={user} onChange={(e)=>{onChangeBettor(e.target.value);console.log(bettor)}} />
                                                 <label for="floatingInput">Enter Bettor's UserID / Mobile Number (Optional)</label>
                                             </div>
                                         </div>
                                         <div className="col-md-12 pt-4 px-5">
                                             <div class="d-grid gap-2 col-6 mx-auto">
-                                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#betModal" >BET</button>
+                                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#betModal" onClick={generateTicket}>BET</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1156,7 +1167,7 @@ function HomepageContent() {
                         <div className="col-md-12 pt-5">
                             <div className="btn-toolbar amount">
                                 <button type="button" data-bs-dismiss="modal" class="btn mx-2 btnAddMore">ADD MORE</button>
-                                <button type="button" class="btn mx-2 btnCheckout" onClick={generateTicketReceipt}>CHECKOUT</button>
+                                <button type="button" class="btn mx-2 btnCheckout" data-bs-toggle="modal" data-bs-target="#receipt" onClick={generateTicketReceipt}>CHECKOUT</button>
                                 <button type="button" class="btn mx-2 btnRemove">REMOVE</button>
                             </div>
                         </div>    
@@ -1168,7 +1179,6 @@ function HomepageContent() {
 
         {/* ============================================ */}
 
-        {/* RECEIPT MODAL HERE */}
         <div class="modal fade" id="receipt" tabindex="-1" aria-labelledby="" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
@@ -1193,6 +1203,9 @@ function HomepageContent() {
     </div>
     );
 }
+
+
+
 
 export default HomepageContent
 
