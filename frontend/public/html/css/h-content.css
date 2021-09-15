@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;900&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background-color: #f0f3f4;
+    color: #262626;
+}
+
+div.div3{
+    float: right;
+    height: calc(100vh - 53px);
+    width: calc(100% - 250px);
+    padding: 0;
+}
+
+h1{
+    padding: 0;
+    line-height: 100px;
+    width: 768px;
+    text-align: center;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+sup{
+    vertical-align: super;
+    font-size: small;
+    letter-spacing: 0px;
+}
+
+.play, .mytix, .stats{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.description{
+    display: block;
+    padding-bottom: 15px;
+}
+
+.threeButton{
+    cursor: pointer;
+    height: 150px;
+    border: none;
+    background: transparent;
+}
