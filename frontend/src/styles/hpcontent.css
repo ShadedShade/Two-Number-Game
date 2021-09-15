@@ -321,3 +321,39 @@ button.btn.mx-5.btn-default.btn-circle.btn-xl.betinputbtn{
     background-color: #9ba0a6;
     color: #262626;
 }
+
+.btn-toolbar.btnReceipts {
+    padding-top: 23px;
+    display: block;
+}
+button.btnDownload, button.mx-2.btnHome{
+    border-radius: 20px;
+}
+button.btnDownload{
+    background-color: #f7931e;
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 10px;
+}
+button.mx-2.btnHome{
+    background-color: white;
+    border: 2px solid #9ba0a6;
+    color: #9ba0a6;
+    font-size: 14px;
+}
+button.px-3.py-1.btnDownload:hover{
+    font-weight: 600;
+    background-color: #f36e23;
+}
+button.mx-2.btnHome:hover{
+    border: none;
+    background-color: #262626;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+}
+.col-md-7.receiptcolumn{
+    background: #f0f3f4;
+    border-radius: 10px;
+}
