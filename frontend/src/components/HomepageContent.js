@@ -115,19 +115,19 @@ function HomepageContent() {
                 currentGame = "Ez2ltt";
                 maxPin = 2;
                 image = ez2Icon;
-                gameName ="EZ2 Lotto"
+                gameName ="EZ2"
                 break;
                 case "Sr3ltt":
                     currentGame = "sr3ltt";
                     maxPin = 3;
                     image = s3Icon;
-                    gameName ="Suertres Lotto"
+                    gameName ="Suertres"
                     break;
                     case "FoDgltt":
                         currentGame = "FoDgltt";
                         maxPin = 4;
                         image = fdgIcon;
-                        gameName ="4DG Lotto"
+                        gameName ="4DG"
                 break;
         }
 
@@ -423,7 +423,7 @@ function HomepageContent() {
     }, [listOfBets]);
     const generateTicket = () => {
         let amount = betAmount;
-        let toBettor = bettor;
+        let toBettor = bettor ?? user;
         console.log(gameDrawDate);
         let drawDate = gameDrawDate;
         let drawShift = gameDrawShift;
@@ -813,10 +813,11 @@ function HomepageContent() {
                                                             <div style={{width:"338px", display:"flex", flexDirection:"row-reverse"}}>
                                                                 {CombinationPin()}
                                                             </div>
-                                                            <div style={{display:"flex", width:"134px", justifyContent:"center", alignContent:"center", flexWrap:"wrap"}}>
+                                                            <div style={{display:"flex", width:"134px", justifyContent:"center", alignContent:"center", flexWrap:"wrap"}} onClick ={removeCombo}>
                                                                 <BackspaceIcon 
                                                                     fontSize="large"
                                                                     cursor="pointer"
+                                                                    
                                                                 />
                                                             </div>
                                                         </div>
@@ -932,13 +933,13 @@ function HomepageContent() {
                                         </div>
                                         <div className="col-md-12 pb-3 pt-5 px-5">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" id="floatingInput" placeholder="09XXXXXXXXX" onChange={(e)=>{onChangeBettor(e.target.value);console.log(bettor)}} />
+                                                <input type="text" class="form-control" id="floatingInput" placeholder={user} onChange={(e)=>{onChangeBettor(e.target.value);console.log(bettor)}} />
                                                 <label for="floatingInput">Enter Bettor's UserID / Mobile Number (Optional)</label>
                                             </div>
                                         </div>
                                         <div className="col-md-12 pt-4 px-5">
                                             <div class="d-grid gap-2 col-6 mx-auto">
-                                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#betModal" >BET</button>
+                                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#betModal" onClick={generateTicket}>BET</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1174,7 +1175,7 @@ function HomepageContent() {
                         <div className="col-md-12 pt-5">
                             <div className="btn-toolbar amount">
                                 <button type="button" data-bs-dismiss="modal" class="btn mx-2 btnAddMore">ADD MORE</button>
-                                <button type="button" class="btn mx-2 btnCheckout" onClick={generateTicketReceipt}>CHECKOUT</button>
+                                <button type="button" class="btn mx-2 btnCheckout" data-bs-toggle="modal" data-bs-target="#receipt" onClick={generateTicketReceipt}>CHECKOUT</button>
                                 <button type="button" class="btn mx-2 btnRemove">REMOVE</button>
                             </div>
                         </div>
