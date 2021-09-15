@@ -74,8 +74,8 @@ app.listen(PORT, () => {
 // console.log(y[0] +y[1] + " "+ typeof(y[0]));
 // CreateTicketControl('2021-09;02','10:00:00','3922331144');
 // backendFunctions.InsertDraw("2021-09-016","10:00:00",draw.GenerateRandomNumbers(2,1,40),"Ez2ltt")
-// backendFunctions.InsertDraw("2021-09-016","14:00:00",draw.GenerateRandomNumbers(2,1,40),"Ez2ltt")
-// backendFunctions.InsertDraw("2021-09-016","18:00:00",draw.GenerateRandomNumbers(2,1,40),"Ez2ltt")
+// backendFunctions.InsertDraw("2021-09-023","14:00:00",draw.GenerateRandomNumbers(4,1,40),"FoDgltt")
+// backendFunctions.InsertDraw("2021-09-025","18:00:00",draw.GenerateRandomNumbers(6,1,40),"Sr3ltt")
 backendFunctions.ForceDraw(5);
   let prelimDate = new Date();
   console.log("init Date: "+ prelimDate);

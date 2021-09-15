@@ -23,15 +23,24 @@ import Axios from 'axios';
 
 import '../styles/hpcontent.css'
 
+
 let combo = [23, 2]
 let maxPin = 2;
 let gameDrawDate = "2021-09-21";
 let gameShift = "10:00:00";
 let user = sessionStorage.getItem("Userid");
+let currentGame = "";
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
 }
+
+function toLocalString(date) {
+    let utcDate = new Date(date).toLocaleDateString().split('/');
+    let localizeDate = utcDate.join("-");
+    return localizeDate;
+}
+
 let gameShiftTime = [];
 //todo get all user profile here
 function HomepageContent() {
@@ -98,6 +107,22 @@ function HomepageContent() {
     const playGame = (id) => {
         console.log(id);
 
+        switch (id) {
+            case "Ez2ltt":
+                currentGame = "Ez2ltt";
+                maxPin = 2;
+                break;
+            case "Sr3ltt":
+                currentGame = "sr3ltt";
+                maxPin = 3;
+                break;
+            case "FoDgltt":
+                currentGame = "FoDgltt";
+                maxPin = 4;
+                break;
+        }
+
+        gameDetails.length = 0;
         Axios.post('http://localhost:3000/selected', {
             gameid: id
         }).then((response) => {
@@ -110,8 +135,11 @@ function HomepageContent() {
                 //check if array already contains this date, if not push it
                 for (let i = 0; i < gameDetails.length; i++) {   // push the first date if the length is 0
                     if (gameDates.length == 0) {
+                        let utcDate = new Date(gameDetails[i].DrawDate).toLocaleDateString().split('/');
+                        let localizeDate = utcDate.join("-");
                         gameDates.push(gameDetails[i].DrawDate)
-                        dateList[0] = gameDates[0];
+                        dateList[0] = localizeDate;
+                        console.log(gameDates[0]);
                         console.log(gameDates);
                     }
                     else {
@@ -119,9 +147,10 @@ function HomepageContent() {
 
                         for (let j = 0; j < gameDates.length; j++) {
                             if (gameDates[j] != gameDetails[i].DrawDate) {
-                                console.log("Date: " + (gameDetails[i].DrawDate).slice(0, 10))
+                                console.log("Date: " + toLocalString(gameDetails[i].DrawDate));
+                                let localTime = toLocalString(gameDetails[i].DrawDate);
                                 gameDates.push(gameDetails[i].DrawDate)
-                                dateList.push(gameDetails[i].DrawDate)
+                                dateList.push(localTime)
 
                             }
                         }
@@ -176,20 +205,27 @@ function HomepageContent() {
             }
         });
     }
-
+    let[gameDrawList,onGameDrawListChange] = useState([]);
+    let[gameDraw,onGameDrawChange] = useState("");
     const changeShiftAccordingtoDate = (drawDate) => {
+        gameDrawDate = drawDate.slice(0, 10);
+        console.log(gameDrawDate);
+        setDrawDate(gameDrawDate);
+        gameDrawList.length = 0;
         let tempShifts = [];
         let shiftDetails = gameShiftTime;
         shiftList = [];
-        console.log(shiftDetails[0].shift);
+        console.log(shiftDetails[0]);
         for (let i = 0; i < shiftDetails.length; i++) {
             if (shiftDetails[i] != undefined) {
                 console.log("gst: " + shiftDetails[i].drawDate.slice(0, 10) + " " + drawDate.slice(0, 10))
                 console.log(shiftDetails[i].drawDate.slice(0, 10) == drawDate.slice(0, 10))
-                if (shiftDetails[i].drawDate.slice(0, 10) == drawDate.slice(0, 10)) {
+                if (toLocalString(shiftDetails[i].drawDate) == drawDate.slice(0, 10)) {
                     console.log("shift2D: " + shiftDetails[i].shift + " " + drawDate)
+                   
                     tempShifts.push(shiftDetails[i].shift);
                     shiftList.push(shiftDetails[i].shift);
+                    gameDrawList.push(shiftDetails[i].DrawID);
 
                 }
             }
@@ -200,15 +236,38 @@ function HomepageContent() {
         // given a date filter shift
         //console.log(tempShifts);
         setShifts([...shiftList]);
+        onGameDrawListChange([...gameDrawList]);
         console.log(shiftList + " " + hasShift);
-
-
     }
+
+    const changeShiftTime = (shift) =>
+    {
+        setShiftTime(shift);
+        console.log(gameShiftTime);
+        for(let i = 0; i< gameShiftTime.length;i++)
+        {
+            if(toLocalString(gameShiftTime[i].drawDate) == gameDrawDate)
+            {
+                if(gameShiftTime[i].shift == shift)
+                {
+                    console.log(gameShiftTime[i].DrawID);
+                    gameDraw = gameShiftTime[i].DrawID;
+                    onGameDrawChange(gameDraw);
+                }
+            }
+        }
+        
+    }
+
+    useEffect(() => {
+        setMoney(money);
+        console.log(money);
+    }, [money]);
     useEffect(() => {
         console.log('COMBO ' + combination.length);
         if (combination.length > 0)
             changedPinValue(true);
-            else
+        else
             changedPinValue(false);
 
     }, [combination]);
@@ -235,10 +294,10 @@ function HomepageContent() {
     const chooseDatesDropDown = () => {
         console.log("datelist length: " + dateList)
         if (hasDates) {
-            return dateList.map((item, i) => <option value={item} key={i}>{item}</option>);
+            return (dateList.map((item, i) => <option value={item} key={i}>{item.slice(0, 10)}</option>));
         }
         else {
-            return <option value="def" selected>Choose Date</option>;
+            return;
         }
     }
     let chooseShiftTimeDropDown = () => {
@@ -248,7 +307,7 @@ function HomepageContent() {
             return shiftList.map((item, i) => <option value={item} key={i}>{item}</option>);
         }
         else {
-            return <option value="def" selected>Choose Time</option>;
+            return;
         }
     }
 
@@ -263,8 +322,8 @@ function HomepageContent() {
         }
     }
     const removeCombo = () => {
-                combination.length = 0;       
-            setCombination([...combination]);
+        combination.length = 0;
+        setCombination([...combination]);
 
     }
     let CombinationPin = () => {
@@ -309,24 +368,24 @@ function HomepageContent() {
             if (response) {
                 console.log(response.data);
                 for (let i = 0; i < response.data.length; i++) {
-                    let t = response.data[i].DrawDate.split(/[- : T]/);
-                    let d = new Date(t[0], t[1] - 1, t[2]);
+                    let t = toLocalString(response.data[i].DrawDate);
+
                     console.log(t);
                     if (response.data[i].gameid == "Sr3ltt") {
 
-                        onSwerTres(d.toDateString())
+                        onSwerTres(t)
                         onPlayGame("Sr3ltt")
                         maxPin = 3;
 
                     }
                     if (response.data[i].gameid == "FoDgltt") {
 
-                        onForDgt(d.toDateString())
+                        onForDgt(t)
                         onPlayGame("FoDgltt")
                         maxPin = 4;
                     }
                     if (response.data[i].gameid == "Ez2ltt") {
-                        onEzTwo(d.toDateString())
+                        onEzTwo(t)
                         onPlayGame("Ez2ltt")
                         maxPin = 2;
 
@@ -341,49 +400,97 @@ function HomepageContent() {
         });
 
     }
-    const [bets, onShowBets] = useState([])
+    const [listOfBets, onShowBets] = useState([])
     const [betChange, onChangeBets] = useState(false)
     useEffect(() => {
-        console.log('bets ' + bets.length);
-        if (bets.length > 0)
-        onChangeBets(true);
+        console.log('listOfBets ' + listOfBets.length);
+        if (listOfBets.length > 0)
+            onChangeBets(true);
         else
-        onChangeBets(false);
+            onChangeBets(false);
 
-    }, [bets]);
+    }, [listOfBets]);
     const generateTicket = () => {
         let amount = betAmount;
         let toBettor = bettor;
+        console.log(gameDrawDate);
         let drawDate = gameDrawDate;
         let drawShift = gameDrawShift;
-        let numbCombo =  combination.join('-');
-        let ticket = { DrawDate: drawDate, DrawShift: drawShift, BetAmount: amount, Bettor: toBettor, Combination: numbCombo }
-        bets.push(ticket);
-        onShowBets([...bets])
-        console.log(bets);
-        console.log(bets[0].Bettor);
+        let drawID = gameDraw;
+        let numbCombo = combination.join('-');
+        //<----  From Input this should be the contents from the Front
+
+        let ticket = { DrawID: drawID, DrawDate: drawDate, DrawShift: drawShift, BetAmount: amount, Bettor: toBettor, Combo: numbCombo }
+        console.log("TICKET:" + drawID + " "+ currentGame);
+       
+        listOfBets.push(ticket);
+        onShowBets([...listOfBets])
+        console.log(listOfBets);
+        console.log(listOfBets[0].Bettor);
     }
     const generateTicketUI = () => {
- 
-        if(betChange)
-        return (bets.map((item, i) =>
-            <div className="row py-4 border-1 rectangle" style={{ columnGap: "39px", justifyContent: "center" }}>
-                <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                        <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
-                            <span style={{ color: "#f36e23" }}>Draw</span>Date:
-                            <br />Combination: {item.Combination}
-                            <br />Total: {item.BetAmount}
-                        </h3>
-                    </div></div>
-            </div>));
-            else 
-            {
-                return<h1>Nothing to Display</h1>
-            }
+
+        if (betChange)
+            return (listOfBets.map((item, i) =>
+                <div className="row py-4 border-1 rectangle" style={{ columnGap: "39px", justifyContent: "center" }}>
+                    <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                            <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
+                                <span style={{ color: "#f36e23" }}>Draw</span>Date: {item.DrawDate}
+                                <br />Shift Time: {item.DrawShift}
+                                <br />Combination: {item.Combo}
+                                <br />Total: {item.BetAmount}
+                            </h3>
+                        </div></div>
+                </div>));
+        else {
+            return <h1>Nothing to Display</h1>
+        }
 
     }
+
+    // GENERATE RECEIPT :D
+    const generateTicketReceipt = () => {
+
+        // listOfBets array contains these
+        // user id
+        // game id
+        //
+        // let drawID = gameDraw;
+        // let amount = betAmount;
+        // let toBettor = bettor;
+        // let drawDate = gameDrawDate;
+        // let drawShift = gameDraw;
+        // let numbCombo = combination.join('-');
+        console.log(gameDrawDate);
+
+       
+        let userid = user;
+        let gameid = currentGame;
+        let bets = listOfBets;
+        console.log(listOfBets);
+
+        Axios.post('http://localhost:3000/placeBets',{
+            User:userid,GameID:gameid,Wager:JSON.stringify(bets)
+        }).then((response) =>
+        {
+            if(response.data.err)
+            {
+                console.log(response.data.err)
+            }
+            else 
+            {
+                console.log(response.data);
+                money = response.data.balance
+                setMoney(money);
+                sessionStorage.setItem("sessionMoney",money);
+                console.log("WHAT IS MONEY: "+money);
+            }
+        })
+        
+    }
+
 
     /* Modal */
     const generateReference = () => {
@@ -570,7 +677,7 @@ function HomepageContent() {
                                     <td>
                                         <div style={{ textAlign: "center" }}>
                                             <button type="button" data-bs-toggle="modal" data-bs-target="#s3m" style={{ marginRight: "2px" }}>MECHANICS</button>
-                                            <button type="button" style={{ marginLeft: "2px" }} value="Sr3ltt" onClick={(e) => { onPlayClick(e.target.value); console.log(e.target.value) }}>BET NOW</button>
+                                            <button type="button" style={{ marginLeft: "2px" }} data-bs-toggle="modal" data-bs-target="#ez2game" value="Sr3ltt" onClick={(e) => { onPlayClick(e.target.value); console.log(e.target.value); playGame(e.target.value); }}>BET NOW</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -580,7 +687,7 @@ function HomepageContent() {
                                     <td>
                                         <div style={{ textAlign: "center" }}>
                                             <button type="button" data-bs-toggle="modal" data-bs-target="#fDm" style={{ marginRight: "2px" }}>MECHANICS</button>
-                                            <button type="button" style={{ marginLeft: "2px" }} value="FoDgltt" onClick={(e) => { onPlayClick(e.target.value); console.log(e.target.value) }}>BET NOW</button>
+                                            <button type="button" style={{ marginLeft: "2px" }} data-bs-toggle="modal" data-bs-target="#ez2game" value="FoDgltt" onClick={(e) => { onPlayClick(e.target.value); console.log(e.target.value); playGame(e.target.value); }}>BET NOW</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -663,6 +770,7 @@ function HomepageContent() {
                                                 {/* SELECT MENU HERE */}
 
                                                 <select class="form-select drawdate" id="drawdate" aria-label="select" defaultValue="def" onChange={(e) => { changeShiftAccordingtoDate(e.target.value) }}>
+                                                    <option value="def" selected>Choose Date</option>
                                                     {chooseDatesDropDown()}
                                                 </select>
                                                 {/* ======================= */}
@@ -671,7 +779,8 @@ function HomepageContent() {
                                         <div className="col-md-6">
                                             <div className="form-group px-5">
                                                 {/* SELECT MENU HERE */}
-                                                <select class="form-select drawtime" id="drawtime" aria-label="select" defaultValue="def" onChange={(e) => { console.log(e.target.value) }}>
+                                                <select class="form-select drawtime" id="drawtime" aria-label="select" defaultValue="def" onChange={(e) => { changeShiftTime(e.target.value) }}>
+                                                    <option value="def" selected>Choose Time</option>
                                                     {chooseShiftTimeDropDown()}
                                                 </select>
                                                 {/* ======================= */}
@@ -781,7 +890,7 @@ function HomepageContent() {
                                         <div className="col-md-12 pt-4 pb-3">
                                             <div className="btn-toolbar numpad">
                                                 <button type="button" class="btn mx-5 btn-default btn-circle btn-xl" onClick={removeCombo} >X</button>
- </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -856,11 +965,11 @@ function HomepageContent() {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-5">
-                            {generateTicketUI()}
+                        {generateTicketUI()}
                         <div className="col-md-12 pt-5">
                             <div className="btn-toolbar amount">
                                 <button type="button" data-bs-dismiss="modal" class="btn mx-2 btnAddMore">ADD MORE</button>
-                                <button type="button" class="btn mx-2 btnCheckout">CHECKOUT</button>
+                                <button type="button" class="btn mx-2 btnCheckout" onClick={generateTicketReceipt}>CHECKOUT</button>
                                 <button type="button" class="btn mx-2 btnRemove">REMOVE</button>
                             </div>
                         </div>
