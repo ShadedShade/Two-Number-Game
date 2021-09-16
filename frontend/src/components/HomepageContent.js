@@ -473,6 +473,44 @@ function HomepageContent() {
 
     }, [receipt]);
 
+    const generateTicketRecieptHeader = () => 
+    {
+        if(hasReceipt)
+        {
+            let control = receipt.receipt[0].receiptid;
+            let agent = receipt.agent;
+            let transacDate = receipt.tranDate;
+            let game = receipt.gameName;
+            return ( <thead>
+                <tr style={{ borderBottom: "none" }}>
+                    <th colspan="3" class="receipthead">
+                        Receipt No:
+                        <b class="databold"><span class="text-inverse"> {control}</span></b>
+                    </th>
+                    <th colspan="3" class="receipthead right">
+                        Agent:
+                        <b class="databold"><span class="text-inverse"> {agent}</span></b>
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="3" class="receipthead">
+                        Transaction Date:
+                        <b class="databold"><span class="text-inverse"> {transacDate}</span></b>
+                    </th>
+                    <th colspan="3" class="receipthead right">
+                        Game Name:
+                        <b class="databold"><span class="text-inverse"> {game}</span></b>
+                    </th>
+                </tr>
+            </thead>);
+        }
+        else
+        {
+            return;
+        }
+        
+    }
+
     const generateTicketForReceipt = () => {
 
         if (hasReceipt)
@@ -501,7 +539,7 @@ function HomepageContent() {
                     </td>
                     <td>
                         <span class="text-inverse">Bettor</span><br></br>
-                        <b class="databold"><span class="text-inverse">N/A</span></b><br></br>
+                        <b class="databold"><span class="text-inverse">{item.bettor}</span></b><br></br>
                         <b class="databold"><span class="text-inverse"></span></b>
                     </td>
                 </tr>))
@@ -511,7 +549,7 @@ function HomepageContent() {
     const generateReceiptTotalAmount = () => {
         if (hasReceipt) {
             totalAmount = 0;
-            console.log(receipt.receipt);
+            console.log(receipt);
             receipt.receipt.forEach(amount => {
                 totalAmount += amount.BetAmount;
                 console.log(amount.BetAmount);
@@ -1264,28 +1302,7 @@ function HomepageContent() {
                         <div className="col-md-7 px-5 receiptcolumn" style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
                             <div class="table">
                                 <table class="table table-invoice" style={{ background: "transparent" }}>
-                                    <thead>
-                                        <tr style={{ borderBottom: "none" }}>
-                                            <th colspan="3" class="receipthead">
-                                                Receipt No:
-                                                <b class="databold"><span class="text-inverse"> 2344d21315rwdza</span></b>
-                                            </th>
-                                            <th colspan="3" class="receipthead right">
-                                                Agent:
-                                                <b class="databold"><span class="text-inverse"> Insert Here</span></b>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" class="receipthead">
-                                                Transaction Date:
-                                                <b class="databold"><span class="text-inverse"> 2021-09-17</span></b>
-                                            </th>
-                                            <th colspan="3" class="receipthead right">
-                                                Game Name:
-                                                <b class="databold"><span class="text-inverse"> EZ2 Lotto</span></b>
-                                            </th>
-                                        </tr>
-                                    </thead>
+                                   {generateTicketRecieptHeader()}
                                     <tbody>
 
 

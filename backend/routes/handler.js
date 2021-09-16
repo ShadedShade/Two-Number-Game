@@ -263,12 +263,12 @@ for(let i = 0; i < betsObject.length;i++)
         console.log(result[0].money);
 
 
-        db.query("Select receipt.receiptid, receiptdetails.ticketid,bets.combo, bets.BetAmount, draw.DrawDate, draw.ShiftTime from numbers.receipt inner join numbers.receiptdetails on receipt.receiptid = receiptdetails.receiptid inner join numbers.bets on receiptdetails.ticketid = bets.BetID inner join numbers.draw on draw.DrawID = bets.drawid Where UserID = ? AND numbers.receiptdetails.receiptid = ?;",[userid,control]
+        db.query("Select receipt.receiptid, receipt.TranDate, receipt.Agent, gametype.gamename, receiptdetails.ticketid,bets.combo, receiptdetails.bettor, bets.BetAmount, draw.DrawDate, draw.ShiftTime from numbers.receipt inner join numbers.receiptdetails on receipt.receiptid = receiptdetails.receiptid inner join numbers.bets on receiptdetails.ticketid = bets.BetID inner join numbers.draw on draw.DrawID = bets.drawid inner join numbers.gametype on receipt.gameid = gametype.gameid Where UserID = ? AND numbers.receiptdetails.receiptid = ?;",[userid,control]
         ,(err,ress) =>
         {
             if(ress)
             {
-                res.send({receipt:control,balance:result[0].money,receipt: ress});
+                res.send({controlNo:control,tranDate:ress[0].TranDate,agent:ress[0].Agent,gameName:ress[0].gamename,balance:result[0].money,receipt: ress});
             }
         })
         
