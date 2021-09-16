@@ -57,7 +57,7 @@ function Login() {
                             <label >{loginStatus}</label>
                         </div>
                         <div className="mt-4 mb-3 d-grid gap-2">
-                            <a className="btn" onClick={Login}>NEXT</a>
+                            <a className="btn" style={{cursor:'pointer'}} onClick={Login}>NEXT</a>
                         </div>
                         <div className="text-center forgot">
                             <p className="mb-0">Forgot UserID / Mobile Number? Contact our <br/></p>

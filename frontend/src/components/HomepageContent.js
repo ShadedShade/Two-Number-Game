@@ -89,7 +89,7 @@ function HomepageContent() {
 
 
     const handleHomeClick = () => {
-        history.push('/Home');
+        history.go(0);
     }
     const handleTIcketsClick = () => {
         history.push('/');
@@ -457,7 +457,7 @@ function HomepageContent() {
                         </div></div>
                 </div>));
         else {
-            return <h2 style={{textAlign:"center", color: "#262626"}}>Nothing to Display</h2>
+            return <h2 style={{ textAlign: "center", color: "#262626" }}>Nothing to Display</h2>
         }
 
     }
@@ -473,15 +473,13 @@ function HomepageContent() {
 
     }, [receipt]);
 
-    const generateTicketRecieptHeader = () => 
-    {
-        if(hasReceipt)
-        {
+    const generateTicketRecieptHeader = () => {
+        if (hasReceipt) {
             let control = receipt.receipt[0].receiptid;
             let agent = receipt.agent;
             let transacDate = receipt.tranDate;
-            let game = receipt.gameName ;
-            return ( <thead>
+            let game = receipt.gameName;
+            return (<thead>
                 <tr style={{ borderBottom: "none" }}>
                     <th colspan="3" class="receipthead">
                         Receipt No:
@@ -504,11 +502,10 @@ function HomepageContent() {
                 </tr>
             </thead>);
         }
-        else
-        {
+        else {
             return;
         }
-        
+
     }
 
     const generateTicketForReceipt = () => {
@@ -609,6 +606,125 @@ function HomepageContent() {
     }
 
 
+    let [tickets, onTickets] = useState([])
+    const [hasTickets, onShowTickets] = useState(false)
+    // useEffect(() => {
+    //     console.log('tickets ' + tickets.length);
+    //     if (tickets.length > 0)
+    //     {
+    //         console.log(tickets.length);
+    //         onShowTickets(true);
+    //     }
+    //     else
+    //         onShowTickets(false);
+
+    // }, [tickets]);
+
+    const getUserTicketHistory = () => {
+        console.log("TICKER PRESSED")
+        Axios.post('http://localhost:3000/userBets', {
+            userid: user
+        }).then((response) => {
+            if (response.data) {
+                tickets = response.data;
+                onTickets(response.data);
+
+            }
+        }
+        )
+        console.log("this is pressed");
+    }
+
+    let [latestJackpot, onLatestJackpot] = useState([])
+    let [previousCombo, onPreviousCombos] = useState([])
+        // useEffect(() => {
+    //     console.log('tickets ' + tickets.length);
+    //     if (tickets.length > 0)
+    //     {
+    //         console.log(tickets.length);
+    //         onShowTickets(true);
+    //     }
+    //     else
+    //         onShowTickets(false);
+
+    // }, [tickets]);
+    const getStats = () =>
+    {
+        getLatestHistory();
+        getHistory();
+    }
+    const getLatestHistory = () => {
+        console.log("TICKER PRESSED")
+        Axios.get('http://localhost:3000/latestDraw').then((response) => {
+            if (response.data) {
+                latestJackpot = response.data;
+                onLatestJackpot(response.data);
+
+            }
+        }
+        )
+        console.log("this is pressed");
+    }
+    const getHistory = () =>
+    {
+        Axios.get('http://localhost:3000/drawHistory').then((response) => {
+            if (response.data) {
+                previousCombo = response.data;
+                onPreviousCombos(response.data);
+
+            }
+        }
+        )
+    }
+
+    const generateTicketHistoryUI = () => {
+        console.log(tickets);
+        if (tickets.length > 0) {
+            return (tickets.map((item, i) =>
+                <tr>
+                    <td>{item.gamename}</td>
+                    <td>{item.combo}</td>
+                    <td>{item.BetAmount}</td>
+                    <td>{toLocalString(item.DrawDate)}</td>
+                    <td>{item.ShiftTime}</td>
+                </tr>
+            ))
+        }
+        else {
+            return <h1>Nothing new</h1>
+        }
+    }
+    const generateLatestDrawsUI = () => {
+        console.log(latestJackpot);
+        if (latestJackpot.length > 0) {
+            return (latestJackpot.map((item, i) =>
+                <tr>
+                    <td>{item.gamename}</td>
+                    <td style={{ textAlign: "center" }}>{item.DrawCombo}</td>
+                </tr>
+            ))
+        }
+        else {
+            return <h1>Nothing new</h1>
+        }
+    }
+    const generateDrawHistoryUI = () => {
+        console.log(previousCombo);
+        if (previousCombo.length > 0) {
+            return (previousCombo.map((item, i) =>
+                <tr>
+                    <td>{item.gamename}</td>
+                    <td style={{ textAlign: "center" }}>{toLocalString(item.DrawDate)}</td>
+                    <td style={{ textAlign: "center" }}>{item.DrawCombo}</td>
+                </tr>
+            ))
+        }
+        else {
+            return <h1>Nothing new</h1>
+        }
+    }
+
+
     /* Modal */
     const generateReference = () => {
         onReference(valueDate + " " + gCashNumber + " " + reference + " " + senderName)
@@ -675,13 +791,13 @@ function HomepageContent() {
                 </div>
                 <div class="col-md-3 buttontix">
                     <div class="shadow mytix">
-                        <button class="btn-group threeButton" id="btix" data-bs-toggle="modal" data-bs-target="#buttonmyTickets"><i class="fas fa-ticket-alt" id="icon2" style={{ fontSize: "140px" }}></i></button>
+                        <button class="btn-group threeButton" id="btix" data-bs-toggle="modal" data-bs-target="#buttonmyTickets"><i class="fas fa-ticket-alt" id="icon2" style={{ fontSize: "140px" }} onClick={getUserTicketHistory} ></i></button>
                         <label class="description" id="tix">My Tickets</label>
                     </div>
                 </div>
                 <div class="col-md-3 buttonstats">
                     <div class="shadow stats">
-                        <button class="btn-group threeButton" id="bstat" data-bs-toggle="modal" data-bs-target="#buttonStats"><i class="fas fa-star" id="icon3" style={{ fontSize: "125px" }}></i></button>
+                        <button class="btn-group threeButton" id="bstat" data-bs-toggle="modal" data-bs-target="#buttonStats"><i class="fas fa-star" id="icon3" style={{ fontSize: "125px" }} onClick={getStats}></i></button>
                         <label class="description" id="stat">Stats</label>
                     </div>
                 </div>
@@ -766,7 +882,7 @@ function HomepageContent() {
                     </div>
                     <div class="modal-body p-5">
                         <table class="col-md-12 table table-bordered p-5 shadow">
-                            <thead style={{background:"#e8eaeb"}}>
+                            <thead style={{ background: "#e8eaeb" }}>
                                 <tr>
                                     <th scope="col">Game Name</th>
                                     <th scope="col" style={{ textAlign: "center" }}>Next Draw Date</th>
@@ -1280,7 +1396,7 @@ function HomepageContent() {
             </div>
         </div>
         {/* ==================END OF BET MODAL====================== */}
-        
+
         {/*==================RECEIPT MODAL================= */}
         <div class="modal fade" id="receipt" tabindex="-1" aria-labelledby="" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
@@ -1299,7 +1415,7 @@ function HomepageContent() {
                         <div className="col-md-7 px-5 receiptcolumn" style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
                             <div class="table">
                                 <table class="table table-invoice" style={{ background: "transparent" }}>
-                                   {generateTicketRecieptHeader()}
+                                    {generateTicketRecieptHeader()}
                                     <tbody>
 
 
@@ -1330,9 +1446,9 @@ function HomepageContent() {
                     <div class="modal-body p-5">
                         <div className="col-md-12 px-5" style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
                             <div class="table">
-                                <table class="table table-invoice shadow" style={{ background: "transparent", overflow:"auto" }}>
-                                    <thead style={{background:"#f7931e", color: "white"}}>
-                                        <tr style={{borderBottom: "none", textAlign:"center"}}>
+                                <table class="table table-invoice shadow" style={{ background: "transparent", overflow: "auto" }}>
+                                    <thead style={{ background: "#f7931e", color: "white" }}>
+                                        <tr style={{ borderBottom: "none", textAlign: "center" }}>
                                             <th>GAME NAME</th>
                                             <th>COMBINATION</th>
                                             <th>BET AMOUNT</th>
@@ -1340,49 +1456,10 @@ function HomepageContent() {
                                             <th>SHIFT TIME</th>
                                         </tr>
                                     </thead>
-                                    <tbody style={{textAlign:"center"}}>
-                                        <tr>
-                                            <td>EZ2 Lotto</td>
-                                            <td>12-37</td>
-                                            <td>100</td>
-                                            <td>17-09-2021</td>
-                                            <td>12:00 PM</td>
-                                        </tr>
-                                        <tr>
-                                            <td>EZ2 Lotto</td>
-                                            <td>12-37</td>
-                                            <td>100</td>
-                                            <td>17-09-2021</td>
-                                            <td>12:00 PM</td>
-                                        </tr>
-                                        <tr>
-                                            <td>EZ2 Lotto</td>
-                                            <td>12-37</td>
-                                            <td>100</td>
-                                            <td>17-09-2021</td>
-                                            <td>12:00 PM</td>
-                                        </tr>
-                                        <tr>
-                                            <td>EZ2 Lotto</td>
-                                            <td>12-37</td>
-                                            <td>100</td>
-                                            <td>17-09-2021</td>
-                                            <td>12:00 PM</td>
-                                        </tr>
-                                        <tr>
-                                            <td>EZ2 Lotto</td>
-                                            <td>12-37</td>
-                                            <td>100</td>
-                                            <td>17-09-2021</td>
-                                            <td>12:00 PM</td>
-                                        </tr>
-                                        <tr>
-                                            <td>EZ2 Lotto</td>
-                                            <td>12-37</td>
-                                            <td>100</td>
-                                            <td>17-09-2021</td>
-                                            <td>12:00 PM</td>
-                                        </tr>
+                                    {/* ticket history */}
+                                    <tbody style={{ textAlign: "center" }}>
+                                        {generateTicketHistoryUI()}
+
                                     </tbody>
                                 </table>
                             </div>
@@ -1401,105 +1478,51 @@ function HomepageContent() {
                         <h5 class="modal-title" id="betModalLabel"><span style={{ color: "#f36e23" }}>Jackpot</span>and <span style={{ color: "#f36e23" }}>Results</span></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body p-5" style={{overflow: "auto", background:"#f0f3f4"}}>
+                    <div class="modal-body p-5" style={{ overflow: "auto", background: "#f0f3f4" }}>
                         <div className="col-md-12 pb-5 px-5" style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
                             <div class="table latestTable">
-                                <table class="table table-invoice shadow" style={{ background: "white", overflow:"auto" }}>
+                                <table class="table table-invoice shadow" style={{ background: "white", overflow: "auto" }}>
                                     <thead>
-                                        <tr style={{background:"#f7931e", color: "white", borderBottom: "none", textAlign:"center"}}>
+                                        <tr style={{ background: "#f7931e", color: "white", borderBottom: "none", textAlign: "center" }}>
                                             <th colSpan="2">
-                                                TODAY'S JACKPOT AND RESULTS 
+                                                TODAY'S JACKPOT AND RESULTS
                                             </th>
                                         </tr>
-                                        <tr style={{background:"#e8eaeb", color: "#262626", borderBottom: "none", borderTop:"none", textAlign:"center"}}>
-                                            <th width="60%" style={{borderBottom:"none", textAlign:"left"}}>GAME NAME</th>
-                                            <th width="40%" style={{borderBottom:"none"}}>WINNING COMBINATION</th>
+                                        <tr style={{ background: "#e8eaeb", color: "#262626", borderBottom: "none", borderTop: "none", textAlign: "center" }}>
+                                            <th width="60%" style={{ borderBottom: "none", textAlign: "left" }}>GAME NAME</th>
+                                            <th width="40%" style={{ borderBottom: "none" }}>WINNING COMBINATION</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>EZ2 Lotto</td>
-                                            <td style={{textAlign:"center"}}>4-25</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suertres Lotto</td>
-                                            <td style={{textAlign:"center"}}>1-2-4</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4DG Lotto</td>
-                                            <td style={{textAlign:"center"}}>15-7-8-4</td>
-                                        </tr>
+                                        {generateLatestDrawsUI()}
+          
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div className="col-md-12 px-5" style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
                             <div class="table latestTable">
-                                <table class="table table-invoice shadow" style={{ background: "white", overflow:"auto" }}>
+                                <table class="table table-invoice shadow" style={{ background: "white", overflow: "auto" }}>
                                     <thead>
-                                        <tr style={{background:"#74d4af", color: "white", borderBottom: "none", textAlign:"center"}}>
+                                        <tr style={{ background: "#74d4af", color: "white", borderBottom: "none", textAlign: "center" }}>
                                             <th colSpan="3">
-                                                LIST OF ALL JACKPOT AND RESULTS 
+                                                LIST OF ALL JACKPOT AND RESULTS
                                             </th>
                                         </tr>
-                                        <tr style={{background:"#e8eaeb", color: "#262626", borderBottom: "none", borderTop:"none", textAlign:"center"}}>
-                                            <th width="39%" style={{borderBottom:"none", textAlign:"left"}}>GAME NAME</th>
-                                            <th style={{borderBottom:"none"}}>DATE</th>
-                                            <th style={{borderBottom:"none"}}>WINNING COMBINATION</th>
+                                        <tr style={{ background: "#e8eaeb", color: "#262626", borderBottom: "none", borderTop: "none", textAlign: "center" }}>
+                                            <th width="39%" style={{ borderBottom: "none", textAlign: "left" }}>GAME NAME</th>
+                                            <th style={{ borderBottom: "none" }}>DATE</th>
+                                            <th style={{ borderBottom: "none" }}>WINNING COMBINATION</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>EZ2 Lotto</td>
-                                            <td style={{textAlign:"center"}}>Date Here</td>
-                                            <td style={{textAlign:"center"}}>4-25</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suertres Lotto</td>
-                                            <td style={{textAlign:"center"}}>Date Here</td>
-                                            <td style={{textAlign:"center"}}>1-2-4</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4DG Lotto</td>
-                                            <td style={{textAlign:"center"}}>Date Here</td>
-                                            <td style={{textAlign:"center"}}>15-7-8-4</td>
-                                        </tr>
-                                        <tr>
-                                            <td>EZ2 Lotto</td>
-                                            <td style={{textAlign:"center"}}>Date Here</td>
-                                            <td style={{textAlign:"center"}}>4-25</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suertres Lotto</td>
-                                            <td style={{textAlign:"center"}}>Date Here</td>
-                                            <td style={{textAlign:"center"}}>1-2-4</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4DG Lotto</td>
-                                            <td style={{textAlign:"center"}}>Date Here</td>
-                                            <td style={{textAlign:"center"}}>15-7-8-4</td>
-                                        </tr>
-                                        <tr>
-                                            <td>EZ2 Lotto</td>
-                                            <td style={{textAlign:"center"}}>Date Here</td>
-                                            <td style={{textAlign:"center"}}>4-25</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suertres Lotto</td>
-                                            <td style={{textAlign:"center"}}>Date Here</td>
-                                            <td style={{textAlign:"center"}}>1-2-4</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4DG Lotto</td>
-                                            <td style={{textAlign:"center"}}>Date Here</td>
-                                            <td style={{textAlign:"center"}}>15-7-8-4</td>
-                                        </tr>
+                                    {generateDrawHistoryUI()}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
