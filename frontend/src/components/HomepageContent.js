@@ -88,8 +88,8 @@ function HomepageContent() {
 
 
 
-    const handlePlayClick = () => {
-        history.push('/');
+    const handleHomeClick = () => {
+        history.push('/Home');
     }
     const handleTIcketsClick = () => {
         history.push('/');
@@ -1255,7 +1255,7 @@ function HomepageContent() {
                             <h1>Your bet has<br></br>been <span style={{ color: "#f36e23" }}>submitted.</span></h1>
                             <div className="btn-toolbar btnReceipts">
                                 <button type="button" class="px-3 py-1 btnDownload">DOWNLOAD TICKET</button>
-                                <button type="button" class="px-3 py-1 mx-2 btnHome">BACK TO HOME</button>
+                                <button type="button" class="px-3 py-1 mx-2 btnHome" onClick={handleHomeClick}>BACK TO HOME</button>
                             </div>
                         </div>
                         <div className="col-md-7 px-5 receiptcolumn" style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
