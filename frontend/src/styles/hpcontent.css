@@ -356,4 +356,19 @@ button.mx-2.btnHome:hover{
 .col-md-7.receiptcolumn{
     background: #f0f3f4;
     border-radius: 10px;
+    overflow: auto;
+}
+
+button.btn.mx-5.btnamount:focus{
+    background: #f7931e; 
+    color: #262626;
+    font-weight:900;
+}
+
+th.receipthead{
+    border-bottom: none;
+}
+
+b.databold{
+    font-weight: 600;
 }
