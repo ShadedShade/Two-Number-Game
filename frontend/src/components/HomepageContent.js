@@ -457,7 +457,7 @@ function HomepageContent() {
                         </div></div>
                 </div>));
         else {
-            return <h1>Nothing to Display</h1>
+            return <h2 style={{textAlign:"center", color: "#262626"}}>Nothing to Display</h2>
         }
 
     }
@@ -675,13 +675,13 @@ function HomepageContent() {
                 </div>
                 <div class="col-md-3 buttontix">
                     <div class="shadow mytix">
-                        <button class="btn-group threeButton" id="btix" onClick={handleTIcketsClick}><i class="fas fa-ticket-alt" id="icon2" style={{ fontSize: "140px" }}></i></button>
+                        <button class="btn-group threeButton" id="btix" data-bs-toggle="modal" data-bs-target="#buttonmyTickets"><i class="fas fa-ticket-alt" id="icon2" style={{ fontSize: "140px" }}></i></button>
                         <label class="description" id="tix">My Tickets</label>
                     </div>
                 </div>
                 <div class="col-md-3 buttonstats">
                     <div class="shadow stats">
-                        <button class="btn-group threeButton" id="bstat" onClick={handleStatisticsClick}><i class="fas fa-star" id="icon3" style={{ fontSize: "125px" }}></i></button>
+                        <button class="btn-group threeButton" id="bstat" data-bs-toggle="modal" data-bs-target="#buttonStats"><i class="fas fa-star" id="icon3" style={{ fontSize: "125px" }}></i></button>
                         <label class="description" id="stat">Stats</label>
                     </div>
                 </div>
@@ -751,9 +751,6 @@ function HomepageContent() {
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer loadModalFooter">
-                        <button type="button" class="btn btn-secondary loadModalCloseBtn" data-bs-dismiss="modal">Close</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -764,12 +761,12 @@ function HomepageContent() {
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
-                        LIST OF <span style={{ color: "#f36e23" }}>GAMES</span>
+                        <h5 class="modal-title" id="betModalLabel">LIST OF <span style={{ color: "#f36e23" }}>GAMES</span></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-5">
-                        <table class="col-md-12 table table-bordered p-5">
-                            <thead>
+                        <table class="col-md-12 table table-bordered p-5 shadow">
+                            <thead style={{background:"#e8eaeb"}}>
                                 <tr>
                                     <th scope="col">Game Name</th>
                                     <th scope="col" style={{ textAlign: "center" }}>Next Draw Date</th>
@@ -816,6 +813,7 @@ function HomepageContent() {
                 </div>
             </div>
         </div>
+
         {/* EZ2 Mechanics */}
         <div class="modal fade" id="ez2m" tabindex="-1" aria-labelledby="" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
@@ -1281,10 +1279,9 @@ function HomepageContent() {
                 </div>
             </div>
         </div>
-        {/* ============= */}
-
-        {/* ============================================ */}
-
+        {/* ==================END OF BET MODAL====================== */}
+        
+        {/*==================RECEIPT MODAL================= */}
         <div class="modal fade" id="receipt" tabindex="-1" aria-labelledby="" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
@@ -1319,6 +1316,194 @@ function HomepageContent() {
                 </div>
             </div>
         </div>
+        {/*==============END OF RECEIPT MODAL============== */}
+
+
+        {/* =========== TICKETS MODAL HERE ============ */}
+        <div class="modal fade" id="buttonmyTickets" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="betModalLabel"><span style={{ color: "#f36e23" }}>Bet</span>History</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-5">
+                        <div className="col-md-12 px-5" style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+                            <div class="table">
+                                <table class="table table-invoice shadow" style={{ background: "transparent", overflow:"auto" }}>
+                                    <thead style={{background:"#f7931e", color: "white"}}>
+                                        <tr style={{borderBottom: "none", textAlign:"center"}}>
+                                            <th>GAME NAME</th>
+                                            <th>COMBINATION</th>
+                                            <th>BET AMOUNT</th>
+                                            <th>DRAW DATE</th>
+                                            <th>SHIFT TIME</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style={{textAlign:"center"}}>
+                                        <tr>
+                                            <td>EZ2 Lotto</td>
+                                            <td>12-37</td>
+                                            <td>100</td>
+                                            <td>17-09-2021</td>
+                                            <td>12:00 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>EZ2 Lotto</td>
+                                            <td>12-37</td>
+                                            <td>100</td>
+                                            <td>17-09-2021</td>
+                                            <td>12:00 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>EZ2 Lotto</td>
+                                            <td>12-37</td>
+                                            <td>100</td>
+                                            <td>17-09-2021</td>
+                                            <td>12:00 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>EZ2 Lotto</td>
+                                            <td>12-37</td>
+                                            <td>100</td>
+                                            <td>17-09-2021</td>
+                                            <td>12:00 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>EZ2 Lotto</td>
+                                            <td>12-37</td>
+                                            <td>100</td>
+                                            <td>17-09-2021</td>
+                                            <td>12:00 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>EZ2 Lotto</td>
+                                            <td>12-37</td>
+                                            <td>100</td>
+                                            <td>17-09-2021</td>
+                                            <td>12:00 PM</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/* ======== END OF MYTICKETS MODAL =========== */}
+
+        {/* =========== STATS MODAL HERE ============ */}
+        <div class="modal fade" id="buttonStats" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="betModalLabel"><span style={{ color: "#f36e23" }}>Jackpot</span>and <span style={{ color: "#f36e23" }}>Results</span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-5" style={{overflow: "auto", background:"#f0f3f4"}}>
+                        <div className="col-md-12 pb-5 px-5" style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+                            <div class="table latestTable">
+                                <table class="table table-invoice shadow" style={{ background: "white", overflow:"auto" }}>
+                                    <thead>
+                                        <tr style={{background:"#f7931e", color: "white", borderBottom: "none", textAlign:"center"}}>
+                                            <th colSpan="2">
+                                                TODAY'S JACKPOT AND RESULTS 
+                                            </th>
+                                        </tr>
+                                        <tr style={{background:"#e8eaeb", color: "#262626", borderBottom: "none", borderTop:"none", textAlign:"center"}}>
+                                            <th width="60%" style={{borderBottom:"none", textAlign:"left"}}>GAME NAME</th>
+                                            <th width="40%" style={{borderBottom:"none"}}>WINNING COMBINATION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>EZ2 Lotto</td>
+                                            <td style={{textAlign:"center"}}>4-25</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Suertres Lotto</td>
+                                            <td style={{textAlign:"center"}}>1-2-4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4DG Lotto</td>
+                                            <td style={{textAlign:"center"}}>15-7-8-4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div className="col-md-12 px-5" style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+                            <div class="table latestTable">
+                                <table class="table table-invoice shadow" style={{ background: "white", overflow:"auto" }}>
+                                    <thead>
+                                        <tr style={{background:"#74d4af", color: "white", borderBottom: "none", textAlign:"center"}}>
+                                            <th colSpan="3">
+                                                LIST OF ALL JACKPOT AND RESULTS 
+                                            </th>
+                                        </tr>
+                                        <tr style={{background:"#e8eaeb", color: "#262626", borderBottom: "none", borderTop:"none", textAlign:"center"}}>
+                                            <th width="39%" style={{borderBottom:"none", textAlign:"left"}}>GAME NAME</th>
+                                            <th style={{borderBottom:"none"}}>DATE</th>
+                                            <th style={{borderBottom:"none"}}>WINNING COMBINATION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>EZ2 Lotto</td>
+                                            <td style={{textAlign:"center"}}>Date Here</td>
+                                            <td style={{textAlign:"center"}}>4-25</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Suertres Lotto</td>
+                                            <td style={{textAlign:"center"}}>Date Here</td>
+                                            <td style={{textAlign:"center"}}>1-2-4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4DG Lotto</td>
+                                            <td style={{textAlign:"center"}}>Date Here</td>
+                                            <td style={{textAlign:"center"}}>15-7-8-4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>EZ2 Lotto</td>
+                                            <td style={{textAlign:"center"}}>Date Here</td>
+                                            <td style={{textAlign:"center"}}>4-25</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Suertres Lotto</td>
+                                            <td style={{textAlign:"center"}}>Date Here</td>
+                                            <td style={{textAlign:"center"}}>1-2-4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4DG Lotto</td>
+                                            <td style={{textAlign:"center"}}>Date Here</td>
+                                            <td style={{textAlign:"center"}}>15-7-8-4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>EZ2 Lotto</td>
+                                            <td style={{textAlign:"center"}}>Date Here</td>
+                                            <td style={{textAlign:"center"}}>4-25</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Suertres Lotto</td>
+                                            <td style={{textAlign:"center"}}>Date Here</td>
+                                            <td style={{textAlign:"center"}}>1-2-4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4DG Lotto</td>
+                                            <td style={{textAlign:"center"}}>Date Here</td>
+                                            <td style={{textAlign:"center"}}>15-7-8-4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        {/* ======== END OF STATS MODAL =========== */}
     </div>
     );
 }
