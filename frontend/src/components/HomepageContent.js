@@ -423,14 +423,18 @@ function HomepageContent() {
     }, [listOfBets]);
         const generateTicket = () => {
             let amount = betAmount;
-            let toBettor = bettor;
+            let toBettor = bettor == ""? user:bettor;
             console.log(gameDrawDate);
             let drawDate = gameDrawDate;
             let drawShift = gameDrawShift;
             let drawID = gameDraw;
             let numbCombo = combination.join('-');
             //<----  From Input this should be the contents from the Front
-    
+            if( amount == 0 || drawDate == "" || drawShift =="" || numbCombo == "")
+            { console.log("you forgot a field");
+                return;
+
+            }
             let ticket = { DrawID: drawID, DrawDate: drawDate, DrawShift: drawShift, BetAmount: amount, Bettor: toBettor, Combo: numbCombo }
             console.log("TICKET:" + drawID + " "+ currentGame);
            
