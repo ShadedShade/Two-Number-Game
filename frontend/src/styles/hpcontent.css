@@ -168,12 +168,6 @@ button.loadwallet{
 button.loadModalCloseBtn{
     border:none;
 }
-.loadModalHeader{
-    border-bottom: 1px solid #f36e23;
-}
-.loadModalFooter{
-    border-top: 1px solid #f36e23;
-}
 
 .react-datetime-picker__wrapper{
     border: none;
