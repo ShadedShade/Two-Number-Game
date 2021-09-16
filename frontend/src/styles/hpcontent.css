@@ -367,10 +367,6 @@ button.btn.mx-5.btnamount:focus{
 
 th.receipthead{
     border-bottom: none;
-    font-weight: 200;
-}
-th.receipthead.right{
-    text-align: right;
 }
 
 b.databold{
