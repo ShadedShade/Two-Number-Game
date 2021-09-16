@@ -33,6 +33,7 @@ let gameShift = "10:00:00";
 let user = sessionStorage.getItem("Userid");
 let currentGame = "";
 let gameName = "EZ2 Lotto"
+let totalAmount = 0;
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -461,42 +462,67 @@ function HomepageContent() {
 
     }
 
-    let [receipt, onReceipt] = useState({receipt:"",balance:0})
+    let [receipt, onReceipt] = useState({ receipt: "", balance: 0 })
     const [hasReceipt, onShowReceipt] = useState(false)
     useEffect(() => {
         console.log('receipt ' + receipt.length);
         if (listOfBets.length > 0)
-        onShowReceipt(true);
+            onShowReceipt(true);
         else
-        onShowReceipt(false);
+            onShowReceipt(false);
 
     }, [receipt]);
 
     const generateTicketForReceipt = () => {
 
-        return (listOfBets.map((item, i) =>
-            <tr>
-                <td>
-                    <span class="text-inverse">Draw Date</span><br></br>
-                    <b class="databold"><span class="text-inverse">{item.DrawDate}</span></b><br></br>
-                    <b class="databold"><span class="text-inverse">{item.DrawShift}</span></b>
+        if (hasReceipt)
+
+            return (receipt.receipt.map((item, i) =>
+                <tr>
+                    <td>
+                        <span class="text-inverse">Draw Date</span><br></br>
+                        <b class="databold"><span class="text-inverse">{toLocalString(item.DrawDate)}</span></b><br></br>
+                        <b class="databold"><span class="text-inverse">{item.ShiftTime}</span></b>
+                    </td>
+                    <td>
+                        <span class="text-inverse">Ticket No.</span><br></br>
+                        <b class="databold"><span class="text-inverse">{item.ticketid}</span></b><br></br>
+                        <b class="databold"><span class="text-inverse"></span></b>
+                    </td>
+                    <td>
+                        <span class="text-inverse">Combination</span><br></br>
+                        <b class="databold"><span class="text-inverse">{item.combo}</span></b><br></br>
+                        <b class="databold"><span class="text-inverse"></span></b>
+                    </td>
+                    <td>
+                        <span class="text-inverse">Amount</span><br></br>
+                        <b class="databold"><span class="text-inverse">{item.BetAmount}</span></b><br></br>
+                        <b class="databold"><span class="text-inverse"></span></b>
+                    </td>
+                </tr>))
+
+    }
+
+    const generateReceiptTotalAmount = () => {
+        if (hasReceipt)
+        {
+          totalAmount = 0;
+          console.log(receipt.receipt);
+            receipt.receipt.forEach(amount => {
+                totalAmount+= amount.BetAmount;                
+                console.log(amount.BetAmount);
+            });
+           return (<tr style={{ textAlign: "right" }}>
+                <td colspan="4" class="pt-3" style={{ paddingRight: "38px" }}>
+                    <span class="text-inverse">Total Amount</span><br></br>
+                    <b class="databold"><span class="text-inverse">{totalAmount}</span></b>
                 </td>
-                <td>
-                    <span class="text-inverse">Ticket No.</span><br></br>
-                    <b class="databold"><span class="text-inverse">1234567897653</span></b><br></br>
-                    <b class="databold"><span class="text-inverse"></span></b>
-                </td>
-                <td>
-                    <span class="text-inverse">Combination</span><br></br>
-                    <b class="databold"><span class="text-inverse">3-16</span></b><br></br>
-                    <b class="databold"><span class="text-inverse"></span></b>
-                </td>
-                <td>
-                    <span class="text-inverse">Amount</span><br></br>
-                    <b class="databold"><span class="text-inverse">5.00</span></b><br></br>
-                    <b class="databold"><span class="text-inverse"></span></b>
-                </td>
-            </tr>))
+            </tr>)
+        }
+            else
+            {
+                return;
+            }
     }
 
     // GENERATE RECEIPT :D
@@ -535,7 +561,7 @@ function HomepageContent() {
                 console.log("WHAT IS MONEY: " + money);
                 receipt = response.data;
                 onReceipt(receipt);
-                console.log(receipt);
+                console.log(receipt.receipt);
             }
         })
 
@@ -1243,78 +1269,14 @@ function HomepageContent() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <span class="text-inverse">Draw Date</span><br></br>
-                                                <b class="databold"><span class="text-inverse">17-09-2021</span></b><br></br>
-                                                <b class="databold"><span class="text-inverse">6:00 PM</span></b>
-                                            </td>
-                                            <td>
-                                                <span class="text-inverse">Ticket No.</span><br></br>
-                                                <b class="databold"><span class="text-inverse">1234567897653</span></b><br></br>
-                                                <b class="databold"><span class="text-inverse"></span></b>
-                                            </td>
-                                            <td>
-                                                <span class="text-inverse">Combination</span><br></br>
-                                                <b class="databold"><span class="text-inverse">3-16</span></b><br></br>
-                                                <b class="databold"><span class="text-inverse"></span></b>
-                                            </td>
-                                            <td>
-                                                <span class="text-inverse">Amount</span><br></br>
-                                                <b class="databold"><span class="text-inverse">5.00</span></b><br></br>
-                                                <b class="databold"><span class="text-inverse"></span></b>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span class="text-inverse">Draw Date</span><br></br>
-                                                <b class="databold"><span class="text-inverse">18-09-2021</span></b><br></br>
-                                                <b class="databold"><span class="text-inverse">1:00 PM</span></b>
-                                            </td>
-                                            <td>
-                                                <span class="text-inverse">Ticket No.</span><br></br>
-                                                <b class="databold"><span class="text-inverse">65645254242542</span></b><br></br>
-                                                <b class="databold"><span class="text-inverse"></span></b>
-                                            </td>
-                                            <td>
-                                                <span class="text-inverse">Combination</span><br></br>
-                                                <b class="databold"><span class="text-inverse">20-37</span></b><br></br>
-                                                <b class="databold"><span class="text-inverse"></span></b>
-                                            </td>
-                                            <td>
-                                                <span class="text-inverse">Amount</span><br></br>
-                                                <b class="databold"><span class="text-inverse">10.00</span></b><br></br>
-                                                <b class="databold"><span class="text-inverse"></span></b>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span class="text-inverse">Draw Date</span><br></br>
-                                                <b class="databold"><span class="text-inverse">19-09-2021</span></b><br></br>
-                                                <b class="databold"><span class="text-inverse">10:00 AM</span></b>
-                                            </td>
-                                            <td>
-                                                <span class="text-inverse">Ticket No.</span><br></br>
-                                                <b class="databold"><span class="text-inverse">12433645423224</span></b><br></br>
-                                                <b class="databold"><span class="text-inverse"></span></b>
-                                            </td>
-                                            <td>
-                                                <span class="text-inverse">Combination</span><br></br>
-                                                <b class="databold"><span class="text-inverse">40-1</span></b><br></br>
-                                                <b class="databold"><span class="text-inverse"></span></b>
-                                            </td>
-                                            <td>
-                                                <span class="text-inverse">Amount</span><br></br>
-                                                <b class="databold"><span class="text-inverse">10.00</span></b><br></br>
-                                                <b class="databold"><span class="text-inverse"></span></b>
-                                            </td>
-                                        </tr>
-                                        <tr style={{ textAlign: "right" }}>
+                                        {generateTicketForReceipt()}
+                                        {generateReceiptTotalAmount()}
+                                        {/* <tr style={{ textAlign: "right" }}>
                                             <td colspan="4" class="pt-3" style={{ paddingRight: "38px" }}>
                                                 <span class="text-inverse">Total Amount</span><br></br>
                                                 <b class="databold"><span class="text-inverse">25.00</span></b>
                                             </td>
-                                        </tr>
+                                        </tr> */}
                                     </tbody>
                                 </table>
                             </div>
