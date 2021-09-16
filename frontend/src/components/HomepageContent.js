@@ -115,19 +115,19 @@ function HomepageContent() {
                 currentGame = "Ez2ltt";
                 maxPin = 2;
                 image = ez2Icon;
-                gameName ="EZ2"
+                gameName = "EZ2"
                 break;
-                case "Sr3ltt":
-                    currentGame = "sr3ltt";
-                    maxPin = 3;
-                    image = s3Icon;
-                    gameName ="Suertres"
-                    break;
-                    case "FoDgltt":
-                        currentGame = "FoDgltt";
-                        maxPin = 4;
-                        image = fdgIcon;
-                        gameName ="4DG"
+            case "Sr3ltt":
+                currentGame = "sr3ltt";
+                maxPin = 3;
+                image = s3Icon;
+                gameName = "Suertres"
+                break;
+            case "FoDgltt":
+                currentGame = "FoDgltt";
+                maxPin = 4;
+                image = fdgIcon;
+                gameName = "4DG"
                 break;
         }
 
@@ -214,8 +214,8 @@ function HomepageContent() {
             }
         });
     }
-    let[gameDrawList,onGameDrawListChange] = useState([]);
-    let[gameDraw,onGameDrawChange] = useState("");
+    let [gameDrawList, onGameDrawListChange] = useState([]);
+    let [gameDraw, onGameDrawChange] = useState("");
     const changeShiftAccordingtoDate = (drawDate) => {
         gameDrawDate = drawDate.slice(0, 10);
         console.log(gameDrawDate);
@@ -231,7 +231,7 @@ function HomepageContent() {
                 console.log(shiftDetails[i].drawDate.slice(0, 10) == drawDate.slice(0, 10))
                 if (toLocalString(shiftDetails[i].drawDate) == drawDate.slice(0, 10)) {
                     console.log("shift2D: " + shiftDetails[i].shift + " " + drawDate)
-                   
+
                     tempShifts.push(shiftDetails[i].shift);
                     shiftList.push(shiftDetails[i].shift);
                     gameDrawList.push(shiftDetails[i].DrawID);
@@ -249,16 +249,12 @@ function HomepageContent() {
         console.log(shiftList + " " + hasShift);
     }
 
-    const changeShiftTime = (shift) =>
-    {
+    const changeShiftTime = (shift) => {
         setShiftTime(shift);
         console.log(gameShiftTime);
-        for(let i = 0; i< gameShiftTime.length;i++)
-        {
-            if(toLocalString(gameShiftTime[i].drawDate) == gameDrawDate)
-            {
-                if(gameShiftTime[i].shift == shift)
-                {
+        for (let i = 0; i < gameShiftTime.length; i++) {
+            if (toLocalString(gameShiftTime[i].drawDate) == gameDrawDate) {
+                if (gameShiftTime[i].shift == shift) {
                     console.log(gameShiftTime[i].DrawID);
                     gameDraw = gameShiftTime[i].DrawID;
                     onGameDrawChange(gameDraw);
@@ -350,7 +346,7 @@ function HomepageContent() {
     const SetupBetInput = (num) => {
         console.log("why is this one?: " + num);
         if (betAmount.length < 1) {
-            betAmount.push(num.toString());            
+            betAmount.push(num.toString());
         }
         else {
             betAmount = num;
@@ -421,51 +417,89 @@ function HomepageContent() {
             onChangeBets(false);
 
     }, [listOfBets]);
-        const generateTicket = () => {
-            let amount = betAmount;
-            let toBettor = bettor == ""? user:bettor;
-            console.log(gameDrawDate);
-            let drawDate = gameDrawDate;
-            let drawShift = gameDrawShift;
-            let drawID = gameDraw;
-            let numbCombo = combination.join('-');
-            //<----  From Input this should be the contents from the Front
-            if( amount == 0 || drawDate == "" || drawShift =="" || numbCombo == "")
-            { console.log("you forgot a field");
-                return;
-
-            }
-            let ticket = { DrawID: drawID, DrawDate: drawDate, DrawShift: drawShift, BetAmount: amount, Bettor: toBettor, Combo: numbCombo }
-            console.log("TICKET:" + drawID + " "+ currentGame);
-           
-            listOfBets.push(ticket);
-            onShowBets([...listOfBets])
-            console.log(listOfBets);
-            console.log(listOfBets[0].Bettor);
-        }
-        const generateTicketUI = () => {
-    
-            if (betChange)
-                return (listOfBets.map((item, i) =>
-                    <div className="row py-4 border-1 rectangle" style={{ columnGap: "39px", justifyContent: "center" }}>
-                        <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
-                                    <span style={{ color: "#f36e23" }}>Draw</span>Date: {item.DrawDate}
-                                    <br />Shift Time: {item.DrawShift}
-                                    <br />Combination: {item.Combo}
-                                    <br />Total: {item.BetAmount}
-                                </h3>
-                            </div></div>
-                    </div>));
-            else {
-                return <h1>Nothing to Display</h1>
-            }
+    const generateTicket = () => {
+        let amount = betAmount;
+        let toBettor = bettor == "" ? user : bettor;
+        console.log(gameDrawDate);
+        let drawDate = gameDrawDate;
+        let drawShift = gameDrawShift;
+        let drawID = gameDraw;
+        let numbCombo = combination.join('-');
+        //<----  From Input this should be the contents from the Front
+        if (amount == 0 || drawDate == "" || drawShift == "" || numbCombo == "") {
+            console.log("you forgot a field");
+            return;
 
         }
+        let ticket = { DrawID: drawID, DrawDate: drawDate, DrawShift: drawShift, BetAmount: amount, Bettor: toBettor, Combo: numbCombo }
+        console.log("TICKET:" + drawID + " " + currentGame);
 
-        // GENERATE RECEIPT :D
+        listOfBets.push(ticket);
+        onShowBets([...listOfBets])
+        console.log(listOfBets);
+        console.log(listOfBets[0].Bettor);
+    }
+    const generateTicketUI = () => {
+
+        if (betChange)
+            return (listOfBets.map((item, i) =>
+                <div className="row py-4 border-1 rectangle" style={{ columnGap: "39px", justifyContent: "center" }}>
+                    <div className="shadow border-1 col-md-5 pb-3 pt-2" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                            <h3 class="form-check-label pt-4 mx-5" for="flexCheckDefault">
+                                <span style={{ color: "#f36e23" }}>Draw</span>Date: {item.DrawDate}
+                                <br />Shift Time: {item.DrawShift}
+                                <br />Combination: {item.Combo}
+                                <br />Total: {item.BetAmount}
+                            </h3>
+                        </div></div>
+                </div>));
+        else {
+            return <h1>Nothing to Display</h1>
+        }
+
+    }
+
+    let [receipt, onReceipt] = useState({receipt:"",balance:0})
+    const [hasReceipt, onShowReceipt] = useState(false)
+    useEffect(() => {
+        console.log('receipt ' + receipt.length);
+        if (listOfBets.length > 0)
+        onShowReceipt(true);
+        else
+        onShowReceipt(false);
+
+    }, [listOfBets]);
+
+    const generateTicketForReceipt = () => {
+
+        return (listOfBets.map((item, i) =>
+            <tr>
+                <td>
+                    <span class="text-inverse">Draw Date</span><br></br>
+                    <b class="databold"><span class="text-inverse">{item.DrawDate}</span></b><br></br>
+                    <b class="databold"><span class="text-inverse">{item.DrawShift}</span></b>
+                </td>
+                <td>
+                    <span class="text-inverse">Ticket No.</span><br></br>
+                    <b class="databold"><span class="text-inverse">1234567897653</span></b><br></br>
+                    <b class="databold"><span class="text-inverse"></span></b>
+                </td>
+                <td>
+                    <span class="text-inverse">Combination</span><br></br>
+                    <b class="databold"><span class="text-inverse">3-16</span></b><br></br>
+                    <b class="databold"><span class="text-inverse"></span></b>
+                </td>
+                <td>
+                    <span class="text-inverse">Amount</span><br></br>
+                    <b class="databold"><span class="text-inverse">5.00</span></b><br></br>
+                    <b class="databold"><span class="text-inverse"></span></b>
+                </td>
+            </tr>))
+    }
+
+    // GENERATE RECEIPT :D
     const generateTicketReceipt = () => {
 
         // listOfBets array contains these
@@ -480,30 +514,31 @@ function HomepageContent() {
         // let numbCombo = combination.join('-');
         console.log(gameDrawDate);
 
-       
+
         let userid = user;
         let gameid = currentGame;
         let bets = listOfBets;
         console.log(listOfBets);
 
-        Axios.post('http://localhost:3000/placeBets',{
-            User:userid,GameID:gameid,Wager:JSON.stringify(bets)
-        }).then((response) =>
-        {
-            if(response.data.err)
-            {
+        Axios.post('http://localhost:3000/placeBets', {
+            User: userid, GameID: gameid, Wager: JSON.stringify(bets)
+        }).then((response) => {
+            if (response.data.err) {
                 console.log(response.data.err)
-    }
-    else 
-            {
+            }
+            else {
+                receipt.length = 0;
                 console.log(response.data);
                 money = response.data.balance
                 setMoney(money);
-                sessionStorage.setItem("sessionMoney",money);
-                console.log("WHAT IS MONEY: "+money);
+                sessionStorage.setItem("sessionMoney", money);
+                console.log("WHAT IS MONEY: " + money);
+                receipt = response.data;
+                onReceipt(receipt);
+                console.log(receipt);
             }
         })
-        
+
     }
 
 
@@ -787,7 +822,7 @@ function HomepageContent() {
                                                 {/* SELECT MENU HERE */}
 
                                                 <select class="form-select drawdate" id="drawdate" aria-label="select" defaultValue="def" onChange={(e) => { changeShiftAccordingtoDate(e.target.value) }}>
-                                                <option value="def" selected>Choose Date</option>
+                                                    <option value="def" selected>Choose Date</option>
                                                     {chooseDatesDropDown()}
                                                 </select>
                                                 {/* ======================= */}
@@ -813,17 +848,17 @@ function HomepageContent() {
                                                 <div className="col-md-12 pt-4">
                                                     {/* PIN LOCATION HERE */}
                                                     <div className="btn-toolbar numpad">
-                                                        <div style={{display:"flex"}}>
-                                                            <div style={{display:"flex", marginLeft:"59px"}}>
+                                                        <div style={{ display: "flex" }}>
+                                                            <div style={{ display: "flex", marginLeft: "59px" }}>
                                                                 {CombinationPin()}
                                                             </div>
 
-                                                            <div style={{display:"flex", width:"70px", placeContent:"center", flexWrap:"wrap", marginLeft: "-13px"}}onClick ={removeCombo}>
-                                                           
-                                                                <BackspaceIcon 
+                                                            <div style={{ display: "flex", width: "70px", placeContent: "center", flexWrap: "wrap", marginLeft: "-13px" }} onClick={removeCombo}>
+
+                                                                <BackspaceIcon
                                                                     fontSize="large"
                                                                     cursor="pointer"
-                                                                    
+
                                                                 />
                                                             </div>
                                                         </div>
@@ -939,7 +974,7 @@ function HomepageContent() {
                                         </div>
                                         <div className="col-md-12 pb-3 pt-5 px-5">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" id="floatingInput" placeholder={user} onChange={(e)=>{onChangeBettor(e.target.value);console.log(bettor)}} />
+                                                <input type="text" class="form-control" id="floatingInput" placeholder={user} onChange={(e) => { onChangeBettor(e.target.value); console.log(bettor) }} />
                                                 <label for="floatingInput">Enter Bettor's UserID / Mobile Number (Optional)</label>
                                             </div>
                                         </div>
@@ -967,7 +1002,7 @@ function HomepageContent() {
                     </div>
                     <div className="col-md-12">
                         <div className="px-3 d-flex justify-content-around align-items-center">
-                            <div className="col-md-6 d-flex px-5 justify-content-end" style={{marginRight: "-76px"}}>
+                            <div className="col-md-6 d-flex px-5 justify-content-end" style={{ marginRight: "-76px" }}>
                                 <img className="icon" src={s3Icon} alt="" />
                             </div>
                             <div className="col-md-6 px-2 d-flex m-0">
@@ -1010,12 +1045,12 @@ function HomepageContent() {
                                                 <div className="col-md-12 pt-4">
                                                     {/* PIN LOCATION HERE */}
                                                     <div className="btn-toolbar numpad">
-                                                        <div style={{display:"flex"}}>
-                                                            <div style={{width:"338px", display:"flex"}}>
+                                                        <div style={{ display: "flex" }}>
+                                                            <div style={{ width: "338px", display: "flex" }}>
                                                                 {CombinationPin()}
                                                             </div>
-                                                            <div style={{display:"flex", width:"134px", justifyContent:"center", alignContent:"center", flexWrap:"wrap"}}>
-                                                                <BackspaceIcon 
+                                                            <div style={{ display: "flex", width: "134px", justifyContent: "center", alignContent: "center", flexWrap: "wrap" }}>
+                                                                <BackspaceIcon
                                                                     fontSize="large"
                                                                     cursor="pointer"
                                                                     onClick={removeCombo}
@@ -1140,7 +1175,7 @@ function HomepageContent() {
                                         </div>
                                         <div className="col-md-12 pt-4 px-5">
                                             <div class="d-grid gap-2 col-6 mx-auto">
-                                                
+
                                                 <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#betModal" onClick={generateTicket}>BET</button>
 
                                             </div>
@@ -1174,7 +1209,7 @@ function HomepageContent() {
                                 <button type="button" class="btn mx-2 btnCheckout" data-bs-toggle="modal" data-bs-target="#receipt" onClick={generateTicketReceipt}>CHECKOUT</button>
                                 <button type="button" class="btn mx-2 btnRemove">REMOVE</button>
                             </div>
-                        </div>    
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1186,7 +1221,7 @@ function HomepageContent() {
         <div class="modal fade" id="receipt" tabindex="-1" aria-labelledby="" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
-                    <div class="modal-header" style={{borderBottom:"0px"}}>
+                    <div class="modal-header" style={{ borderBottom: "0px" }}>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-5 col-md-12 d-flex">
@@ -1194,12 +1229,12 @@ function HomepageContent() {
                             <h1>Your bet has<br></br>been <span style={{ color: "#f36e23" }}>submitted.</span></h1>
                             <div className="btn-toolbar btnReceipts">
                                 <button type="button" class="px-3 py-1 btnDownload">DOWNLOAD TICKET</button>
-                                <button type="button" class="px-3 py-1 mx-2 btnHome">BACK TO HOME</button>      
+                                <button type="button" class="px-3 py-1 mx-2 btnHome">BACK TO HOME</button>
                             </div>
                         </div>
-                        <div className="col-md-7 px-5 receiptcolumn" style={{justifyContent:"center", alignItems:"center", display:"flex"}}>
+                        <div className="col-md-7 px-5 receiptcolumn" style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
                             <div class="table">
-                                <table class="table table-invoice" style={{background:"transparent"}}>
+                                <table class="table table-invoice" style={{ background: "transparent" }}>
                                     <thead>
                                         <tr>
                                             <th class="receipthead"></th>
@@ -1274,8 +1309,8 @@ function HomepageContent() {
                                                 <b class="databold"><span class="text-inverse"></span></b>
                                             </td>
                                         </tr>
-                                        <tr style={{textAlign:"right"}}>
-                                            <td colspan="4" class="pt-3" style={{ paddingRight: "38px"}}>
+                                        <tr style={{ textAlign: "right" }}>
+                                            <td colspan="4" class="pt-3" style={{ paddingRight: "38px" }}>
                                                 <span class="text-inverse">Total Amount</span><br></br>
                                                 <b class="databold"><span class="text-inverse">25.00</span></b>
                                             </td>
@@ -1286,7 +1321,7 @@ function HomepageContent() {
                         </div>
                     </div>
                 </div>
-            </div>                                 
+            </div>
         </div>
     </div>
     );

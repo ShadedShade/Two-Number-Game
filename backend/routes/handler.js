@@ -259,8 +259,20 @@ for(let i = 0; i < betsObject.length;i++)
    {
     if(result)
     {
+        // RETURN RECEIPT DETAILS
         console.log(result[0].money);
-        res.send({receipt:control,balance:result[0].money});
+
+
+        db.query("Select receipt.receiptid, receiptdetails.ticketid,bets.combo, bets.BetAmount, draw.DrawDate, draw.ShiftTime from numbers.receipt inner join numbers.receiptdetails on receipt.receiptid = receiptdetails.receiptid inner join numbers.bets on receiptdetails.ticketid = bets.BetID inner join numbers.draw on draw.DrawID = bets.drawid Where UserID = ? AND numbers.receiptdetails.receiptid = ?;",[userid,control]
+        ,(err,ress) =>
+        {
+            if(ress)
+            {
+                res.send({receipt:control,balance:result[0].money,receipt: ress});
+            }
+        })
+        
+       
     }
    }) 
    
@@ -321,7 +333,8 @@ router.post('/transaction',(req,res)=>
 
 router.post('results',(req,res)=>
 {
-
+    const username = req.body.username;
+    db.query("Select receipt.receiptid, receiptdetails.ticketid,bets.combo, bets.BetAmount, draw.DrawDate, draw.ShiftTime from numbers.receipt inner join numbers.receiptdetails on receipt.receiptid = receiptdetails.receiptid inner join numbers.bets on receiptdetails.ticketid = bets.BetID inner join numbers.draw on draw.DrawID = bets.drawid Where UserID = ?;",[username])
 })
 
 
