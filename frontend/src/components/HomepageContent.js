@@ -470,7 +470,7 @@ function HomepageContent() {
         else
         onShowReceipt(false);
 
-    }, [listOfBets]);
+    }, [receipt]);
 
     const generateTicketForReceipt = () => {
 
