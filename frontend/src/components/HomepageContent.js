@@ -1262,17 +1262,93 @@ function HomepageContent() {
                             <div class="table">
                                 <table class="table table-invoice" style={{ background: "transparent" }}>
                                     <thead>
+                                        <tr style={{borderBottom:"none"}}>
+                                            <th colspan="3" class="receipthead">
+                                                Receipt No:
+                                                <b class="databold"><span class="text-inverse"> 2344d21315rwdza</span></b>
+                                            </th>
+                                            <th colspan="3" class="receipthead right">
+                                                Agent:
+                                                <b class="databold"><span class="text-inverse"> Insert Here</span></b>
+                                            </th>
+                                        </tr>
                                         <tr>
-                                            <th class="receipthead"></th>
-                                            <th class="text-center receipthead"></th>
-                                            <th class="text-center receipthead"></th>
+                                            <th colspan="3" class="receipthead">
+                                                Transaction Date:
+                                                <b class="databold"><span class="text-inverse"> 2021-09-17</span></b>
+                                            </th>
+                                            <th colspan="3" class="receipthead right">
+                                                Game Name:
+                                                <b class="databold"><span class="text-inverse"> EZ2 Lotto</span></b>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
+
+                                        
+                                        <tr>
+                                            <td>
+                                                <span class="text-inverse">Draw Date</span><br></br>
+                                                <b class="databold"><span class="text-inverse">18-09-2021</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse">1:00 PM</span></b>
+                                            </td>
+                                            <td>
+                                                <span class="text-inverse">Ticket No.</span><br></br>
+                                                <b class="databold"><span class="text-inverse">65645254242542</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse"></span></b>
+                                            </td>
+                                            <td>
+                                                <span class="text-inverse">Combination</span><br></br>
+                                                <b class="databold"><span class="text-inverse">20-37</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse"></span></b>
+                                            </td>
+                                            <td>
+                                                <span class="text-inverse">Amount</span><br></br>
+                                                <b class="databold"><span class="text-inverse">10.00</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse"></span></b>
+                                            </td>
+                                            <td>
+                                                <span class="text-inverse">Bettor</span><br></br>
+                                                <b class="databold"><span class="text-inverse">N/A</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse"></span></b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-inverse">Draw Date</span><br></br>
+                                                <b class="databold"><span class="text-inverse">19-09-2021</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse">10:00 AM</span></b>
+                                            </td>
+                                            <td>
+                                                <span class="text-inverse">Ticket No.</span><br></br>
+                                                <b class="databold"><span class="text-inverse">12433645423224</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse"></span></b>
+                                            </td>
+                                            <td>
+                                                <span class="text-inverse">Combination</span><br></br>
+                                                <b class="databold"><span class="text-inverse">40-1</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse"></span></b>
+                                            </td>
+                                            <td>
+                                                <span class="text-inverse">Amount</span><br></br>
+                                                <b class="databold"><span class="text-inverse">10.00</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse"></span></b>
+                                            </td>
+                                            <td>
+                                                <span class="text-inverse">Bettor</span><br></br>
+                                                <b class="databold"><span class="text-inverse">N/A</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse"></span></b>
+                                            </td>
+                                        </tr>
+                                        <tr style={{ textAlign: "right" }}>
+                                            <td colspan="5" class="pt-3">
+
                                         {generateTicketForReceipt()}
+                                        
                                         {generateReceiptTotalAmount()}
                                         {/* <tr style={{ textAlign: "right" }}>
                                             <td colspan="4" class="pt-3" style={{ paddingRight: "38px" }}>
+
                                                 <span class="text-inverse">Total Amount</span><br></br>
                                                 <b class="databold"><span class="text-inverse">25.00</span></b>
                                             </td>
