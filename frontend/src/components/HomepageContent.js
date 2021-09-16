@@ -1236,10 +1236,25 @@ function HomepageContent() {
                             <div class="table">
                                 <table class="table table-invoice" style={{ background: "transparent" }}>
                                     <thead>
+                                        <tr style={{borderBottom:"none"}}>
+                                            <th colspan="3" class="receipthead">
+                                                Receipt No:
+                                                <b class="databold"><span class="text-inverse"> 2344d21315rwdza</span></b>
+                                            </th>
+                                            <th colspan="3" class="receipthead right">
+                                                Agent:
+                                                <b class="databold"><span class="text-inverse"> Insert Here</span></b>
+                                            </th>
+                                        </tr>
                                         <tr>
-                                            <th class="receipthead"></th>
-                                            <th class="text-center receipthead"></th>
-                                            <th class="text-center receipthead"></th>
+                                            <th colspan="3" class="receipthead">
+                                                Transaction Date:
+                                                <b class="databold"><span class="text-inverse"> 2021-09-17</span></b>
+                                            </th>
+                                            <th colspan="3" class="receipthead right">
+                                                Game Name:
+                                                <b class="databold"><span class="text-inverse"> EZ2 Lotto</span></b>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1264,6 +1279,11 @@ function HomepageContent() {
                                                 <b class="databold"><span class="text-inverse">5.00</span></b><br></br>
                                                 <b class="databold"><span class="text-inverse"></span></b>
                                             </td>
+                                            <td>
+                                                <span class="text-inverse">Bettor</span><br></br>
+                                                <b class="databold"><span class="text-inverse">N/A</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse"></span></b>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -1284,6 +1304,11 @@ function HomepageContent() {
                                             <td>
                                                 <span class="text-inverse">Amount</span><br></br>
                                                 <b class="databold"><span class="text-inverse">10.00</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse"></span></b>
+                                            </td>
+                                            <td>
+                                                <span class="text-inverse">Bettor</span><br></br>
+                                                <b class="databold"><span class="text-inverse">N/A</span></b><br></br>
                                                 <b class="databold"><span class="text-inverse"></span></b>
                                             </td>
                                         </tr>
@@ -1308,9 +1333,14 @@ function HomepageContent() {
                                                 <b class="databold"><span class="text-inverse">10.00</span></b><br></br>
                                                 <b class="databold"><span class="text-inverse"></span></b>
                                             </td>
+                                            <td>
+                                                <span class="text-inverse">Bettor</span><br></br>
+                                                <b class="databold"><span class="text-inverse">N/A</span></b><br></br>
+                                                <b class="databold"><span class="text-inverse"></span></b>
+                                            </td>
                                         </tr>
                                         <tr style={{ textAlign: "right" }}>
-                                            <td colspan="4" class="pt-3" style={{ paddingRight: "38px" }}>
+                                            <td colspan="5" class="pt-3">
                                                 <span class="text-inverse">Total Amount</span><br></br>
                                                 <b class="databold"><span class="text-inverse">25.00</span></b>
                                             </td>
