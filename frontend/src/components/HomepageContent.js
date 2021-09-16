@@ -480,7 +480,7 @@ function HomepageContent() {
             let control = receipt.receipt[0].receiptid;
             let agent = receipt.agent;
             let transacDate = receipt.tranDate;
-            let game = receipt.gameName;
+            let game = receipt.gameName ;
             return ( <thead>
                 <tr style={{ borderBottom: "none" }}>
                     <th colspan="3" class="receipthead">
