@@ -24,6 +24,13 @@ function Signup() {
     }
 
     const Register = () => {
+
+        if(usernameReg == "" || passwordReg == "" || authCode == "")
+        {
+            console.log("Please Fill up the required fields");
+            return;
+        }
+
         Axios.post('http://localhost:3000/register', {
             username: usernameReg, password: passwordReg,email:emailReg,name:nameReg
         }).then(function (response) {
@@ -39,8 +46,9 @@ function Signup() {
                 console.log("Account already Exists")
             }
 
-            if(response.result)
+            if(response)
             {
+               
                 handleRegisterClick();
             }
 

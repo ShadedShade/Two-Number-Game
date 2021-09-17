@@ -144,7 +144,7 @@ router.get('/latestDraw', (req, res) => {
 
 router.get('/drawHistory', (req, res) => {
     // request all games 
-    db.query("Select   draw.DrawCombo, draw.DrawDate, gametype.gamename From numbers.draw inner join numbers.gametype on draw.gameid = gametype.gameid  order by draw.drawdate desc;", (err, result) => {
+    db.query("Select   draw.DrawCombo, draw.DrawDate, gametype.gamename From numbers.draw inner join numbers.gametype on draw.gameid = gametype.gameid Where (date(now())>= draw.drawdate) order by draw.drawdate desc;", (err, result) => {
         if (err) {
             res.send({ err: err });
         }

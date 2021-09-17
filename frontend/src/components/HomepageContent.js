@@ -34,6 +34,8 @@ let user = sessionStorage.getItem("Userid");
 let currentGame = "";
 let gameName = "EZ2 Lotto"
 let totalAmount = 0;
+let wager = 0; // the current wager money of the player
+
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -265,6 +267,7 @@ function HomepageContent() {
 
     }
 
+    const [hasMoney, checkMoney] = useState(false);
     useEffect(() => {
         setMoney(money);
         console.log(money);
@@ -283,6 +286,18 @@ function HomepageContent() {
             changedbetAmount(true);
 
     }, [betAmount]);
+
+
+    useEffect(() => {
+        console.log(money);
+        if (money > 0) {
+            checkMoney(true)
+        }
+        else {
+            checkMoney(false)
+        }
+
+    }, [money]);
 
     useEffect(() => {
         console.log("EFFECT: " + shiftList + " " + shiftList.length);
@@ -637,7 +652,7 @@ function HomepageContent() {
 
     let [latestJackpot, onLatestJackpot] = useState([])
     let [previousCombo, onPreviousCombos] = useState([])
-        // useEffect(() => {
+    // useEffect(() => {
     //     console.log('tickets ' + tickets.length);
     //     if (tickets.length > 0)
     //     {
@@ -648,8 +663,7 @@ function HomepageContent() {
     //         onShowTickets(false);
 
     // }, [tickets]);
-    const getStats = () =>
-    {
+    const getStats = () => {
         getLatestHistory();
         getHistory();
     }
@@ -665,8 +679,7 @@ function HomepageContent() {
         )
         console.log("this is pressed");
     }
-    const getHistory = () =>
-    {
+    const getHistory = () => {
         Axios.get('http://localhost:3000/drawHistory').then((response) => {
             if (response.data) {
                 previousCombo = response.data;
@@ -785,7 +798,7 @@ function HomepageContent() {
             <div class="col-md-12 px-2 d-flex justify-content-around align-items-center rounded buttons">
                 <div class="col-md-3 buttonPlay">
                     <div class="shadow play">
-                        <button class="btn-group threeButton" id="bplay" data-bs-toggle="modal" data-bs-target="#buttonplay"><i class="fas fa-gamepad" id="icon1" style={{ fontSize: "145px" }} onClick={getDates}></i></button>
+                        <button class="btn-group threeButton" id="bplay" data-bs-toggle="modal" data-bs-target="#buttonplay" disabled={!hasMoney}><i class="fas fa-gamepad" id="icon1" style={{ fontSize: "145px" }}  onClick={getDates}></i></button>
                         <label class="description" id="play">Play</label>
                     </div>
                 </div>
@@ -1495,7 +1508,7 @@ function HomepageContent() {
                                     </thead>
                                     <tbody>
                                         {generateLatestDrawsUI()}
-          
+
                                     </tbody>
                                 </table>
                             </div>
@@ -1516,7 +1529,7 @@ function HomepageContent() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {generateDrawHistoryUI()}
+                                        {generateDrawHistoryUI()}
                                     </tbody>
                                 </table>
                             </div>
