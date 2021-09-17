@@ -970,24 +970,18 @@ function HomepageContent() {
                                 <div className="step3 mx-5 py-4">
                                     <label style={{ fontWeight: "600" }} for="combination">Choose <span style={{ color: "#f36e23" }}>Amount</span></label>
                                     <div className="row shadow py-4 border-1 rectangle" id="combination" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
+                                        <div className="col-md-12 bal">
+                                            <h6 style={{ color: "#9ba0a6"}}>
+                                                <sup>PTS</sup>
+                                                {money}
+                                            </h6>
+                                        </div>
                                         <div className="col-md-12">
                                             <div className="form-group px-5">
 
                                                 <div className="btn-toolbar numpad">
                                                     {betInputPin()}
                                                 </div>
-                                                {/* <PinInput
-                                                    length={2}
-                                                    initialValue=""
-                                                    onChange={(value, index) => { }}
-                                                    type="numeric"
-                                                    inputMode="number"
-                                                    style={{ padding: '10px', textAlign: 'center' }}
-                                                    inputStyle={{ background: '#c6c7c9', border: 'none' }}
-                                                    inputFocusStyle={{ border: '1px solid #f36e23', background: 'white' }}
-                                                    onComplete={(value, index) => { }}
-                                                    autoSelect={true}
-                                                /> */}
                                             </div>
                                         </div>
                                         <div className="col-md-12 pt-4">
@@ -1167,7 +1161,6 @@ function HomepageContent() {
                                     <div className="row shadow py-4 border-1 rectangle" id="combination" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
                                         <div className="col-md-12">
                                             <div className="form-group px-5">
-
                                                 <div className="btn-toolbar numpad">
                                                     {betInputPin()}
                                                 </div>
