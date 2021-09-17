@@ -29,12 +29,12 @@ nav {
 }
 
 
-.nv .links li{
+.navProfile .nv .links li{
   list-style: none;
   line-height: 70px;
 }
 
-nav ul li #profile{
+.navProfile nav ul li #profile{
   flex: 30%;
   display: grid;
   place-items: center;
