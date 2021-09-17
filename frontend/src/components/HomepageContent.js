@@ -82,7 +82,7 @@ function HomepageContent() {
     console.log(shiftList);
     console.log("^^")
 
-    const [dates, onDates] = useState("");
+
 
     money = sessionStorage.getItem("sessionMoney");
     let gameDetails = [];
@@ -526,7 +526,6 @@ function HomepageContent() {
     const generateTicketForReceipt = () => {
 
         if (hasReceipt)
-
             return (receipt.receipt.map((item, i) =>
                 <tr>
                     <td>

@@ -1,9 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/homenav-style.css'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { useHistory } from "react-router-dom";
+
+
+let sessionName = sessionStorage.getItem("sessionName");
+let sessionuser = sessionStorage.getItem("Userid");
+let sessionmpin = sessionStorage.getItem("mPin");
+let sessionmail = sessionStorage.getItem("sessionEmail");
+
 
 
 function HomeNav() {
+
+    const [profile, onProfileShow] = useState([]);
+
+    const generateProfileUI = () =>
+    {
+        // generate profile UI
+    }
+
+
+
     return (
     <div>
         <nav role="navigation">
@@ -38,21 +56,21 @@ function HomeNav() {
                                     <div className="col-md-6">
                                         <div className="form-group pb-4">
                                             <label style={{fontWeight: 600}} for="fullName" class="form-label">Full Name</label>
-                                            <input id="fullName" style={{background: "none", border:"none"}} class="form-control" type="text" value="Juan Dela Cruz" aria-label="FirstName LastName" disabled readonly/>
+                                            <input id="fullName" style={{background: "none", border:"none"}} class="form-control" type="text" value={sessionName} aria-label="FirstName LastName" disabled readonly/>
                                         </div>
                                         <div className="form-group">
                                             <label style={{fontWeight: 600}} for="MPIN" class="form-label">MPIN</label>
-                                            <input id="MPIN" style={{background: "none", border:"none"}} class="form-control" type="password" value="123456" aria-label="MPIN" disabled readonly/>
+                                            <input id="MPIN" style={{background: "none", border:"none"}} class="form-control" type="password" value={sessionmpin} aria-label="MPIN" disabled readonly/>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group pb-4">
                                             <label style={{fontWeight: 600}} for="userID" class="form-label">User ID / Mobile Number</label>
-                                            <input id="userID" style={{background: "none", border:"none"}} class="form-control" type="text" value="09217876549" aria-label="MobileNum" disabled readonly/>
+                                            <input id="userID" style={{background: "none", border:"none"}} class="form-control" type="text" value={sessionuser} aria-label="MobileNum" disabled readonly/>
                                         </div>
                                         <div className="form-group">
                                             <label style={{fontWeight: 600}} for="email" class="form-label">Email Address</label>
-                                            <input id="email" style={{background: "none", border:"none"}} class="form-control" type="text" value="thisismyemail@gmail.com" aria-label="Email" disabled readonly/>
+                                            <input id="email" style={{background: "none", border:"none"}} class="form-control" type="text" value={sessionmail} aria-label="Email" disabled readonly/>
                                         </div>
                                     </div>                              
                                 </div> 

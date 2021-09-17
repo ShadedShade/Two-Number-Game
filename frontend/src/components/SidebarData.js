@@ -13,10 +13,11 @@ export const SidebarData = [
         icon: <HomeRoundedIcon />,
         link: "/Home"
     },
-    {
+    {       
+        // Then you bind the link created in app.js in the link parameter
         title: "Mechanics",
         icon: <ReceiptRoundedIcon />,
-        link: "/mechanics"
+        link: "/Mechanics"
     },
     {
         title: "Transfer Credit",

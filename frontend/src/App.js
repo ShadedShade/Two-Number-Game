@@ -12,6 +12,7 @@ import Sidebar from './components/Sidebar';
 import HomeNav from './components/HomeNav';
 import HomepageContent from './components/HomepageContent'
 import Homepage from './components/Homepage';
+import Mechanics from './components/Mechanics';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 //setter
@@ -48,6 +49,8 @@ function App() {
         <Route path="/Signup" exact component={Signup} />
         <Route path="/LoginStepTwo" exact component={LoginStepTwo} />
         <Route path="/Login" exact component={Login} />
+        {/* Create first a Route to the page (then assuming created na yung Component/ else gawa component) go to Sidebar data */}
+        <Route path="/Mechanics" exact component={Mechanics} />  
         </Switch>
             
         

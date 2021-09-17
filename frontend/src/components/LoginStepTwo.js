@@ -46,6 +46,7 @@ function LoginStepTwo() {
                 sessionStorage.setItem("mPin", response.data[0].mpin);
                 sessionStorage.setItem("sessionMoney", response.data[0].money);
                 sessionStorage.setItem("sessionName", response.data[0].name);
+                sessionStorage.setItem("sessionEmail", response.data[0].email);
                 console.log("session Storage Userid: " + sessionStorage.getItem("Userid"));
                 console.log("session Storage Mpin: " + sessionStorage.getItem("mPin"));
                 console.log("session Storage sessionMoney: " + sessionStorage.getItem("sessionMoney"));
