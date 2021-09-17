@@ -13,7 +13,7 @@ function Mechanics() {
                 <div>
                     <HomeNav />
                 </div>
-                <div className={col}>
+                <div>
                     {/* Gawin mo nalang tong dalawang column if ayaw gumana gawin mo nalang modal HAHAHAH */}
                     <Sidebar />
                     <h1>WHAT</h1>
