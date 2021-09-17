@@ -367,6 +367,20 @@ function HomepageContent() {
         else {
             betAmount = num;
         }
+        let tempWagerAmount = 0;
+        if (tickets.length > 0) {
+            for (let i = 0; i < tickets.length; i++) {
+                tempWagerAmount += parseInt(tickets[i].BetAmount, 10);
+            }
+        }
+        else
+        {
+            tempWagerAmount += parseInt(num,10);
+        }
+        if (tempWagerAmount > money) {
+            console.log("You have unsufficient Balance");       // UI for this?
+            return;
+        }
         setbetAmount(betAmount);
     }
     let betInputPin = () => {
@@ -797,7 +811,7 @@ function HomepageContent() {
             <div class="col-md-12 px-2 d-flex justify-content-around align-items-center rounded buttons">
                 <div class="col-md-3 buttonPlay">
                     <div class="shadow play">
-                        <button class="btn-group threeButton" id="bplay" data-bs-toggle="modal" data-bs-target="#buttonplay" disabled={!hasMoney}><i class="fas fa-gamepad" id="icon1" style={{ fontSize: "145px" }}  onClick={getDates}></i></button>
+                        <button class="btn-group threeButton" id="bplay" data-bs-toggle="modal" data-bs-target="#buttonplay" disabled={!hasMoney}><i class="fas fa-gamepad" id="icon1" style={{ fontSize: "145px" }} onClick={getDates}></i></button>
                         <label class="description" id="play">Play</label>
                     </div>
                 </div>
@@ -1137,7 +1151,7 @@ function HomepageContent() {
                                     <label style={{ fontWeight: "600" }} for="combination">Choose <span style={{ color: "#f36e23" }}>Amount</span></label>
                                     <div className="row shadow py-4 border-1 rectangle" id="combination" style={{ border: "1px solid #262626", borderRadius: ".25rem" }}>
                                         <div className="col-md-12 bal">
-                                            <h6 style={{ color: "#9ba0a6"}}>
+                                            <h6 style={{ color: "#9ba0a6" }}>
                                                 <sup>PTS</sup>
                                                 {money}
                                             </h6>
