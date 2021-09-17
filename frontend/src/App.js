@@ -49,8 +49,8 @@ function App() {
         <Route path="/Signup" exact component={Signup} />
         <Route path="/LoginStepTwo" exact component={LoginStepTwo} />
         <Route path="/Login" exact component={Login} />
-        {/* Create first a Route to the page (then assuming created na yung Component/ else gawa component) go to Sidebar data */}
-        <Route path="/Mechanics" exact component={Mechanics} />  
+        {/* <Route path="/Mechanics" exact component={Mechanics} /> */}
+
         </Switch>
             
         
