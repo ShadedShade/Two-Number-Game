@@ -41,6 +41,19 @@ function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
 }
 
+function returnResult(bet,draw,results)
+{
+    for(let i = 0; i <results.length;i++)
+    {
+        if(results[i].Draw_ID == draw && results[i].Bet_ID == bet)
+        {
+            return results[i].Prize;
+        }
+            
+    }
+    return 0;
+}
+
 function toLocalString(date) {
     let utcDate = new Date(date).toLocaleDateString().split('/');
     let localizeDate = utcDate.join("-");
@@ -635,6 +648,7 @@ function HomepageContent() {
 
 
     let [tickets, onTickets] = useState([])
+    let [results, onResults] = useState([])
     const [hasTickets, onShowTickets] = useState(false)
     // useEffect(() => {
     //     console.log('tickets ' + tickets.length);
@@ -656,6 +670,14 @@ function HomepageContent() {
             if (response.data) {
                 tickets = response.data;
                 onTickets(response.data);
+
+            }
+        }
+        );
+        Axios.post('http://localhost:3000/result').then((response) => {
+            if (response.data) {
+                results = response.data;
+                onResults(response.data);
 
             }
         }
@@ -704,15 +726,26 @@ function HomepageContent() {
     }
 
     const generateTicketHistoryUI = () => {
+
+        // combine tickets and results
+       // let ticketTemplate = [{gamename:"",combo:"",Bet:"",DrawDate:"",ShiftTime:"",Result:""}]
+        let ticketTemplate = [];
+       for(let  i = 0; i< tickets.length;i++)
+       {
+        ticketTemplate.push({gamename:tickets[i].gamename,combo:tickets[i].combo,BetAmount:tickets[i].BetAmount,DrawDate:toLocalString(tickets[i].DrawDate),ShiftTime:tickets[i].ShiftTime,Result: returnResult(tickets[i].betid,tickets[i].drawid,results)});
+       }
         console.log(tickets);
-        if (tickets.length > 0) {
-            return (tickets.map((item, i) =>
+        console.log(results);
+        console.log(ticketTemplate);
+        if (ticketTemplate.length > 0) {
+            return (ticketTemplate.map((item, i) =>
                 <tr>
                     <td>{item.gamename}</td>
                     <td>{item.combo}</td>
                     <td>{item.BetAmount}</td>
-                    <td>{toLocalString(item.DrawDate)}</td>
+                    <td>{item.DrawDate}</td>
                     <td>{item.ShiftTime}</td>
+                    <td>{item.Result}</td>
                 </tr>
             ))
         }
@@ -1470,7 +1503,7 @@ function HomepageContent() {
                                             <th>BET AMOUNT</th>
                                             <th>DRAW DATE</th>
                                             <th>SHIFT TIME</th>
-                                            <th>RESULTS</th>
+                                            <th>RESULT</th>
                                         </tr>
                                     </thead>
                                     {/* ticket history */}

@@ -203,7 +203,23 @@ router.post('/selected', (req, res) => {
 // Select userBet History
 router.post('/userBets', (req, res) => {
     const userid = req.body.userid;
-    db.query("Select gametype.gamename,bets.combo, bets.BetAmount, draw.DrawDate, draw.ShiftTime from numbers.receipt inner join numbers.receiptdetails on receipt.receiptid = receiptdetails.receiptid inner join numbers.bets on receiptdetails.ticketid = bets.BetID inner join numbers.gametype on receipt.gameid = gametype.gameid inner join numbers.draw on draw.DrawID = bets.drawid Where UserID = ? order by draw.DrawDate desc " , [userid],
+    db.query("Select draw.drawid,bets.betid, gametype.gamename,bets.combo, bets.BetAmount, draw.DrawDate, draw.ShiftTime from numbers.receipt inner join numbers.receiptdetails on receipt.receiptid = receiptdetails.receiptid inner join numbers.bets on receiptdetails.ticketid = bets.BetID inner join numbers.gametype on receipt.gameid = gametype.gameid inner join numbers.draw on draw.DrawID = bets.drawid Where UserID = ? order by draw.DrawDate desc " , [userid],
+        (err, result) => {
+            console.log(result);
+            if (err) {
+                res.send({ err: err });
+            }
+            if (result) {
+               
+                res.send(result);
+            }
+
+        }
+    )
+}
+)
+router.post('/result', (req, res) => {
+    db.query("SELECT * FROM numbers.results;",
         (err, result) => {
             console.log(result);
             if (err) {

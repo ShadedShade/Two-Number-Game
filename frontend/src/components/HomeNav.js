@@ -14,6 +14,11 @@ let sessionmail = sessionStorage.getItem("sessionEmail");
 
 
 function HomeNav() {
+    const history = useHistory();
+
+    const handleLoginStepTwoClick = () => {
+        history.push('/'); // go to step 2
+    }
 
 
     const [details, onChangeDetails] = useState("");
@@ -86,7 +91,7 @@ function HomeNav() {
                     <ul class="dropdown" aria-label="submenu">
                         <li style={{right: "65%"}} class="hnavli"><a href="#" data-bs-toggle="modal" data-bs-target="#viewProfileModal">View Profile</a></li>
                         <li style={{right: "65%"}} class="hnavli"><a href="#" data-bs-toggle="modal" data-bs-target="#transferCreditModal">Transfer Credit</a></li>
-                        <li style={{right: "65%"}} class="hnavli"><a href="#">Logout</a></li>
+                        <li style={{right: "65%"}} class="hnavli"><a onClick={handleLoginStepTwoClick}>Logout</a></li>
                     </ul>
                 </li>
             </ul>
