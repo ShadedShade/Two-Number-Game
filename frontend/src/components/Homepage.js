@@ -13,11 +13,8 @@ function Homepage() {
       <HomeNav />
       <div className="container-fluid">
         <div className="row">
-          <div className="col-sm-2" style={{ padding: "0px", paddingRight: "304px" }}>
-            <Sidebar />
-          </div>
           <Router>
-            <div className="col-sm-9">
+            <div className="col-sm-12">
               <Switch>
                 <Route path="/Home" exact component={HomepageContent} />
                 <Route path="/Home/Mechanics" exact component={Mechanics} />

@@ -13,17 +13,6 @@ export const SidebarData = [
         icon: <HomeRoundedIcon />,
         link: "/Home"
     },
-    {       
-        // Then you bind the link created in app.js in the link parameter
-        title: "Mechanics",
-        icon: <ReceiptRoundedIcon />,
-        link: "/Home/Mechanics"
-    },
-    {
-        title: "Transfer Credit",
-        icon: <SendRoundedIcon />,
-        link: "/transfer"
-    },
     {
         title: "Logout",
         icon: <ExitToAppRoundedIcon />,

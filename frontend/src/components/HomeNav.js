@@ -34,8 +34,8 @@ function HomeNav() {
                 <li><a href="#" aria-haspopup="true" id="profile"><AccountCircleIcon style={{color: "white"}} /></a>
                     <ul class="dropdown" aria-label="submenu">
                         <li style={{right: "65%"}}><a href="#" data-bs-toggle="modal" data-bs-target="#viewProfileModal">View Profile</a></li>
-                        <li style={{right: "65%"}}><a href="#">Settings</a></li>
-                        <li style={{right: "65%"}}><a href="#">Link Here</a></li>
+                        <li style={{right: "65%"}}><a href="#" data-bs-toggle="modal" data-bs-target="#transferCreditModal">Transfer Credit</a></li>
+                        <li style={{right: "65%"}}><a href="#">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -82,6 +82,50 @@ function HomeNav() {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/* ========================= */}
+
+        {/* TRANSFER CREDIT MODAL HERE */}
+        <div class="modal fade" id="transferCreditModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header mechanicsmodalheader">
+                    <h5 class="modal-title" id="betModalLabel">Transfer <span style={{ color: "#f36e23" }}>Credit</span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-5">
+                        <form className="pt-5">
+                            <div className="form-content">
+                                <div className="row pb-4">
+                                    <div className="col-md-6 py-5 px-3">
+                                        <div className="form-group pb-4">
+                                            <label style={{fontWeight: 600}} for="recUID" class="form-label">Recipient's User ID</label>
+                                            <input id="recUID" class="form-control" type="tel" aria-label="Recipient's UserID" minlength="11" maxlength="11" placeholder="09XXXXXXXXX" pattern="[0-9]{2}[0-9]{9}"/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label style={{fontWeight: 600}} for="amount" class="form-label">Amount</label>
+                                            <input id="amount" class="form-control" type="number" aria-label="amount"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6 py-5 px-3">
+                                        <div className="form-group pb-4">
+                                        <label style={{fontWeight: 600}} for="gcashNum" class="form-label">Gcash Number</label>
+                                            <input id="gcashNum" class="form-control" type="tel" aria-label="Gcash Number" minlength="11" maxlength="11" placeholder="09XXXXXXXXX" pattern="[0-9]{2}[0-9]{9}"/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label style={{fontWeight: 600}} for="notes" class="form-label">Notes</label>
+                                            <textarea class="form-control" rows="1"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-12 text-center">
+                                    <button type="button" className="btn transferCreditBtn" data-bs-dismiss="modal">TRANSFER CREDIT</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

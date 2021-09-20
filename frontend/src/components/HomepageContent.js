@@ -717,7 +717,7 @@ function HomepageContent() {
             ))
         }
         else {
-            return <h1>Nothing new</h1>
+            return <td colspan="5"><h2 colspan="" style={{ textAlign: "center", color: "#262626" }}>Nothing to Show</h2></td>
         }
     }
     const generateLatestDrawsUI = () => {
@@ -731,7 +731,7 @@ function HomepageContent() {
             ))
         }
         else {
-            return <h1>Nothing new</h1>
+            return <td colspan="3"><h2 colspan="" style={{ textAlign: "center", color: "#262626" }}>Nothing to Show</h2></td>
         }
     }
     const generateDrawHistoryUI = () => {
@@ -746,7 +746,7 @@ function HomepageContent() {
             ))
         }
         else {
-            return <h1>Nothing new</h1>
+            return <td colspan="3"><h2 colspan="" style={{ textAlign: "center", color: "#262626" }}>Nothing to Show</h2></td>
         }
     }
 
