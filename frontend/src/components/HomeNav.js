@@ -24,18 +24,18 @@ function HomeNav() {
 
     return (
     <div>
-        <nav role="navigation">
+        <nav class="homenav" role="navigation" style={{scrollBehavior:"smooth"}}>
             <div class="logo">
                 <a className="navbar-brand px-2" href="#" id="brand">
                     Logo <span style={{color: "#f36e23"}}>Here</span>
                 </a>
             </div>
             <ul className="navProfile">
-                <li><a href="#" aria-haspopup="true" id="profile"><AccountCircleIcon style={{color: "white"}} /></a>
+                <li className="homeNavitems"><a href="#" aria-haspopup="true" id="profile"><AccountCircleIcon style={{color: "white"}} /></a>
                     <ul class="dropdown" aria-label="submenu">
-                        <li style={{right: "65%"}}><a href="#" data-bs-toggle="modal" data-bs-target="#viewProfileModal">View Profile</a></li>
-                        <li style={{right: "65%"}}><a href="#" data-bs-toggle="modal" data-bs-target="#transferCreditModal">Transfer Credit</a></li>
-                        <li style={{right: "65%"}}><a href="#">Logout</a></li>
+                        <li style={{right: "65%"}} class="hnavli"><a href="#" data-bs-toggle="modal" data-bs-target="#viewProfileModal">View Profile</a></li>
+                        <li style={{right: "65%"}} class="hnavli"><a href="#" data-bs-toggle="modal" data-bs-target="#transferCreditModal">Transfer Credit</a></li>
+                        <li style={{right: "65%"}} class="hnavli"><a href="#">Logout</a></li>
                     </ul>
                 </li>
             </ul>

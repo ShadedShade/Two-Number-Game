@@ -132,7 +132,7 @@ h1.f{
     font-size: 48px;
     font-weight: bolder;
     background-color: black;
-    width: 438px;
+    width: 100%;
 }
 h1.s{
     font-size: 48px;
@@ -167,7 +167,7 @@ h5{
 /* CARD EFFECTS IN BLOG */
 .card-effect {
     box-shadow: 6px 0px 50px -7px black;
-    height: 275px;
+    height: 287px;
     background-color: white;
     padding: 25px;
     transition: all 0.35s ease;
@@ -198,7 +198,6 @@ h5{
     color: #f7931e;
 }
 .footer-bottom {
-    background-color: #f36e23;
     height: 26px;
 }
 .footer-bottom p{
@@ -206,3 +205,7 @@ h5{
     color: #ffffff;
 }
 /* ================== */
+/* 
+li.nav-item {
+    background: white;
+} */

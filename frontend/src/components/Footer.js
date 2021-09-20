@@ -43,8 +43,8 @@ function Footer() {
                 <div class="footer-bottom py-1">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-12 mb-0">
-                                <p class="mb-0 text-center">© 2021 copyright all right reserved</p>
+                            <div class="col-md-12 mt-1 mb-0">
+                                <p class="mb-3 text-center" style={{color:"#262626", fontSize:"15px"}}>© 2021 copyright all right reserved</p>
                             </div>
                         </div>
                     </div>
