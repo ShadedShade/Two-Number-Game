@@ -717,7 +717,7 @@ function HomepageContent() {
             ))
         }
         else {
-            return <td colspan="5"><h2 colspan="" style={{ textAlign: "center", color: "#262626" }}>Nothing to Show</h2></td>
+            return <td colspan="6"><h2 colspan="" style={{ textAlign: "center", color: "#262626" }}>Nothing to Show</h2></td>
         }
     }
     const generateLatestDrawsUI = () => {
@@ -1470,6 +1470,7 @@ function HomepageContent() {
                                             <th>BET AMOUNT</th>
                                             <th>DRAW DATE</th>
                                             <th>SHIFT TIME</th>
+                                            <th>RESULTS</th>
                                         </tr>
                                     </thead>
                                     {/* ticket history */}
