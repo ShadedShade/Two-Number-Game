@@ -29,7 +29,8 @@ function HomeNav() {
    let currMoney = sessionStorage.getItem("sessionMoney")
     user = userName;
     const transfer = () => {
-
+        // alert when valueAMount is greater than money
+        // this will not continue query
         if(valueAmount > currMoney)
         {
             alert("You Have not enough balance");
