@@ -271,7 +271,7 @@ function HomepageContent() {
     useEffect(() => {
         setMoney(money);
         console.log(money);
-    }, [money]);
+    });
     useEffect(() => {
         console.log('COMBO ' + combination.length);
         if (combination.length > 0)
@@ -785,13 +785,10 @@ function HomepageContent() {
                         }
                     })
 
-
-
-
-
             }
         });
     }
+ 
 
 
     return (<div>

@@ -320,6 +320,30 @@ router.post('/transaction', (req, res) => {
             }
         });
 })
+router.post('/transfer', (req, res) => {
+
+    console.log("request accepted");
+    const username = req.body.username;
+    const details = req.body.details; // might be server
+    const amount = req.body.amount;
+    const receipient = req.body.receipient;
+    db.query("call numbers.transfer_credits(?, 3,'Transfer', ?, ?, ?)", [username, details, amount,receipient],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({ message: "unknown error occured" });
+
+            }
+
+            if (result) {
+                console.log(JSON.stringify(result));
+                res.send(result);
+
+            }
+        });
+})
+
+
 
 router.post('results', (req, res) => {
     const username = req.body.username;

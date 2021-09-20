@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../styles/homenav-style.css'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { useHistory } from "react-router-dom";
+import Axios from 'axios';
+
 
 
 let sessionName = sessionStorage.getItem("sessionName");
@@ -13,7 +15,56 @@ let sessionmail = sessionStorage.getItem("sessionEmail");
 
 function HomeNav() {
 
-    const [profile, onProfileShow] = useState([]);
+
+    const [details, onChangeDetails] = useState("");
+    const [valueAmount, onChangeAmount] = useState("");
+    const [gcashNumber, onChangeGCash] = useState("");
+    let [user, onChangeUser] = useState("");
+   let userName =sessionStorage.getItem("Userid");
+   let currMoney = sessionStorage.getItem("sessionMoney")
+    user = userName;
+    const transfer = () => {
+
+        if(valueAmount > currMoney)
+        {
+            alert("You Have not enough balance");
+            return;
+        }
+        if(user == "" || gcashNumber =="" || valueAmount === "0")
+        {
+            alert("Invalid Transaction");
+            return;
+        }
+
+
+        Axios.post('http://localhost:3000/transfer', {
+            username: user, details: details, amount: valueAmount,receipient:gcashNumber
+        }).then((response) => {
+            if (response.data.message) {               //  When Invalid
+
+                console.log(response.data.message);
+            } else {                        // When True
+                // setLoginStatus(response.data[0])
+                console.log(response);
+                Axios.post('http://localhost:3000/money',
+                    {
+                        username: sessionStorage.getItem("Userid"), password: sessionStorage.getItem("mPin")
+                    }).then((response) => {
+                        if (response.data.message) {
+                            console.log(response.data.message);
+                        }
+                        else {
+                            console.log(response.data[0].money);
+
+                            sessionStorage.setItem("sessionMoney", response.data[0].money);
+                            
+
+                        }
+                    })
+
+            }
+        });
+    }
 
     const generateProfileUI = () =>
     {
@@ -103,26 +154,26 @@ function HomeNav() {
                                     <div className="col-md-6 py-5 px-3">
                                         <div className="form-group pb-4">
                                             <label style={{fontWeight: 600}} for="recUID" class="form-label">Recipient's User ID</label>
-                                            <input id="recUID" class="form-control" type="tel" aria-label="Recipient's UserID" minlength="11" maxlength="11" placeholder="09XXXXXXXXX" pattern="[0-9]{2}[0-9]{9}"/>
+                                            <input id="recUID" class="form-control" type="tel" aria-label="Recipient's UserID" minlength="11" maxlength="11" placeholder="09XXXXXXXXX" pattern="[0-9]{2}[0-9]{9}" value={user} onChange={(e)=>{}}/>
                                         </div>
                                         <div className="form-group">
                                             <label style={{fontWeight: 600}} for="amount" class="form-label">Amount</label>
-                                            <input id="amount" class="form-control" type="number" aria-label="amount"/>
+                                            <input id="amount" class="form-control" type="number" aria-label="amount" onChange={(e)=>{onChangeAmount(e.target.value)}}/>
                                         </div>
                                     </div>
                                     <div className="col-md-6 py-5 px-3">
                                         <div className="form-group pb-4">
                                         <label style={{fontWeight: 600}} for="gcashNum" class="form-label">Gcash Number</label>
-                                            <input id="gcashNum" class="form-control" type="tel" aria-label="Gcash Number" minlength="11" maxlength="11" placeholder="09XXXXXXXXX" pattern="[0-9]{2}[0-9]{9}"/>
+                                            <input id="gcashNum" class="form-control" type="tel" aria-label="Gcash Number" minlength="11" maxlength="11" placeholder="09XXXXXXXXX" pattern="[0-9]{2}[0-9]{9}" onChange={(e)=>{onChangeGCash(e.target.value)}}/>
                                         </div>
                                         <div className="form-group">
                                             <label style={{fontWeight: 600}} for="notes" class="form-label">Notes</label>
-                                            <textarea class="form-control" rows="1"></textarea>
+                                            <textarea class="form-control" rows="1" onChange={(e)=>{onChangeDetails(e.target.value)}}></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-md-12 text-center">
-                                    <button type="button" className="btn transferCreditBtn" data-bs-dismiss="modal">TRANSFER CREDIT</button>
+                                    <button type="button" className="btn transferCreditBtn" data-bs-dismiss="modal" onClick={transfer}>TRANSFER CREDIT</button>
                                 </div>
                             </div>
                         </form>
