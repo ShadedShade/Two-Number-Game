@@ -623,7 +623,19 @@ function HomepageContent() {
         let userid = user;
         let gameid = currentGame;
         let bets = listOfBets;
+        let betsTotal = 0;
+
+        for(let i = 0;i< listOfBets.length;i++)
+        {
+            betsTotal+= listOfBets[i].BetAmount;
+        }
+
         console.log(listOfBets);
+        if (betsTotal > money)
+        {
+            alert("You don't have enough Money");
+            return;
+        }
 
         Axios.post('http://localhost:3000/placeBets', {
             User: userid, GameID: gameid, Wager: JSON.stringify(bets)
